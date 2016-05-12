@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft Yahei', Helvetica, Arial, sans-serif;
+    background-color:   #F7F7F7;
+}
+
+
+.form-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+
+    form {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 800px;
+        height: 360px;
+        margin-left: -400px;
+        margin-top: -180px;
+        padding: 30px;
+        border-radius: 15px;
+        background-color: #fff;
+
+        select {
+            padding: 3px;
+            border: 0;
+            border-radius: 8px;
+        }
+
+        [type="text"] {
+            height: 25px;
+            margin-left: 100px;
+            padding: 3px;
+            border: 1px solid gray;
+            border-radius: 2px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 210px;
+            margin: 20px auto;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        [type="button"] {
+            float: right;
+            width: 100px;
+            height: 30px;
+            margin-right: 50px;
+            padding: 3px;
+            border: 0;
+            border-radius: 8px;
+            &:hover {
+                background-color: #B7B7B7;
+            }
+        }
+
+        [type="submit"] {
+            float: right;
+            width: 100px;
+            height: 30px;
+            padding: 3px;
+            border: 0;
+            border-radius: 8px;
+            &:hover {
+                background-color: #B7B7B7;
+            }
+        }
+    }
+}
+
+
+header {
+    width: 100%;
+    padding: 60px 0px;
+    border-bottom: 1px solid #B7B7B7;
+    text-align: center;
+    background: url(./img/header.jpg) no-repeat fixed center/cover;
+    h1 {
+        margin: 0;
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    [type="text"] {
+        height: 25px;
+        margin-right: 100px;
+        padding: 3px;
+        border: 0;
+        border-radius: 8px;
+    }
+
+    [type="button"] {
+        width: 100px;
+        height: 30px;
+        margin-left: 100px;
+        padding: 3px;
+        border: 0;
+        border-radius: 8px;
+        &:hover {
+            background-color: #B7B7B7;
+        }
+    }
+}
+
+
+.diary-catalog {
+    width: 1000px;
+    margin: 0 auto;
+
+    .category {
+        padding-top: 50px;
+        text-align: center;
+        &:after {
+            content: "";
+            height: 2px;
+            width: 80px;
+            background: black;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    }
+
+    [type="button"] {
+        display: block;
+        width: 100px;
+        height: 30px;
+        margin:0 auto;
+        padding: 3px;
+        border: 0;
+        border-radius: 8px;
+        &:hover {
+            background-color: #B7B7B7;
+        }
+    }
+
+}
+
+.diary-list {
+    margin-top: 50px;
+    padding: 0 60px 10px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+article.diary-item:last-child {
+    border-bottom: 0;
+}
+
+article.diary-item {
+    margin-top: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+
+    .diary-title {
+        text-align: center;
+    }
+
+    [type="button"] {
+        display: inline-block;
+        margin:0;
+    }
+
+    .diary-date {
+        display: inline-block;
+        float: right;
+    }
+
+    .diary-body {
+        margin-top: 30px;
+    }
+
+}
+
+
+footer {
+    width: 100%;
+    height: 80px;
+    margin: 30px 0 0;
+    padding: 5px 0;
+    font-size: 1.2em;
+    word-spacing: 0.3em;
+    color: #fff;
+    text-align: center;
+    background-color: #666;
+}
