@@ -2,10 +2,9 @@
   "name": "react-diary",
   "version": "1.0.0",
   "description": "A diary app build on react",
-  "main": "app/entry.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base app",
-    "build": "webpack",
+    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base src",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,8 +21,11 @@
   "dependencies": {
     "babel-runtime": "6.x",
     "marked": "^0.3.5",
+    "normalize.css": "^4.2.0",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2"
   },
   "devDependencies": {
     "babel-core": "6.x",
@@ -40,9 +42,9 @@
     "eslint-plugin-jsx-a11y": "0.x",
     "eslint-plugin-react": "4.x",
     "file-loader": "^0.8.5",
-    "node-sass": "^3.6.0",
+    "node-sass": "^3.8.0",
     "open-browser-webpack-plugin": "0.0.2",
-    "sass-loader": "^3.2.0",
+    "sass-loader": "^4.0.0",
     "style-loader": "~0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "1.x",

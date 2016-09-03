@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 
-class DiaryForm extends React.Component {
+export default class DiaryForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
-        let title = this.refs.title.value.replace(/(^\s*)|(\s*$)/g, '');
-        let category = this.refs.category.value.replace(/(^\s*)|(\s*$)/g, '');
+        const title = this.refs.title.value.replace(/(^\s*)|(\s*$)/g, '');
+        const category = this.refs.category.value.replace(/(^\s*)|(\s*$)/g, '');
         if (title === '' || category === '') return;
-        let newDiary = {
+        const date = new Date();
+        const newDiary = {
             title: title,
             body: this.refs.body.value,
-            date: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+            date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
         };
         this.refs.form.reset();
-        this.props.addDiary(category, newDiary);
+        this.props.addPost(category, newDiary);
     }
 
     render() {
         let style = {
-            display: this.props.formShow ? 'block' : 'none'
+            display: this.props.showForm ? 'block' : 'none'
         };
-        let options = this.props.diaryAll.map((diary, index) => {
+        let options = this.props.diarys.map((diary, index) => {
             return <option key={ index } value={ diary.category }>{ diary.category }</option>;
         });
         return (
             <div style={ style } className="form-wrapper">
-                <form ref="form" action="#" onSubmit={ this.handleSubmit.bind(this) }>
+                <form ref="form" action="#" onSubmit={ (e) => { this.handleSubmit(e); } }>
                     <select ref="category" >
                         { options }
                     </select>
@@ -39,4 +40,8 @@ class DiaryForm extends React.Component {
     }
 }
 
-export default DiaryForm;
+
+DiaryForm.propTypes = {
+    toggleForm: PropTypes.func.isRequired,
+    addPost: PropTypes.func.isRequired
+};

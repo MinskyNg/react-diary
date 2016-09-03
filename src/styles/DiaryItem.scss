@@ -1,0 +1,28 @@
+.diary-item:last-child {
+    border-bottom: 0;
+}
+
+.diary-item {
+    margin-top: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+
+    .diary-title {
+        text-align: center;
+    }
+
+    [type="button"] {
+        display: inline-block;
+        margin: 0;
+    }
+
+    .diary-date {
+        display: inline-block;
+        float: right;
+    }
+
+    .diary-body {
+        margin-top: 30px;
+    }
+
+}

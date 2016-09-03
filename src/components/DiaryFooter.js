@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class DiaryFooter extends React.Component {
+export default class DiaryFooter extends React.Component {
     render() {
         const logion = ['我们唯一能够逃避的就是逃避本身。 —— 卡夫卡',
             '如果你想知道周围有多么黑暗，你就得留意远处的微弱光线。 —— 卡尔维诺',
@@ -19,6 +19,3 @@ class DiaryFooter extends React.Component {
         );
     }
 }
-
-
-export default DiaryFooter;

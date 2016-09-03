@@ -1,0 +1,32 @@
+.diary-catalog {
+    width: 1000px;
+    margin: 0 auto;
+
+    .category {
+        padding-top: 50px;
+        text-align: center;
+        &:after {
+            content: "";
+            height: 2px;
+            width: 80px;
+            background: black;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    }
+
+    [type="button"] {
+        display: block;
+        width: 100px;
+        height: 30px;
+        margin: 0 auto;
+        padding: 3px;
+        border: 0;
+        border-radius: 8px;
+        &:hover {
+            background-color: #B7B7B7;
+        }
+    }
+
+}
