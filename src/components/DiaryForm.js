@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 
 
 export default class DiaryForm extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.showForm !== this.props.showForm;
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         const title = this.refs.title.value.replace(/(^\s*)|(\s*$)/g, '');

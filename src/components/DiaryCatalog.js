@@ -3,6 +3,10 @@ import DiaryList from './DiaryList';
 
 
 export default class DiaryCatalog extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.diarys !== this.props.diarys;
+    }
+
     render() {
         let diarysList = this.props.diarys.map((diary, index) => {
             return <DiaryList key={ index } category={ diary.category } posts={ diary.posts } delCat={ this.props.delCat } delPost={ this.props.delPost} />;

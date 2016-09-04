@@ -8,6 +8,10 @@ import DiaryFooter from '../components/DiaryFooter';
 
 
 class DiaryApp extends React.Component {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.showForm !== this.props.showForm || nextProps.diarys !== this.props.diarys;
+    }
+
     render() {
         const { dispatch, showForm, diarys } = this.props;
         return (
