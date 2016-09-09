@@ -7,29 +7,25 @@ import DiaryCatalog from '../components/DiaryCatalog';
 import DiaryFooter from '../components/DiaryFooter';
 
 
-class DiaryApp extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.showForm !== this.props.showForm || nextProps.diarys !== this.props.diarys;
-    }
-
+class DiaryApp extends React.PureComponent {
     render() {
         const { dispatch, showForm, diarys } = this.props;
         return (
             <div>
                 <DiaryForm
                   showForm={ showForm }
-                  toggleForm={ () => { dispatch(toggleForm()); } }
+                  toggleForm={ () => dispatch(toggleForm()) }
                   diarys={ diarys }
-                  addPost={ (cat, post) => { dispatch(addPost(cat, post)); } }
+                  addPost={ (cat, post) => dispatch(addPost(cat, post)) }
                 />
                 <DiaryHeader
-                  addCat={ (cat) => { dispatch(addCat(cat)); } }
-                  toggleForm={ () => { dispatch(toggleForm()); } }
+                  addCat={ cat => dispatch(addCat(cat)) }
+                  toggleForm={ () => dispatch(toggleForm()) }
                 />
                 <DiaryCatalog
                   diarys={ diarys }
-                  delCat={ (cat) => { dispatch(delCat(cat)); } }
-                  delPost={ (cat, date) => { dispatch(delPost(cat, date)); } }
+                  delCat={ cat => dispatch(delCat(cat)) }
+                  delPost={ (cat, date) => dispatch(delPost(cat, date)) }
                 />
                 <DiaryFooter />
             </div>
@@ -37,7 +33,7 @@ class DiaryApp extends React.Component {
     }
 }
 
-DiaryApp.PropTypes = {
+DiaryApp.propTypes = {
     showForm: PropTypes.bool.isRequired,
     diarys: PropTypes.arrayOf(PropTypes.shape({
         category: PropTypes.string.isRequired,
@@ -47,8 +43,8 @@ DiaryApp.PropTypes = {
 
 function mapStateToProps(state) {
     return {
-        showForm: state.showForm,
-        diarys: state.diarys
+        showForm: state.get('showForm'),
+        diarys: state.get('diarys').toJS()
     };
 }
 

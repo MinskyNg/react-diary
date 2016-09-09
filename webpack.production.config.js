@@ -38,7 +38,11 @@ module.exports = {
         loaders: [
             { test: /\.css$/, loader: 'style!css' },
             { test: /\.scss$/, include: path.resolve(__dirname, 'src/styles'), loader: 'style!css!sass' },
-            { test: /\.js[x]?$/, include: path.resolve(__dirname, 'src'), exclude: /node_modules/, loader: 'babel' },
+            { test: /\.js[x]?$/,
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
+                loader: 'babel'
+            },
             { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
         ]
     },

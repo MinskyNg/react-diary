@@ -1,23 +1,19 @@
 import React, { PropTypes } from 'react';
 
 
-export default class DiaryForm extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.showForm !== this.props.showForm;
-    }
-
+export default class DiaryForm extends React.PureComponent {
     handleSubmit(event) {
         event.preventDefault();
-        const title = this.refs.title.value.replace(/(^\s*)|(\s*$)/g, '');
-        const category = this.refs.category.value.replace(/(^\s*)|(\s*$)/g, '');
+        const title = this._title.value.replace(/(^\s*)|(\s*$)/g, '');
+        const category = this._category.value.replace(/(^\s*)|(\s*$)/g, '');
         if (title === '' || category === '') return;
         const date = new Date();
         const newDiary = {
             title: title,
-            body: this.refs.body.value,
+            body: this._body.value,
             date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
         };
-        this.refs.form.reset();
+        this._form.reset();
         this.props.addPost(category, newDiary);
     }
 
@@ -30,12 +26,12 @@ export default class DiaryForm extends React.Component {
         });
         return (
             <div style={ style } className="form-wrapper">
-                <form ref="form" action="#" onSubmit={ (e) => { this.handleSubmit(e); } }>
-                    <select ref="category" >
+                <form ref={ form => {this._form = form;} } action="#" onSubmit={ e => this.handleSubmit(e) }>
+                    <select ref={ select => {this._category = select;} } >
                         { options }
                     </select>
-                    <input ref="title" type="text" placeholder="标题" />
-                    <textarea ref="body" placeholder="写点东西吧......( 支持markdown )" ></textarea>
+                    <input ref={ input => {this._title = input;} } type="text" placeholder="标题" />
+                    <textarea ref={ textarea => {this._body = textarea;} } placeholder="写点东西吧......( 支持markdown )" ></textarea>
                     <input type="submit" value="确认" onClick={ this.props.toggleForm } />
                     <input type="button" value="取消" onClick={ this.props.toggleForm } />
                 </form>

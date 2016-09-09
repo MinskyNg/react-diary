@@ -1,14 +1,18 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import DiaryItem from './DiaryItem.js';
 
 
-export default class DiaryList extends React.Component {
+export default class DiaryList extends React.PureComponent {
+    componentDidMount() {
+        this._delete.style.visibility = 'hidden';
+    }
+
     handleMouseOver() {
-        this.refs.delete.style.visibility = 'visible';
+        this._delete.style.visibility = 'visible';
     }
 
     handleMouseOut() {
-        this.refs.delete.style.visibility = 'hidden';
+        this._delete.style.visibility = 'hidden';
     }
 
     handleClick() {
@@ -18,14 +22,14 @@ export default class DiaryList extends React.Component {
     }
 
     render() {
-        let diarysItem = this.props.posts.map((diary, index) => {
+        let diarysItems = this.props.posts.map((diary, index) => {
             return <DiaryItem key={ index } category={ this.props.category } {...diary} delPost={ this.props.delPost} />;
         });
         return (
-            <div onMouseOver={ () => { this.handleMouseOver(); } } onMouseOut={ () => { this.handleMouseOut(); } } className="diary-list" >
+            <div onMouseOver={ () => this.handleMouseOver() } onMouseOut={ () => this.handleMouseOut() } className="diary-list" >
                 <h2 className="category">{ this.props.category } ( { this.props.posts.length } )</h2>
-                <input ref="delete" type="button" value="删除分类" onClick={ () => { this.handleClick(); } } />
-                { diarysItem }
+                <input ref={ input => {this._delete = input;} } type="button" value="删除分类" onClick={ () => this.handleClick() } />
+                { diarysItems }
             </div>
         );
     }

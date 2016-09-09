@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import DiaryApp from './containers/App';
 import rootReducer from './reducers';
+import { fromJS } from 'immutable';
 require('normalize.css/normalize.css');
 require('./styles/App.scss');
 
@@ -19,10 +20,10 @@ const diarySpare = JSON.stringify([
 const diaryStorage = localStorage.getItem('diarys') || diarySpare;
 const diarySource = JSON.parse(diaryStorage);
 
-const initialState = {
+const initialState = fromJS({
     showForm: false,
     diarys: diarySource
-};
+});
 
 let store = createStore(rootReducer, initialState);
 

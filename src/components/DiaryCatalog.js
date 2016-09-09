@@ -2,22 +2,18 @@ import React, { PropTypes } from 'react';
 import DiaryList from './DiaryList';
 
 
-export default class DiaryCatalog extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.diarys !== this.props.diarys;
-    }
-
+export default class DiaryCatalog extends React.PureComponent {
     render() {
-        let diarysList = this.props.diarys.map((diary, index) => {
+        let diarysLists = this.props.diarys.map((diary, index) => {
             return <DiaryList key={ index } category={ diary.category } posts={ diary.posts } delCat={ this.props.delCat } delPost={ this.props.delPost} />;
         });
         return (
             <div className="diary-catalog">
-                { diarysList }
+                { diarysLists }
             </div>
         );
     }
-}
+    }
 
 DiaryCatalog.propTypes = {
     delCat: PropTypes.func.isRequired,

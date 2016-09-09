@@ -1,23 +1,24 @@
 import { ADD_CAT, DEL_CAT, ADD_POST, DEL_POST } from '../constants/actionTypes';
+import { fromJS } from 'immutable';
 
 
 function add_cat(state, cat) {
-    const len = state.length;
+    const len = state.size;
     for (let index = 0; index < len; index++) {
-        if (state[index].category === cat) {
+        if (state.get(index).get('category') === cat) {
             return state;
         }
     }
-    const newState = [...state, { category: cat, posts: [] }];
+    const newState = state.push(fromJS({ category: cat, posts: [] }));
     localStorage.setItem('diarys', JSON.stringify(newState));
     return newState;
 }
 
 function del_cat(state, cat) {
-    const len = state.length;
+    const len = state.size;
     for (let index = 0; index < len; index++) {
-        if (state[index].category === cat) {
-            const newState = [...state.slice(0, index), ...state.slice(index + 1)];
+        if (state.get(index).get('category') === cat) {
+            const newState = state.delete(index);
             localStorage.setItem('diarys', JSON.stringify(newState));
             return newState;
         }
@@ -25,12 +26,10 @@ function del_cat(state, cat) {
 }
 
 function add_post(state, cat, post) {
-    const len = state.length;
+    const len = state.size;
     for (let index = 0; index < len; index++) {
-        if (state[index].category === cat) {
-            const newState = [...state.slice(0, index), Object.assign({},
-                state[index], { posts: [...state[index].posts, post] }),
-                ...state.slice(index + 1)];
+        if (state.get(index).get('category') === cat) {
+            const newState = state.update(index, x => x.update('posts', y => y.push(post)));
             localStorage.setItem('diarys', JSON.stringify(newState));
             return newState;
         }
@@ -38,16 +37,14 @@ function add_post(state, cat, post) {
 }
 
 function del_post(state, cat, date) {
-    const len = state.length;
+    const len = state.size;
     for (let index = 0; index < len; index++) {
-        if (state[index].category === cat) {
-            const posts = state[index].posts;
-            const le = posts.length;
+        if (state.get(index).get('category') === cat) {
+            const posts = state.get(index).get('posts');
+            const le = posts.size;
             for (let i = 0; i < le; i++) {
-                if (posts[i].date === date) {
-                    const newState = [...state.slice(0, index), Object.assign({},
-                        state[index], { posts: [...posts.slice(0, i), ...posts.slice(i + 1)] }),
-                        ...state.slice(index + 1)];
+                if (posts.get(i).get('date') === date) {
+                    const newState = state.update(index, x => x.update('posts', y => y.delete(i)));
                     localStorage.setItem('diarys', JSON.stringify(newState));
                     return newState;
                 }
@@ -56,7 +53,7 @@ function del_post(state, cat, date) {
     }
 }
 
-export default function diarys(state = [], action) {
+export default function diarys(state = fromJS([]), action) {
     switch (action.type) {
         case ADD_CAT:
             return add_cat(state, action.cat);
