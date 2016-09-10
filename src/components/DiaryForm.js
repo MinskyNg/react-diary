@@ -9,7 +9,7 @@ export default class DiaryForm extends React.PureComponent {
         if (title === '' || category === '') return;
         const date = new Date();
         const newDiary = {
-            title: title,
+            title,
             body: this._body.value,
             date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
         };

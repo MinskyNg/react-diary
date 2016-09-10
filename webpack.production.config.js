@@ -1,21 +1,31 @@
 var webpack = require('webpack');
 var path = require('path');
-var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js', Infinity),
-        new webpack.optimize.DedupePlugin(),
-        new uglifyJsPlugin({
+        new UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
         }),
-        new CopyWebpackPlugin([
-          { from: './src/index.html', to: './index.html' },
-          { from: './src/favicon.ico', to: './favicon.ico' }
-        ]),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new HtmlWebpackPlugin({
+            favicon: './src/favicon.ico',
+            template: path.resolve(__dirname, 'src/index.tmpl.html'),
+            inject: true,
+            hash: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        })
     ],
     devtool: 'cheap-source-map',
     entry: {
@@ -26,13 +36,14 @@ module.exports = {
             'react',
             'react-dom',
             'redux',
-            'react-redux'
+            'react-redux',
+            'redux-immutable'
         ]
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '',
-        filename: '[name].bundle.js'
+        filename: '[name]-[hash].js'
     },
     module: {
         loaders: [

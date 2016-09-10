@@ -41,11 +41,11 @@ DiaryApp.propTypes = {
     }).isRequired).isRequired
 };
 
-function mapStateToProps(state) {
+function selector(state) {
     return {
         showForm: state.get('showForm'),
         diarys: state.get('diarys').toJS()
     };
 }
 
-export default connect(mapStateToProps)(DiaryApp);
+export default connect(selector)(DiaryApp);
