@@ -7,12 +7,12 @@
         text-align: center;
         &:after {
             content: "";
+            display: block;
             height: 2px;
             width: 80px;
-            background: black;
-            display: block;
             margin: 0 auto;
             margin-top: 20px;
+            background: black;
         }
     }
 

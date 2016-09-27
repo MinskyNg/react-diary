@@ -28,11 +28,23 @@ export default class DiaryItem extends React.PureComponent {
 
     render() {
         return (
-                <article className="diary-item" onMouseOver={ () => this.handleMouseOver() } onMouseOut={ () => this.handleMouseOut() }>
+                <article
+                  className="diary-item"
+                  onMouseOver={ () => this.handleMouseOver() }
+                  onMouseOut={ () => this.handleMouseOut() }
+                >
                     <h3 className="diary-title">{ this.props.title }</h3>
-                    <input ref={input => {this._delete = input;}} type="button" value="删除文章" onClick={ () => this.handleClick() } />
+                    <input
+                      type="button" value="删除文章"
+                      ref={ input => this._delete = input }
+                      onClick={ () => this.handleClick() }
+                    />
                     <span className="diary-date">{ this.props.date }</span>
-                    <div className="diary-body" dangerouslySetInnerHTML={ this.rawMarkup() }></div>
+                    <div
+                      className="diary-body"
+                      dangerouslySetInnerHTML={ this.rawMarkup() }
+                    >
+                    </div>
                 </article>
         );
     }

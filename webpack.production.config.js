@@ -1,15 +1,23 @@
 var webpack = require('webpack');
 var path = require('path');
+var autoprefixer = require('autoprefixer');
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+var CleanPlugin = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     plugins: [
+        new CleanPlugin(['dist'], {
+            verbose: true
+        }),
         new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js', Infinity),
         new UglifyJsPlugin({
             compress: {
                 warnings: false
             },
+            output: {
+                comments: false
+            }
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -48,7 +56,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.css$/, loader: 'style!css' },
-            { test: /\.scss$/, include: path.resolve(__dirname, 'src/styles'), loader: 'style!css!sass' },
+            { test: /\.scss$/, include: path.resolve(__dirname, 'src/styles'), loader: 'style!css!postcss!sass' },
             { test: /\.js[x]?$/,
                 include: path.resolve(__dirname, 'src'),
                 exclude: /node_modules/,
@@ -59,5 +67,6 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
-    }
+    },
+    postcss: [autoprefixer({ browsers: ['last 2 versions'] })]
 };

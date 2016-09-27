@@ -23,12 +23,29 @@ export default class DiaryList extends React.PureComponent {
 
     render() {
         let diarysItems = this.props.posts.map((diary, index) => {
-            return <DiaryItem key={ index } category={ this.props.category } {...diary} delPost={ this.props.delPost} />;
+            return (
+                <DiaryItem
+                  key={ index }
+                  {...diary}
+                  category={ this.props.category }
+                  delPost={ this.props.delPost }
+                />
+            );
         });
         return (
-            <div onMouseOver={ () => this.handleMouseOver() } onMouseOut={ () => this.handleMouseOut() } className="diary-list" >
-                <h2 className="category">{ this.props.category } ( { this.props.posts.length } )</h2>
-                <input ref={ input => {this._delete = input;} } type="button" value="删除分类" onClick={ () => this.handleClick() } />
+            <div
+              className="diary-list"
+              onMouseOver={ () => this.handleMouseOver() }
+              onMouseOut={ () => this.handleMouseOut() }
+            >
+                <h2 className="category">
+                  { this.props.category } ( { this.props.posts.length } )
+                </h2>
+                <input
+                  type="button" value="删除分类"
+                  ref={ input => this._delete = input }
+                  onClick={ () => this.handleClick() }
+                />
                 { diarysItems }
             </div>
         );
