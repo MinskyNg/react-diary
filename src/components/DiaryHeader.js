@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 
 export default class DiaryHeader extends React.PureComponent {
@@ -23,9 +23,3 @@ export default class DiaryHeader extends React.PureComponent {
         );
     }
 }
-
-
-DiaryHeader.propTypes = {
-    toggleForm: PropTypes.func.isRequired,
-    addCat: PropTypes.func.isRequired
-};

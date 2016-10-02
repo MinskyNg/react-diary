@@ -25,13 +25,14 @@ export default class DiaryList extends React.PureComponent {
         let diarysItems = this.props.posts.map((diary, index) => {
             return (
                 <DiaryItem
-                  key={ index }
+                  key={ diary.date }
                   {...diary}
                   category={ this.props.category }
                   delPost={ this.props.delPost }
                 />
             );
         });
+
         return (
             <div
               className="diary-list"

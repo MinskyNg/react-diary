@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 
 export default class DiaryForm extends React.PureComponent {
@@ -11,7 +11,8 @@ export default class DiaryForm extends React.PureComponent {
         const newDiary = {
             title,
             body: this._body.value,
-            date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+            date: `${date.getFullYear()}-${date.getMonth() + 1}-
+              ${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         };
         this._form.reset();
         this.props.addPost(category, newDiary);
@@ -24,7 +25,7 @@ export default class DiaryForm extends React.PureComponent {
         return (
             <div
               className="form-wrapper"
-              style={ { display: this.props.showForm ? 'block' : 'none' } }
+              style={{ display: this.props.showForm ? 'block' : 'none' }}
             >
                 <form
                   action="#"
@@ -51,8 +52,3 @@ export default class DiaryForm extends React.PureComponent {
     }
 }
 
-
-DiaryForm.propTypes = {
-    toggleForm: PropTypes.func.isRequired,
-    addPost: PropTypes.func.isRequired
-};

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import DiaryList from './DiaryList';
 
 
@@ -23,8 +23,3 @@ export default class DiaryCatalog extends React.PureComponent {
         );
     }
     }
-
-DiaryCatalog.propTypes = {
-    delCat: PropTypes.func.isRequired,
-    delPost: PropTypes.func.isRequired
-};

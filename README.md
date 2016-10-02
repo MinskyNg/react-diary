@@ -2,7 +2,7 @@
 
 ES6编写，Webpack打包，使用LocalStorage本地存储，支持Markdown。
 
-[DiaryApp](http://minsky.me/diary)
+[react-diary](http://minsky.me/diary)
 
 ## How to start
 

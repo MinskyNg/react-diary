@@ -8,5 +8,12 @@ require('normalize.css/normalize.css');
 require('./styles/App.scss');
 
 
-ReactDOM.render(<Provider store={store}><div><DiaryApp /><DevTools /></div></Provider>,
-    document.getElementById('app'));
+ReactDOM.render(
+    <Provider store={store}>
+        <div>
+            <DiaryApp />
+            { process.env.NODE_ENV !== 'production' && <DevTools /> }
+        </div>
+    </Provider>,
+    document.getElementById('app')
+);
