@@ -7,5 +7,3 @@ ES6编写，Webpack打包，使用LocalStorage本地存储，支持Markdown。
 ## How to start
 
 npm install & npm start
-
-或者直接在build目录下打开index.html

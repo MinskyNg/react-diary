@@ -1,5 +1,9 @@
-export const TOGGLE_FORM = 'TOGGLE_FORM';
 export const ADD_CAT = 'ADD_CAT';
+export const EDIT_CAT = 'EDIT_CAT';
 export const DEL_CAT = 'DEL_CAT';
 export const ADD_POST = 'ADD_POST';
 export const DEL_POST = 'DEL_POST';
+export const CHANGE_TITLE = 'CHANGE_TITLE';
+export const CHANGE_BODY = 'CHANGE_BODY';
+export const CHANGE_CAT = 'CHANGE_CAT';
+export const CHANGE_SCREEN = 'CHANGE_SCREEN';
