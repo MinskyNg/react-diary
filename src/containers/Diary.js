@@ -1,16 +1,53 @@
-import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { addCat, delCat, addTag, delTag, addPost, toggleAside } from '../actions';
+import Nav from '../components/Nav';
 
 
-export default class App extends React.PureComponent {
+class Home extends React.PureComponent {
     render() {
+        const { postIds, categories, tags, navName, asideShow, dispatch, router } = this.props;
         return (
-            <div style={{ width: '100%', height: '100%' }}>
-                <Header />
-                    {this.props.children}
-                <Footer />
+            <div className="content">
+                <Nav
+                  navName={navName}
+                  categories={categories}
+                  tags={tags}
+                  asideShow={asideShow}
+                  addCat={cat => dispatch(addCat(cat))}
+                  delCat={cat => dispatch(delCat(cat))}
+                  addTag={tag => dispatch(addTag(tag))}
+                  delTag={tag => dispatch(delTag(tag))}
+                  addPost={(cat, year, date) => {
+                      dispatch(addPost(postIds[0] + 1, cat, year, date));
+                      router.replace(`/editor/${postIds[0] + 1}`);
+                  }}
+                  toggleAside={() => dispatch(toggleAside())}
+                />
+                {this.props.children}
             </div>
         );
     }
 }
+
+
+Home.propTypes = {
+    postIds: PropTypes.array.isRequired,
+    categories: PropTypes.object.isRequired,
+    tags: PropTypes.object.isRequired,
+    navName: PropTypes.string.isRequired,
+    asideShow: PropTypes.bool.isRequired
+};
+
+
+function selector(state) {
+    return {
+        postIds: state.getIn(['diarys', 'postIds']).toJS(),
+        categories: state.getIn(['diarys', 'categories']).toJS(),
+        tags: state.getIn(['diarys', 'tags']).toJS(),
+        navName: state.get('navName'),
+        asideShow: state.get('asideShow')
+    };
+}
+
+export default connect(selector)(Home);

@@ -1,6 +1,6 @@
-import { ADD_CAT, EDIT_CAT, DEL_CAT, ADD_POST, DEL_POST,
-  CHANGE_TITLE, CHANGE_BODY, CHANGE_CAT } from '../constants/actionTypes';
-import { fromJS, Map, List } from 'immutable';
+import { ADD_CAT, DEL_CAT, ADD_TAG, DEL_TAG, ADD_POST, DEL_POST, UPDATE_TITLE, UPDATE_BODY,
+ UPDATE_CAT, UPDATE_TAG } from '../constants/actionTypes';
+import { fromJS, List } from 'immutable';
 
 
 function createReducer(initialState, handlers) {
@@ -9,9 +9,8 @@ function createReducer(initialState, handlers) {
             const newState = handlers[action.type](state, action);
             localStorage.setItem('diarys', JSON.stringify(newState));
             return newState;
-        } else {
-            return state;
         }
+        return state;
     };
 }
 
@@ -19,81 +18,103 @@ const handlers = {};
 
 // 添加分类
 handlers[ADD_CAT] = (state, action) => {
-    const cat = action.cat;
-    if (state.hasIn(['categories', cat])) {
+    if (action.cat === '全部日记' || action.cat === '搜索结果') {
         return state;
-    } else {
-        return state.setIn(['categories', cat], List([]));
     }
-};
-
-// 更改分类
-handlers[EDIT_CAT] = (state, action) => {
-    const { cat, newCat } = action;
-    const catList = state.getIn(['categories', cat]);
-    let newState = state.deleteIn(['categories', cat])
-      .setIn(['categories', newCat], catList);
-    catList.forEach(id => {
-        newState = newState.setIn(['posts', id, 'category'], newCat);
-    });
-    return newState;
+    const cat = action.cat;
+    return state.hasIn(['categories', cat]) ? state : state.setIn(['categories', cat], List([]));
 };
 
 // 删除分类
 handlers[DEL_CAT] = (state, action) => {
+    if (action.cat === '未分类') {
+        return state;
+    }
     const cat = action.cat;
     const catList = state.getIn(['categories', cat]);
-    let newState = state.deleteIn(['categories', cat]);
+    let newState = state;
     catList.forEach(id => {
-        newState = newState.setIn(['posts', id, 'category'], '未分类')
-          .updateIn(['categories', '未分类'], cate => cate.push(id));
+        newState = newState.setIn(['posts', id, 'category'], '未分类');
     });
-    return newState;
+    return newState.updateIn(['categories', '未分类'], x => x.merge(catList))
+      .deleteIn(['categories', cat]);
 };
 
-// 添加文章
+// 添加标签
+handlers[ADD_TAG] = (state, action) => {
+    const tag = action.tag;
+    return state.hasIn(['tags', tag]) ? state : state.setIn(['tags', tag], List([]));
+};
+
+// 删除标签
+handlers[DEL_TAG] = (state, action) => {
+    const tag = action.tag;
+    const tagList = state.getIn(['tags', tag]);
+    let newState = state;
+    tagList.forEach(id => {
+        newState = newState.updateIn(['posts', id, 'tag'], x => x.delete(x.indexOf(tag)));
+    });
+    return newState.deleteIn(['tags', tag]);
+};
+
+// 添加日记
 handlers[ADD_POST] = (state, action) => {
-    const date = action.date;
-    const id = state.getIn(['postIds', 0]) + 1;
-    return state.update('postIds', ids => ids.unshift(id))
-      .updateIn(['archives', date.substr(0, 4)], List([id]), arch => arch.unshift(id))
-      .updateIn(['categories', '未分类'], cate => cate.unshift(id))
-      .setIn(['posts', id], Map({ id, title: '新建文章', body: '', date, category: '未分类' }));
+    const { id, year, date, cat } = action;
+    if (state.hasIn(['categories', cat])) {
+        return state.update('postIds', x => x.unshift(id))
+          .updateIn(['categories', cat], x => x.unshift(id))
+          .setIn(['posts', id], fromJS({ id, title: '新建日记', body: '', year, date, category: cat, tag: [] }));
+    }
+    return state.update('postIds', x => x.unshift(id))
+      .updateIn(['categories', '未分类'], x => x.unshift(id))
+      .setIn(['posts', id], fromJS({ id, title: '新建日记', body: '', year, date, category: '未分类', tag: [] }));
 };
 
-// 删除文章
+// 删除日记
 handlers[DEL_POST] = (state, action) => {
     const id = action.id;
     const post = state.getIn(['posts', id]).toJS();
-    return state.update('postIds', ids => ids.delete(ids.indexOf(id)))
-      .updateIn(['archives', post.date.substr(0, 4)], arch => arch.delete(arch.indexOf(id)))
-      .updateIn(['categories', post.category], cate => cate.delete(cate.indexOf(id)))
-      .deleteIn(['posts', id]);
+    let newState = state.update('postIds', x => x.delete(x.indexOf(id)))
+      .updateIn(['categories', post.category], x => x.delete(x.indexOf(id)));
+    post.tag.forEach(tag => {
+        newState = newState.updateIn(['tags', tag], x => x.delete(x.indexOf(id)));
+    });
+    return newState.deleteIn(['posts', id]);
 };
 
 // 修改标题
-handlers[CHANGE_TITLE] = (state, action) => {
+handlers[UPDATE_TITLE] = (state, action) => {
     return state.updateIn(['posts', action.id, 'title'], action.title);
 };
 
 // 修改内容
-handlers[CHANGE_BODY] = (state, action) => {
+handlers[UPDATE_BODY] = (state, action) => {
     return state.updateIn(['posts', action.id, 'body'], action.body);
 };
 
 // 修改分类
-handlers[CHANGE_CAT] = (state, action) => {
+handlers[UPDATE_CAT] = (state, action) => {
     const { id, cat } = action;
     const preCat = state.getIn(['posts', id, 'category']);
-    return state.updateIn(['categories', preCat], cate => cate.delete(cate.indexOf(id)))
-      .updateIn(['categories', cat], cate => cate.unshift(id))
+    return state.updateIn(['categories', preCat], x => x.delete(x.indexOf(id)))
+      .updateIn(['categories', cat], x => x.unshift(id))
       .updateIn(['posts', id, 'category'], cat);
+};
+
+// 修改标签
+handlers[UPDATE_TAG] = (state, action) => {
+    const id = action.id;
+    let newState = state.updateIn(['posts', id, 'tag'], action.tag);
+    action.tag.forEach(tag => {
+        newState = newState.updateIn(['tags', tag], x => x.unshift(id));
+    });
+    return newState;
 };
 
 
 export default createReducer(fromJS({
     postIds: [],
-    archives: {},
-    categories: { 未分类: [] },
+    categories: {},
+    tags: {},
     posts: {}
 }), handlers);

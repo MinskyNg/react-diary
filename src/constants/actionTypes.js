@@ -1,9 +1,12 @@
 export const ADD_CAT = 'ADD_CAT';
-export const EDIT_CAT = 'EDIT_CAT';
 export const DEL_CAT = 'DEL_CAT';
+export const ADD_TAG = 'ADD_TAG';
+export const DEL_TAG = 'DEL_TAG';
 export const ADD_POST = 'ADD_POST';
 export const DEL_POST = 'DEL_POST';
-export const CHANGE_TITLE = 'CHANGE_TITLE';
-export const CHANGE_BODY = 'CHANGE_BODY';
-export const CHANGE_CAT = 'CHANGE_CAT';
-export const CHANGE_SCREEN = 'CHANGE_SCREEN';
+export const UPDATE_TITLE = 'UPDATE_TITLE';
+export const UPDATE_BODY = 'UPDATE_BODY';
+export const UPDATE_CAT = 'UPDATE_CAT';
+export const UPDATE_TAG = 'UPDATE_TAG';
+export const CHANGE_NAV_NAME = 'CHANGE_NAV_NAME';
+export const TOGGLE_ASIDE = 'TOGGLE_ASIDE';

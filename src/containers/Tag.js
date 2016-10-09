@@ -4,11 +4,16 @@ import { delPost, changeNavName } from '../actions';
 import ArchiveItem from '../components/ArchiveItem';
 
 
-class Home extends React.PureComponent {
+class Tag extends React.PureComponent {
     render() {
-        const { postIds, posts, dispatch, router } = this.props;
-        dispatch(changeNavName('全部日记'));
+        const tagName = this.props.params.tagName;
+        const { tags, posts, dispatch, router } = this.props;
         let ArchiveItems = [];
+        const postIds = tags[tagName];
+        if (postIds === undefined) {
+            return (<div></div>);
+        }
+        dispatch(changeNavName('全部日记'));
         for (let i = 0, len = postIds.length; i < len; i++) {
             let prevPost = posts[postIds[i]];
             let articles = [prevPost];
@@ -36,8 +41,8 @@ class Home extends React.PureComponent {
 }
 
 
-Home.propTypes = {
-    postIds: PropTypes.array.isRequired,
+Tag.propTypes = {
+    tags: PropTypes.object.isRequired,
     posts: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
@@ -52,9 +57,9 @@ Home.propTypes = {
 
 function selector(state) {
     return {
-        postIds: state.getIn(['diarys', 'postIds']).toJS(),
-        posts: state.getIn(['diarys', 'posts']).toJS(),
+        tags: state.getIn(['diarys', 'tags']).toJS(),
+        posts: state.getIn(['diarys', 'posts']).toJS()
     };
 }
 
-export default connect(selector)(Home);
+export default connect(selector)(Tag);

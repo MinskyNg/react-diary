@@ -1,22 +1,25 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './components/App';
-import Diary from './container/Diary';
-import Home from './container/Home';
-import Archive from './container/Archive';
-import Category from './container/Category';
-import Post from './container/Post';
-import Editor from './container/Editor';
+import { Route, IndexRoute, Redirect, withRouter } from 'react-router';
+import App from './containers/App';
+import Diary from './containers/Diary';
+import Home from './containers/Home';
+import Search from './containers/Search';
+import Category from './containers/Category';
+import Tag from './containers/Tag';
+import Post from './containers/Post';
+import Editor from './containers/Editor';
 
 
 export default (
-    <Route path="/" component={App}>
-        <IndexRoute component={Diary} >
-            <IndexRoute component={Home} />
-            <Route path="archive" component={Archive} />
-            <Route Path="category/:id" component={Category} />
-            <Route path="post/:id" component={Post} />
+    <Route path="/" component={withRouter(App)}>
+        <IndexRoute component={withRouter(Diary)}>
+            <IndexRoute component={withRouter(Home)} />
+            <Route path="search/:keyword" component={withRouter(Search)} />
+            <Route path="category/:catName" component={withRouter(Category)} />
+            <Route path="tag/:tagName" component={withRouter(Tag)} />
+            <Route path="post/:id" component={withRouter(Post)} />
         </IndexRoute>
-        <Route path="editor/:id" component={Editor} />
+        <Route path="editor/:id" component={withRouter(Editor)} />
+        <Redirect from="*" to="/" />
     </Route>
 );

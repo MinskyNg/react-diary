@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux-immutable';
 import diarys from './diarys';
-import screenShow from './screenShow';
+import navName from './navName';
+import asideShow from './asideShow';
 
 
 export default combineReducers({
     diarys,
-    screenShow
+    navName,
+    asideShow
 });

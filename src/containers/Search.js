@@ -4,16 +4,23 @@ import { delPost, changeNavName } from '../actions';
 import ArchiveItem from '../components/ArchiveItem';
 
 
-class Home extends React.PureComponent {
+class Search extends React.PureComponent {
     render() {
+        const keyword = this.props.params.keyword;
         const { postIds, posts, dispatch, router } = this.props;
-        dispatch(changeNavName('全部日记'));
+        dispatch(changeNavName('搜索结果'));
         let ArchiveItems = [];
+        const searchPosts = [];
         for (let i = 0, len = postIds.length; i < len; i++) {
-            let prevPost = posts[postIds[i]];
+            if (posts[postIds[i]].title.indexOf(keyword) !== -1) {
+                searchPosts.push(posts[postIds[i]]);
+            }
+        }
+        for (let i = 0, len = searchPosts.length; i < len; i++) {
+            let prevPost = posts[searchPosts[i]];
             let articles = [prevPost];
-            while (prevPost.year === posts[postIds[i + 1]].year) {
-                prevPost = posts[postIds[i + 1]];
+            while (prevPost.year === posts[searchPosts[i + 1]].year) {
+                prevPost = posts[searchPosts[i + 1]];
                 articles.push(prevPost);
                 i++;
             }
@@ -36,13 +43,12 @@ class Home extends React.PureComponent {
 }
 
 
-Home.propTypes = {
+Search.propTypes = {
     postIds: PropTypes.array.isRequired,
     posts: PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
@@ -53,8 +59,8 @@ Home.propTypes = {
 function selector(state) {
     return {
         postIds: state.getIn(['diarys', 'postIds']).toJS(),
-        posts: state.getIn(['diarys', 'posts']).toJS(),
+        posts: state.getIn(['diarys', 'posts']).toJS()
     };
 }
 
-export default connect(selector)(Home);
+export default connect(selector)(Search);
