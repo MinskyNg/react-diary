@@ -16,7 +16,7 @@ export default class ArchiveItem extends React.PureComponent {
         );
         return (
             <div>
-                <div className="content-year">{`${this.props.year}年`}</div>
+                <div className="year">{`${this.props.year}年`}</div>
                 {postItems}
             </div>
         );

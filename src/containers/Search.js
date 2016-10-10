@@ -5,24 +5,36 @@ import ArchiveItem from '../components/ArchiveItem';
 
 
 class Search extends React.PureComponent {
+    componentDidMount() {
+        this.props.dispatch(changeNavName(`${this.props.params.keyword}的搜索结果`));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.params.keyword !== nextProps.params.keyword) {
+            nextProps.dispatch(changeNavName(`${nextProps.params.keyword}的搜索结果`));
+        }
+    }
+
     render() {
         const keyword = this.props.params.keyword;
         const { postIds, posts, dispatch, router } = this.props;
-        dispatch(changeNavName('搜索结果'));
         let ArchiveItems = [];
-        const searchPosts = [];
-        for (let i = 0, len = postIds.length; i < len; i++) {
-            if (posts[postIds[i]].title.indexOf(keyword) !== -1) {
-                searchPosts.push(posts[postIds[i]]);
+        const matchIds = [];
+        postIds.forEach(id => {
+            if (posts[id].title.indexOf(keyword) !== -1) {
+                matchIds.push(id);
             }
-        }
-        for (let i = 0, len = searchPosts.length; i < len; i++) {
-            let prevPost = posts[searchPosts[i]];
+        });
+        let i = 0;
+        const len = matchIds.length;
+        while (i < len) {
+            let prevPost = posts[matchIds[i]];
+            let nextPost = posts[matchIds[++i]];
             let articles = [prevPost];
-            while (prevPost.year === posts[searchPosts[i + 1]].year) {
-                prevPost = posts[searchPosts[i + 1]];
+            while (nextPost && prevPost.year === nextPost.year) {
+                prevPost = nextPost;
+                nextPost = posts[matchIds[++i]];
                 articles.push(prevPost);
-                i++;
             }
             ArchiveItems.push(
                 <ArchiveItem
@@ -45,14 +57,15 @@ class Search extends React.PureComponent {
 
 Search.propTypes = {
     postIds: PropTypes.array.isRequired,
-    posts: PropTypes.shape({
+    posts: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    }).isRequired
+    })).isRequired
 };
 
 

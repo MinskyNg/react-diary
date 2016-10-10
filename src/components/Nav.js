@@ -12,6 +12,14 @@ export default class Nav extends React.PureComponent {
         const year = date.getFullYear();
         date = `${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
         this.props.addPost(this.props.navName, year, date);
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    toggleCatHanlder(event) {
+        if (event.target === this._catHandler) {
+            this.setState({ catHandlerShow: !this.state.catHandlerShow });
+        }
     }
 
     handleAddCat(event) {
@@ -22,6 +30,8 @@ export default class Nav extends React.PureComponent {
                 this.props.addCat(cat);
             }
         }
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     handleDelCat(event, cat) {
@@ -32,6 +42,12 @@ export default class Nav extends React.PureComponent {
         event.stopPropagation();
     }
 
+    toggleTagHanlder(event) {
+        if (event.target === this._tagHandler) {
+            this.setState({ tagHandlerShow: !this.state.tagHandlerShow });
+        }
+    }
+
     handleAddTag(event) {
         if (event.keyCode === 13) {
             const tag = event.target.value.replace(/(^\s*)|(\s*$)/g, '');
@@ -40,10 +56,12 @@ export default class Nav extends React.PureComponent {
                 this.props.addTag(tag);
             }
         }
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     handleDelTag(event, tag) {
-        if (confirm('确定要删除此分类吗?')) {
+        if (confirm('确定要删除此标签吗?')) {
             this.props.delTag(tag);
         }
         event.preventDefault();
@@ -67,7 +85,7 @@ export default class Nav extends React.PureComponent {
             )
         );
         return (
-            <nav className="content-nav">
+            <nav className="nav">
                 <button
                   className={this.props.asideShow ? 'aside-hidden' : 'aside-show'}
                   title="切换边栏"
@@ -80,7 +98,8 @@ export default class Nav extends React.PureComponent {
                 >
                 </button>
                 <button className="add-tag" title="管理标签"
-                  onClick={() => this.setState({ tagHandlerShow: true })}
+                  ref={ button => this._tagHandler = button }
+                  onClick={e => this.toggleTagHanlder(e)}
                 >
                     <div className="triangle"
                       style={{ display: this.state.tagHandlerShow ? 'block' : 'none' }}
@@ -96,7 +115,8 @@ export default class Nav extends React.PureComponent {
                     </div>
                 </button>
                 <button className="add-category" title="管理分类"
-                  onClick={() => this.setState({ catHandlerShow: true })}
+                  ref={ button => this._catHandler = button }
+                  onClick={e => this.toggleCatHanlder(e)}
                 >
                     <div className="triangle"
                       style={{ display: this.state.catHandlerShow ? 'block' : 'none' }}

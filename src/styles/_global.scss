@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height:100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Microsoft Yahei', Helvetica, Arial, sans-serif;
+    font-size: 62.5%;
+}
+
+input, button, select, textarea {
+    outline: none;
+}

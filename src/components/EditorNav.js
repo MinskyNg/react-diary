@@ -7,9 +7,20 @@ export default class EditorNav extends React.PureComponent {
         this.state = { tagHandlerShow: false, catHandlerShow: false };
     }
 
-    handleChange(event) {
+    handleTitleChange(event) {
         const title = event.target.value.replace(/(^\s*)|(\s*$)/g, '');
-        this.props.updateTitle(title || '无标题');
+        this.props.updateTitle(title || '');
+    }
+
+    handleMultiSelect(event) {
+        const options = event.target.options;
+        const tag = [];
+        for (let i = 0, len = options.length; i < len; i++) {
+            if (options[i].selected) {
+                tag.push(options[i].value);
+            }
+        }
+        this.props.updateTag(tag);
     }
 
     handleAddPost() {
@@ -17,6 +28,18 @@ export default class EditorNav extends React.PureComponent {
         const year = date.getFullYear();
         date = `${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
         this.props.addPost(this.props.category, year, date);
+    }
+
+    handleDelPost() {
+        if (confirm('确定要删除此日记吗?')) {
+            this.props.delPost();
+        }
+    }
+
+    toggleCatHanlder(event) {
+        if (event.target === this._catHandler) {
+            this.setState({ catHandlerShow: !this.state.catHandlerShow });
+        }
     }
 
     handleAddCat(event) {
@@ -27,14 +50,20 @@ export default class EditorNav extends React.PureComponent {
                 this.props.addCat(cat);
             }
         }
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     handleDelCat(event, cat) {
         if (confirm('确定要删除此分类吗?')) {
             this.props.delCat(cat);
         }
-        event.preventDefault();
-        event.stopPropagation();
+    }
+
+    toggleTagHanlder(event) {
+        if (event.target === this._tagHandler) {
+            this.setState({ tagHandlerShow: !this.state.tagHandlerShow });
+        }
     }
 
     handleAddTag(event) {
@@ -45,14 +74,14 @@ export default class EditorNav extends React.PureComponent {
                 this.props.addTag(tag);
             }
         }
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     handleDelTag(event, tag) {
-        if (confirm('确定要删除此分类吗?')) {
+        if (confirm('确定要删除此标签吗?')) {
             this.props.delTag(tag);
         }
-        event.preventDefault();
-        event.stopPropagation();
     }
 
     handleDown() {
@@ -98,7 +127,7 @@ export default class EditorNav extends React.PureComponent {
             )
         );
         return (
-            <nav className="content-nav">
+            <nav className="nav">
                 <button
                   className={this.props.asideShow ? 'aside-hidden' : 'aside-show'}
                   title="切换边栏"
@@ -110,8 +139,7 @@ export default class EditorNav extends React.PureComponent {
                   type="text"
                   placeholder="请输入标题"
                   value={this.props.title}
-                  onInput={(e) => this.handleChange(e)}
-                  onChange={(e) => this.handleChange(e)}
+                  onChange={(e) => this.handleTitleChange(e)}
                 />
                 <select
                   value={this.props.category}
@@ -121,7 +149,7 @@ export default class EditorNav extends React.PureComponent {
                 </select>
                 <select multiple="true" size="1"
                   value={this.props.tag}
-                  onChange={(e) => this.props.updateTag(e.target.value)}
+                  onChange={(e) => this.handleMultiSelect(e)}
                 >
                     {tagOptions}
                 </select>
@@ -130,7 +158,8 @@ export default class EditorNav extends React.PureComponent {
                 >
                 </button>
                 <button className="add-tag" title="管理标签"
-                  onClick={() => this.setState({ tagHandlerShow: true })}
+                  ref={ button => this._tagHandler = button }
+                  onClick={e => this.toggleTagHanlder(e)}
                 >
                     <div className="triangle"
                       style={{ display: this.state.tagHandlerShow ? 'block' : 'none' }}
@@ -146,7 +175,8 @@ export default class EditorNav extends React.PureComponent {
                     </div>
                 </button>
                 <button className="add-category" title="管理分类"
-                  onClick={() => this.setState({ catHandlerShow: true })}
+                  ref={ button => this._catHandler = button }
+                  onClick={e => this.toggleCatHanlder(e)}
                 >
                     <div className="triangle"
                       style={{ display: this.state.catHandlerShow ? 'block' : 'none' }}
@@ -162,11 +192,11 @@ export default class EditorNav extends React.PureComponent {
                     </div>
                 </button>
                 <button className="show-preview" title="只显示预览区"
-                  onClick={() => changeScreen(0)}
+                  onClick={() => changeScreen(1)}
                 >
                 </button>
                 <button className="show-editor" title="只显示编辑区"
-                  onClick={() => changeScreen(1)}
+                  onClick={() => changeScreen(0)}
                 >
                 </button>
                 <button className="show-double" title="双屏显示"
@@ -186,7 +216,7 @@ export default class EditorNav extends React.PureComponent {
                 >
                 </button>
                 <button className="del" title="删除日记"
-                  onClick={() => this.props.delPost()}
+                  onClick={() => this.handleDelPost()}
                 >
                 </button>
             </nav>

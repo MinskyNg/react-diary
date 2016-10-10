@@ -6,34 +6,46 @@ import marked from 'marked';
 
 
 class Post extends React.PureComponent {
+    componentDidMount() {
+        this.props.dispatch(changeNavName(this.props.posts[this.props.params.id].category));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.params.id !== nextProps.params.id) {
+            nextProps.dispatch(changeNavName(nextProps.posts[nextProps.params.id].category));
+        }
+    }
+
     render() {
         const { posts, dispatch, router } = this.props;
         const post = posts[this.props.params.id];
         if (post === undefined) {
-            return (<div></div>);
+            return <div></div>;
         }
-        dispatch(changeNavName(post.category));
-        let tagItems = post.tags.map(tag => <Link to={`/tag/${tag}`}>{tag}</Link>);
+        let tagItems = post.tag.map(tag => (<Link key={tag} to={`/tag/${tag}`}>{tag}</Link>));
         const markup = marked(post.body.toString(), { sanitize: true });
         return (
-            <article className="content-article">
+            <article className="article">
                 <h3 className="article-title">{post.title}</h3>
                 <span className="article-date">{`${post.year}-${post.date}`}</span>
-                <section className="article-section">
-                    dangerouslySetInnerHTML={{ __html: markup }}
+                <section className="article-section"
+                  dangerouslySetInnerHTML={{ __html: markup }}
+                >
                 </section>
                 <div className="article-bar">
                     {tagItems}
                     <button
                       onClick={() => {
-                          dispatch(delPost(post.id));
-                          router.replace('/');
+                          if (confirm('确定要删除此日记吗?')) {
+                              dispatch(delPost(post.id));
+                              router.replace('/');
+                          }
                       }}
                     >
                         删除日记
                     </button>
                     <button
-                      onClick={router.push(`/editor/${post.id}`)}
+                      onClick={() => router.push(`/editor/${post.id}`)}
                     >
                         编辑日记
                     </button>
@@ -46,7 +58,7 @@ class Post extends React.PureComponent {
 
 Post.propTypes = {
     postIds: PropTypes.array.isRequired,
-    posts: PropTypes.shape({
+    posts: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired,
@@ -54,7 +66,7 @@ Post.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    }).isRequired
+    })).isRequired
 };
 
 

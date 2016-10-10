@@ -5,22 +5,34 @@ import ArchiveItem from '../components/ArchiveItem';
 
 
 class Tag extends React.PureComponent {
+    componentDidMount() {
+        this.props.dispatch(changeNavName(this.props.params.tagName));
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.params.tagName !== nextProps.params.tagName) {
+            nextProps.dispatch(changeNavName(nextProps.params.tagName));
+        }
+    }
+
     render() {
         const tagName = this.props.params.tagName;
         const { tags, posts, dispatch, router } = this.props;
-        let ArchiveItems = [];
         const postIds = tags[tagName];
         if (postIds === undefined) {
-            return (<div></div>);
+            return <div></div>;
         }
-        dispatch(changeNavName('全部日记'));
-        for (let i = 0, len = postIds.length; i < len; i++) {
+        let ArchiveItems = [];
+        let i = 0;
+        const len = postIds.length;
+        while (i < len) {
             let prevPost = posts[postIds[i]];
+            let nextPost = posts[postIds[++i]];
             let articles = [prevPost];
-            while (prevPost.year === posts[postIds[i + 1]].year) {
-                prevPost = posts[postIds[i + 1]];
+            while (nextPost && prevPost.year === nextPost.year) {
+                prevPost = nextPost;
+                nextPost = posts[postIds[++i]];
                 articles.push(prevPost);
-                i++;
             }
             ArchiveItems.push(
                 <ArchiveItem
@@ -43,7 +55,7 @@ class Tag extends React.PureComponent {
 
 Tag.propTypes = {
     tags: PropTypes.object.isRequired,
-    posts: PropTypes.shape({
+    posts: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired,
@@ -51,7 +63,7 @@ Tag.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    }).isRequired
+    })).isRequired
 };
 
 

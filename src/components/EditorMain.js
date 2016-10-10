@@ -89,8 +89,7 @@ export default class EditorMain extends React.PureComponent {
                   className="editor"
                   style={ editorStyle }
                   ref={ textarea => this._editor = textarea }
-                  onInput={ () => this.props.updateArticle(this._editor.value) }
-                  onChange={ () => this.props.updateArticle(this._editor.value) }
+                  onChange={ () => this.props.updateBody(this._editor.value) }
                   value={ this.props.body }
                 >
                 </textarea>
@@ -103,7 +102,7 @@ export default class EditorMain extends React.PureComponent {
                 </div>
                 <EditorBar
                   editor={ this._editor }
-                  updateArticle={ (body) => this.props.updateBody(body) }
+                  updateBody={ (body) => this.props.updateBody(body) }
                 />
             </div>
         );

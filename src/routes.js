@@ -8,18 +8,20 @@ import Category from './containers/Category';
 import Tag from './containers/Tag';
 import Post from './containers/Post';
 import Editor from './containers/Editor';
+import Notfound from './containers/Notfound';
 
 
 export default (
     <Route path="/" component={withRouter(App)}>
-        <IndexRoute component={withRouter(Diary)}>
+        <Route component={withRouter(Diary)}>
             <IndexRoute component={withRouter(Home)} />
             <Route path="search/:keyword" component={withRouter(Search)} />
             <Route path="category/:catName" component={withRouter(Category)} />
             <Route path="tag/:tagName" component={withRouter(Tag)} />
             <Route path="post/:id" component={withRouter(Post)} />
-        </IndexRoute>
+            <Route path="404" component={Notfound} />
+        </Route>
         <Route path="editor/:id" component={withRouter(Editor)} />
-        <Redirect from="*" to="/" />
+        <Redirect from="*" to="/404" />
     </Route>
 );

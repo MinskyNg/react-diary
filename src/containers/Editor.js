@@ -15,13 +15,24 @@ class Editor extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.timer = setTimeout(() => this.setStack(), 2000);
-        document.addEventListener('drop', this.handleDrop);
+        if (this.post !== undefined) {
+            this.timer = setTimeout(() => this.setStack(), 2500);
+            document.addEventListener('drop', this.handleDrop);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.post = nextProps.posts[nextProps.params.id];
+        if (this.props.params.id !== nextProps.params.id) {
+            this.state = { screenShow: 2, undoStack: [], redoStack: [] };
+        }
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timer);
-        document.removeEventListener('drop', this.handleDrop);
+        if (this.post !== undefined) {
+            clearTimeout(this.timer);
+            document.removeEventListener('drop', this.handleDrop);
+        }
     }
 
     setStack() {
@@ -33,7 +44,7 @@ class Editor extends React.PureComponent {
             undoStack.push(this.post.body);
             this.setState({ undoStack });
         }
-        this.timer = setTimeout(() => this.setStack(), 2000);
+        this.timer = setTimeout(() => this.setStack(), 2500);
     }
 
     handleUndo() {
@@ -43,7 +54,7 @@ class Editor extends React.PureComponent {
             const body = undoStack[undoStack.length - 2];
             redoStack.push(undoStack.pop());
             this.setState({ undoStack, redoStack });
-            this.props.dispatch(updateBody(body));
+            this.props.dispatch(updateBody(this.post.id, body));
         }
     }
 
@@ -54,7 +65,7 @@ class Editor extends React.PureComponent {
             const body = redoStack.pop();
             undoStack.push(body);
             this.setState({ undoStack, redoStack });
-            this.props.dispatch(updateBody(body));
+            this.props.dispatch(updateBody(this.post.id, body));
         }
     }
 
@@ -71,10 +82,10 @@ class Editor extends React.PureComponent {
 
     render() {
         const { postIds, categories, tags, posts, asideShow, dispatch, router } = this.props;
-        const postId = this.props.params.id;
+        const postId = +this.props.params.id;
         const post = posts[postId];
         if (post === undefined) {
-            return (<div></div>);
+            return <div></div>;
         }
         return (
             <div className="content">
@@ -124,7 +135,7 @@ Editor.propTypes = {
     postIds: PropTypes.array.isRequired,
     categories: PropTypes.object.isRequired,
     tags: PropTypes.object.isRequired,
-    posts: PropTypes.shape({
+    posts: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired,
@@ -132,7 +143,7 @@ Editor.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    }).isRequired,
+    })).isRequired,
     asideShow: PropTypes.bool.isRequired
 };
 

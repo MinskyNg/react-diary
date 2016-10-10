@@ -1,0 +1,50 @@
+.category-list {
+    float: left;
+    width: 175px;
+    height: 100%;
+    border-right: 1px #BDBDBD solid;
+    background-color: #F5F5F5;
+    overflow: auto;
+}
+
+.category-list a {
+    display: block;
+    height: 56px;
+    border-bottom: 1px #EDEDED solid;
+    color: #000;
+    background-color: #FFF;
+}
+
+.category-list a:hover {
+    color: #FFF;
+    background-color: #CCC;
+}
+
+.category-list .active {
+    background-color: #CCC;
+}
+
+.category-name {
+    float: left;
+    width: 80%;
+    height: 55px;
+    padding-left: 10px;
+    padding-right: 5px;
+    margin: 0;
+    font-size: 1.7em;
+    line-height: 55px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.category-count {
+    display: block;
+    float: right;
+    width: 20%;
+    height: 55px;
+    padding-right: 8px;
+    margin: 0;
+    font-size: 1.6em;
+    line-height: 55px;
+}

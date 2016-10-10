@@ -5,17 +5,23 @@ import ArchiveItem from '../components/ArchiveItem';
 
 
 class Home extends React.PureComponent {
+    componentDidMount() {
+        this.props.dispatch(changeNavName('全部日记'));
+    }
+
     render() {
         const { postIds, posts, dispatch, router } = this.props;
-        dispatch(changeNavName('全部日记'));
         let ArchiveItems = [];
-        for (let i = 0, len = postIds.length; i < len; i++) {
+        let i = 0;
+        const len = postIds.length;
+        while (i < len) {
             let prevPost = posts[postIds[i]];
+            let nextPost = posts[postIds[++i]];
             let articles = [prevPost];
-            while (prevPost.year === posts[postIds[i + 1]].year) {
-                prevPost = posts[postIds[i + 1]];
+            while (nextPost && prevPost.year === nextPost.year) {
+                prevPost = nextPost;
+                nextPost = posts[postIds[++i]];
                 articles.push(prevPost);
-                i++;
             }
             ArchiveItems.push(
                 <ArchiveItem
@@ -38,7 +44,7 @@ class Home extends React.PureComponent {
 
 Home.propTypes = {
     postIds: PropTypes.array.isRequired,
-    posts: PropTypes.shape({
+    posts: PropTypes.objectOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         body: PropTypes.string.isRequired,
@@ -46,7 +52,7 @@ Home.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    }).isRequired
+    })).isRequired
 };
 
 
