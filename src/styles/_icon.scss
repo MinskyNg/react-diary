@@ -1,0 +1,145 @@
+@mixin icon($position, $width, $height) {
+    display: block;
+    background-image: url(./img/sprite.png);
+    background-position: $position;
+    width: $width;
+    height: $height;
+}
+
+.icon-react {
+    margin: 4px 10px 0;
+    float: left;
+    @include icon(0px 0px, 55px, 55px);
+}
+
+.icon-search {
+    float: left;
+    @include icon(0px -55px, 32px, 32px);
+}
+
+.icon-deleteArticle {
+    @include icon(-115px -76px, 24px, 24px);
+}
+
+.icon-date {
+    float: left;
+    margin-right: 8px;
+    @include icon(-55px 0px, 32px, 32px);
+}
+
+.icon-left {
+    margin: 1px 0 0 1px;
+    @include icon(-115px -26px, 25px, 25px);
+}
+
+.icon-right {
+    margin: 1px 0 0 2px;
+    @include icon(-115px -51px, 25px, 25px);
+}
+
+.icon-addCat {
+    margin: 1px 0 0 1px;
+    @include icon(-87px 0px, 28px, 28px);
+}
+
+.icon-addPost {
+    margin: 1px 0 0 1px;
+    @include icon(-56px -87px, 28px, 28px);
+}
+
+.icon-addTag {
+    @include icon(-32px -55px, 31px, 31px);
+}
+
+.icon-delete {
+    float: right;
+    cursor: pointer;
+    border-radius: 50%;
+    @include icon(-141px -21px, 16px, 16px);
+    &:hover {
+        background-color: #999;
+    }
+}
+
+.icon-preview {
+    @include icon(-87px -56px, 28px, 28px);
+}
+
+.icon-editor {
+    margin-left: 1px;
+    @include icon(-28px -87px, 28px, 28px);
+}
+
+.icon-double {
+    margin: 2px 0 0 2px;
+    @include icon(-55px -32px, 25px, 22px);
+}
+
+.icon-undo {
+    margin: 3px 0 0 2px;
+    @include icon(-84px -87px, 26px, 26px);
+}
+
+.icon-redo {
+    margin: 3px 0 0 2px;
+    @include icon(-115px 0px, 26px, 26px);
+}
+
+.icon-download {
+    @include icon(0px -87px, 28px, 28px);
+}
+
+.icon-del {
+    margin: 1px 0 0 1px;
+    @include icon(-87px -28px, 28px, 28px);
+}
+
+.icon-heading {
+    margin-left: 3px;
+    @include icon(-46px -115px, 23px, 23px);
+}
+
+.icon-strong {
+    margin-left: 3px;
+    @include icon(-115px -115px, 23px, 23px);
+}
+
+.icon-italic {
+    margin-left: 3px;
+    @include icon(-23px -115px, 23px, 23px);
+}
+
+.icon-code {
+    margin-left: 3px;
+    @include icon(0px -138px, 24px, 18px);
+}
+
+.icon-link {
+    margin-left: 3px;
+    @include icon(-92px -115px, 23px, 23px);
+}
+
+.icon-img {
+    margin-left: 3px;
+    @include icon(-63px -55px, 23px, 23px);
+}
+
+.icon-ul {
+    margin-left: 3px;
+    @include icon(-69px -115px, 23px, 23px);
+}
+
+.icon-ol {
+    margin-left: 3px;
+    @include icon(0px -115px, 23px, 23px);
+}
+
+.icon-quote {
+    margin-left: 3px;
+    @include icon(-141px 0px, 23px, 21px);
+}
+
+.icon-line {
+    margin-left: 3px;
+    @include icon(-141px -37px, 23px, 4px);
+}

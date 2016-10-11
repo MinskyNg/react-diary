@@ -27,7 +27,10 @@ class Post extends React.PureComponent {
         return (
             <article className="article">
                 <h3 className="article-title">{post.title}</h3>
-                <span className="article-date">{`${post.year}-${post.date}`}</span>
+                <div className="article-date">
+                    <i className="icon-date"></i>
+                    {`${post.year}-${post.date}`}
+                </div>
                 <section className="article-section"
                   dangerouslySetInnerHTML={{ __html: markup }}
                 >

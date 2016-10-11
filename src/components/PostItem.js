@@ -18,11 +18,14 @@ export default class PostItem extends React.PureComponent {
         return (
             <article className="article">
                 <h3 className="article-title">{this.props.title}</h3>
-                <button className="article-delete" title="删除日记"
+                <button className="article-delete icon-deleteArticle" title="删除日记"
                   onClick={() => this.handleDelPost()}
                 >
                 </button>
-                <span className="article-date">{this.props.date}</span>
+                <div className="article-date">
+                    <i className="icon-date"></i>
+                    {this.props.date}
+                </div>
                 <section className="article-section"
                   dangerouslySetInnerHTML={{ __html: trimHtml(markup, { limit: 200 }).html }}
                 >

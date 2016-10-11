@@ -151,46 +151,56 @@ export default class EditorBar extends React.PureComponent {
 
     render() {
         return (
-            <div className="toolbar">
-                <button className="add-heading" title="添加标题"
-                  onClick={ () => this.insertText('heading') }
+            <div className="toolbar" style={{ display: this.props.screenShow !== 1 ? 'block' : 'none' }}>
+                <button title="添加标题"
+                  onClick={() => this.insertText('heading')}
                 >
+                    <i className="icon-heading"></i>
                 </button>
-                <button className="add-strong" title="添加粗体"
-                  onClick={ () => this.insertText('strong') }
+                <button title="添加粗体"
+                  onClick={() => this.insertText('strong')}
                 >
+                    <i className="icon-strong"></i>
                 </button>
-                <button className="add-italic" title="添加斜体"
-                  onClick={ () => this.insertText('italic') }
+                <button title="添加斜体"
+                  onClick={() => this.insertText('italic')}
                 >
+                    <i className="icon-italic"></i>
                 </button>
-                <button className="add-code" title="添加代码"
-                  onClick={ () => this.insertText('code') }
+                <button title="添加代码"
+                  onClick={() => this.insertText('code')}
                 >
+                    <i className="icon-code"></i>
                 </button>
-                <button className="add-link" title="添加链接"
-                  onClick={ () => this.insertText('url') }
+                <button title="添加链接"
+                  onClick={() => this.insertText('url')}
                 >
+                    <i className="icon-link"></i>
                 </button>
-                <button className="add-img" title="添加图片"
-                  onClick={ () => this.insertText('img') }
+                <button title="添加图片"
+                  onClick={() => this.insertText('img')}
                 >
+                    <i className="icon-img"></i>
                 </button>
-                <button className="add-ul" title="添加无序列表"
-                  onClick={ () => this.insertText('ul') }
+                <button title="添加无序列表"
+                  onClick={() => this.insertText('ul')}
                 >
+                    <i className="icon-ul"></i>
                 </button>
-                <button className="add-ol" title="添加有序列表"
-                  onClick={ () => this.insertText('ol') }
+                <button title="添加有序列表"
+                  onClick={() => this.insertText('ol')}
                 >
+                    <i className="icon-ol"></i>
                 </button>
-                <button className="add-quote" title="添加块引用"
-                  onClick={ () => this.insertText('quote') }
+                <button title="添加块引用"
+                  onClick={() => this.insertText('quote')}
                 >
+                    <i className="icon-quote"></i>
                 </button>
-                <button className="add-line" title="添加分割线"
-                  onClick={ () => this.insertText('line') }
+                <button title="添加分割线"
+                  onClick={() => this.insertText('line')}
                 >
+                    <i className="icon-line"></i>
                 </button>
             </div>
         );

@@ -15,8 +15,12 @@ export default class Header extends React.PureComponent {
     render() {
         return (
             <header className="header">
+                <i className="icon-react"></i>
                 <h1>React Diary</h1>
-                <input type="text" onKeyUp={e => this.handleSearch(e)} />
+                <div>
+                    <i className="icon-search"></i>
+                    <input type="text" onKeyUp={e => this.handleSearch(e)} />
+                </div>
             </header>
         );
     }

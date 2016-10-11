@@ -1,0 +1,180 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-addCat {
+  background-image: url(sprite.png);
+  background-position: -87px 0px;
+  width: 28px;
+  height: 28px;
+}
+.icon-addPost {
+  background-image: url(sprite.png);
+  background-position: -56px -87px;
+  width: 28px;
+  height: 28px;
+}
+.icon-addTag {
+  background-image: url(sprite.png);
+  background-position: -32px -55px;
+  width: 31px;
+  height: 31px;
+}
+.icon-code {
+  background-image: url(sprite.png);
+  background-position: 0px -138px;
+  width: 24px;
+  height: 18px;
+}
+.icon-date {
+  background-image: url(sprite.png);
+  background-position: -55px 0px;
+  width: 32px;
+  height: 32px;
+}
+.icon-del {
+  background-image: url(sprite.png);
+  background-position: -87px -28px;
+  width: 28px;
+  height: 28px;
+}
+.icon-delete {
+  background-image: url(sprite.png);
+  background-position: -141px -21px;
+  width: 16px;
+  height: 16px;
+}
+.icon-deleteArticle {
+  background-image: url(sprite.png);
+  background-position: -115px -76px;
+  width: 24px;
+  height: 24px;
+}
+.icon-double {
+  background-image: url(sprite.png);
+  background-position: -55px -32px;
+  width: 25px;
+  height: 22px;
+}
+.icon-download {
+  background-image: url(sprite.png);
+  background-position: 0px -87px;
+  width: 28px;
+  height: 28px;
+}
+.icon-editor {
+  background-image: url(sprite.png);
+  background-position: -28px -87px;
+  width: 28px;
+  height: 28px;
+}
+.icon-heading {
+  background-image: url(sprite.png);
+  background-position: -46px -115px;
+  width: 23px;
+  height: 23px;
+}
+.icon-img {
+  background-image: url(sprite.png);
+  background-position: -63px -55px;
+  width: 23px;
+  height: 23px;
+}
+.icon-italic {
+  background-image: url(sprite.png);
+  background-position: -23px -115px;
+  width: 23px;
+  height: 23px;
+}
+.icon-left {
+  background-image: url(sprite.png);
+  background-position: -115px -26px;
+  width: 25px;
+  height: 25px;
+}
+.icon-line {
+  background-image: url(sprite.png);
+  background-position: -141px -37px;
+  width: 23px;
+  height: 4px;
+}
+.icon-link {
+  background-image: url(sprite.png);
+  background-position: -92px -115px;
+  width: 23px;
+  height: 23px;
+}
+.icon-ol {
+  background-image: url(sprite.png);
+  background-position: 0px -115px;
+  width: 23px;
+  height: 23px;
+}
+.icon-preview {
+  background-image: url(sprite.png);
+  background-position: -87px -56px;
+  width: 28px;
+  height: 28px;
+}
+.icon-quote {
+  background-image: url(sprite.png);
+  background-position: -141px 0px;
+  width: 23px;
+  height: 21px;
+}
+.icon-react {
+  background-image: url(sprite.png);
+  background-position: 0px 0px;
+  width: 55px;
+  height: 55px;
+}
+.icon-redo {
+  background-image: url(sprite.png);
+  background-position: -115px 0px;
+  width: 26px;
+  height: 26px;
+}
+.icon-right {
+  background-image: url(sprite.png);
+  background-position: -115px -51px;
+  width: 25px;
+  height: 25px;
+}
+.icon-search {
+  background-image: url(sprite.png);
+  background-position: 0px -55px;
+  width: 32px;
+  height: 32px;
+}
+.icon-strong {
+  background-image: url(sprite.png);
+  background-position: -115px -115px;
+  width: 23px;
+  height: 23px;
+}
+.icon-ul {
+  background-image: url(sprite.png);
+  background-position: -69px -115px;
+  width: 23px;
+  height: 23px;
+}
+.icon-undo {
+  background-image: url(sprite.png);
+  background-position: -84px -87px;
+  width: 26px;
+  height: 26px;
+}

@@ -1,7 +1,7 @@
 .year {
     height: 40px;
     padding-right: 20px;
-    font-size: 1.8em;
+    font-size: 1.8rem;
     font-weight: bold;
     text-align: right;
     line-height: 39px;
@@ -11,13 +11,16 @@
 .article {
     padding: 20px 120px 30px;
     border-bottom: 1px #EDEDED solid;
-    font-size: 1.6em;
+    font-size: 1.6rem;
+    &:hover .article-delete {
+        opacity: 1;
+    }
 }
 
 .article-title {
     float: left;
     margin: 0;
-    font-size: 1.8em;
+    font-size: 2.4rem;
 }
 
 .article-delete {
@@ -28,28 +31,21 @@
     margin: 5px 10px 0 0;
     border: 0;
     border-radius: 50%;
+    background-color: transparent;
     outline: 0;
-    background: url(./img/deleteArticle.png) no-repeat center;
     cursor: pointer;
     transition: all 0.4s linear;
-}
-
-.article-delete:hover {
-    background-color: #999;
-}
-
-.article:hover .article-delete {
-    opacity: 1;
+    &:hover {
+        background-color: #999;
+    }
 }
 
 .article-date {
     clear: both;
     display: block;
-    height: 35px;
-    padding-left: 40px;
-    margin-top: 50px;
-    line-height: 35px;
-    background: url(./img/date.png) no-repeat top left;
+    height: 32px;
+    margin-top: 48px;
+    line-height: 32px;
 }
 
 .article-section {
@@ -59,43 +55,42 @@
 
 .article-bar {
     height: 35px;
+
+    a {
+        float: left;
+        height: 30px;
+        padding: 0 12px;
+        margin: 3px 16px 2px 0;
+        border-radius: 5px;
+        color: #FFF;
+        font-size: 1.5rem;
+        line-height: 30px;
+        text-decoration: none;
+        background-color: #D8D8D8;
+        cursor: pointer;
+        &:hover {
+            background-color: #8A8A8A;
+        }
+    }
+
+    button {
+        float: right;
+        width: 100px;
+        height: 35px;
+        margin: 0 10px;
+        border: 1px #A8A8A8 solid;
+        border-radius: 5px;
+        color: #FFF;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: #9C9C9C;
+        outline: 0;
+        cursor: pointer;
+        transition: all 0.3s linear;
+        &:hover {
+            color: #555;
+            background-color: #F5F5F5;
+        }
+    }
 }
 
-.article-bar a {
-    float: left;
-    height: 30px;
-    padding: 0 12px;
-    margin: 3px 16px 2px 0;
-    border-radius: 5px;
-    color: #FFF;
-    font-size: 0.9em;
-    line-height: 30px;
-    text-decoration: none;
-    background-color: #D8D8D8;
-    cursor: pointer;
-}
-
-.article-bar a:hover {
-    background-color: #8A8A8A;
-}
-
-.article-bar button {
-    float: right;
-    width: 100px;
-    height: 35px;
-    margin: 0 10px;
-    border: 1px #A8A8A8 solid;
-    border-radius: 5px;
-    color: #FFF;
-    font-size: 0.9em;
-    font-weight: bold;
-    background-color: #9C9C9C;
-    outline: 0;
-    cursor: pointer;
-    transition: all 0.3s linear;
-}
-
-.article-bar button:hover {
-    color: #555;
-    background-color: #F5F5F5;
-}

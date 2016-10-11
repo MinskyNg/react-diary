@@ -17,7 +17,7 @@ export default class Nav extends React.PureComponent {
     }
 
     toggleCatHanlder(event) {
-        if (event.target === this._catHandler) {
+        if (event.target === this._catIcon) {
             this.setState({ catHandlerShow: !this.state.catHandlerShow });
         }
     }
@@ -43,7 +43,7 @@ export default class Nav extends React.PureComponent {
     }
 
     toggleTagHanlder(event) {
-        if (event.target === this._tagHandler) {
+        if (event.target === this._tagIcon) {
             this.setState({ tagHandlerShow: !this.state.tagHandlerShow });
         }
     }
@@ -73,34 +73,38 @@ export default class Nav extends React.PureComponent {
         let catItems = Object.keys(categories).map(cat => (
                 <li key={cat}>
                     <span>{cat} ({categories[cat].length})</span>
-                    <span className="delete" onClick={e => this.handleDelCat(e, cat)}></span>
+                    <span className="icon-delete" onClick={e => this.handleDelCat(e, cat)}></span>
                 </li>
             )
         );
         let tagItems = Object.keys(tags).map(tag => (
                 <li key={tag}>
                     <span>{tag} ({tags[tag].length})</span>
-                    <span className="delete" onClick={e => this.handleDelTag(e, tag)}></span>
+                    <span className="icon-delete" onClick={e => this.handleDelTag(e, tag)}></span>
                 </li>
             )
         );
         return (
             <nav className="nav">
                 <button
-                  className={this.props.asideShow ? 'aside-hidden' : 'aside-show'}
+                  className="aside-toggle"
                   title="切换边栏"
                   onClick={() => this.props.toggleAside()}
                 >
+                    <i className={this.props.asideShow ? 'icon-left' : 'icon-right'}></i>
                 </button>
                 <h2>{this.props.navName}</h2>
                 <button className="add-post" title="添加日记"
                   onClick={() => this.handleAddPost()}
                 >
+                    <i className="icon-addPost"></i>
                 </button>
                 <button className="add-tag" title="管理标签"
-                  ref={ button => this._tagHandler = button }
                   onClick={e => this.toggleTagHanlder(e)}
                 >
+                    <i className="icon-addTag"
+                      ref={ i => this._tagIcon = i }
+                    ></i>
                     <div className="triangle"
                       style={{ display: this.state.tagHandlerShow ? 'block' : 'none' }}
                     ></div>
@@ -114,10 +118,12 @@ export default class Nav extends React.PureComponent {
                         <ul>{tagItems}</ul>
                     </div>
                 </button>
-                <button className="add-category" title="管理分类"
-                  ref={ button => this._catHandler = button }
+                <button className="add-cat" title="管理分类"
                   onClick={e => this.toggleCatHanlder(e)}
                 >
+                    <i className="icon-addCat"
+                      ref={ i => this._catIcon = i }
+                    ></i>
                     <div className="triangle"
                       style={{ display: this.state.catHandlerShow ? 'block' : 'none' }}
                     ></div>

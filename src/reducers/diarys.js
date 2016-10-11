@@ -36,10 +36,16 @@ handlers[DEL_CAT] = (state, action) => {
     const catList = state.getIn(['categories', cat]);
     let newState = state;
     catList.forEach(id => {
-        newState = newState.setIn(['posts', id.toString(), 'category'], '未分类');
+        newState = newState.setIn(['posts', id.toString(), 'category'], '未分类')
+          .updateIn(['categories', '未分类'], x => {
+              const index = x.findKey(y => y < id);
+              if (index === undefined) {
+                  return x.push(id);
+              }
+              return x.insert(index, id);
+          });
     });
-    return newState.updateIn(['categories', '未分类'], x => x.merge(catList))
-      .deleteIn(['categories', cat]);
+    return newState.deleteIn(['categories', cat]);
 };
 
 
@@ -105,13 +111,22 @@ handlers[UPDATE_CAT] = (state, action) => {
     const { id, cat } = action;
     const preCat = state.getIn(['posts', id.toString(), 'category']);
     return state.updateIn(['categories', preCat], x => x.delete(x.indexOf(id)))
-      .updateIn(['categories', cat], x => x.unshift(id))
+      .updateIn(['categories', cat], x => {
+          const index = x.findKey(y => y < id);
+          if (index === undefined) {
+              return x.push(id);
+          }
+          return x.insert(index, id);
+      })
       .setIn(['posts', id.toString(), 'category'], cat);
 };
 
 
 // 修改标签
 handlers[UPDATE_TAG] = (state, action) => {
+    if (action.tag.length > 5) {
+        return state;
+    }
     const id = action.id;
     const preTag = state.getIn(['posts', id.toString(), 'tag']);
     let newState = state.setIn(['posts', id.toString(), 'tag'], List(action.tag));
@@ -119,7 +134,13 @@ handlers[UPDATE_TAG] = (state, action) => {
         newState = newState.updateIn(['tags', tag], x => x.delete(x.indexOf(id)));
     });
     action.tag.forEach(tag => {
-        newState = newState.updateIn(['tags', tag], x => x.unshift(id));
+        newState = newState.updateIn(['tags', tag], x => {
+            const index = x.findKey(y => y < id);
+            if (index === undefined) {
+                return x.push(id);
+            }
+            return x.insert(index, id);
+        });
     });
     return newState;
 };

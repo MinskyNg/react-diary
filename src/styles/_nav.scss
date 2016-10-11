@@ -1,135 +1,62 @@
+@import "panel";
+
 .nav {
     height: 56px;
     padding-right: 10px;
     border-bottom: 1px #EDEDED solid;
     text-align: center;
     background-color: #FFF;
+
+    select {
+        float: left;
+        width: 100px;
+        height: 28px;
+        margin: 12px 10px 0;
+        border: 0;
+        font-size: 1.6rem;
+        background-color: #F5F5F5;
+    }
+
+    button {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        margin: 11px 8px 0;
+        border: 0;
+        border-radius: 3px;
+        cursor: pointer;
+        background-color: transparent;
+        &:hover {
+            background-color: #999;
+        }
+    }
+
+    h2 {
+        display: inline-block;
+        font-size: 2.5rem;
+        margin: 14px 0 0;
+    }
 }
 
-.nav button {
-    width: 30px;
-    height: 30px;
-    margin: 11px 8px 0;
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.nav button:hover {
-    background-color: #999;
-}
-
-.nav h2 {
-    display: inline-block;
-    font-size: 2.5em;
-    margin: 14px 0 0;
-}
-
-.aside-hidden {
+.aside-toggle {
     float: left;
-    background: url(./img/left.png) no-repeat center;
 }
 
-.aside-show {
+.add-cat, .add-tag {
+    position: relative;
+}
+
+.add-cat, .add-tag, .add-post, .del, .download, .undo, .redo, .show-double, .show-editor, .show-preview {
+    float: right;
+}
+
+.input-title {
     float: left;
-    background: url(./img/right.png) no-repeat center;
-}
-
-.add-category {
-    float: right;
-    position: relative;
-    background: url(./img/addCat.png) no-repeat center;
-}
-
-.add-tag {
-    float: right;
-    position: relative;
-    background: url(./img/addTag.png) no-repeat center;
-}
-
-.triangle {
-    position: absolute;
-    top: 21px;
-    right: 8px;
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent #F8F8F8 transparent;
-    z-index: 100;
-}
-
-.panel {
-    position: absolute;
-    top: 40px;
-    right: -10px;
-    width: 200px;
-    height: 400px;
-    padding: 12px 0;
-    border-radius: 10px;
-    text-align: center;
-    background-color: #FCFCFC;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-    z-index: 99;
-    overflow: auto;
-    cursor: default;
-}
-
-.panel input {
     width: 160px;
-    height: 24px;
-    padding: 0 10px;
+    height: 30px;
+    padding: 8px;
+    margin: 12px 15px 0;
     border: 1px #8A8A8A solid;
-    border-radius: 15px;
-    font-size: 1.5em;
-}
-
-.panel h3 {
-    font-size: 1.6em;
-}
-
-.panel h3:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 45px;
-    margin: 0 auto;
-    margin-top: 6px;
-    background: black;
-}
-
-.panel ul {
-    padding: 0;
-    font-size: 1.5em;
-    text-align: left;
-    list-style-type: none;
-}
-
-.panel li {
-    padding: 6px;
-    border-bottom: 1px #8A8A8A solid;
-}
-
-.panel li:hover {
-    background-color: #D8D8D8;
-}
-
-.panel li span {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
-
-.panel li .delete {
-    float: right;
-    width: 16px;
-    height: 16px;
-    background: url(./img/delete.png) no-repeat center;
-    cursor: pointer;
-}
-
-
-.add-post {
-    float: right;
-    background: url(./img/addPost.png) no-repeat center;
+    border-radius: 5px;
+    font-size: 1.6rem;
 }

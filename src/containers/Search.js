@@ -21,7 +21,7 @@ class Search extends React.PureComponent {
         let ArchiveItems = [];
         const matchIds = [];
         postIds.forEach(id => {
-            if (posts[id].title.indexOf(keyword) !== -1) {
+            if (posts[id].title.indexOf(keyword) !== -1 || posts[id].body.indexOf(keyword) !== -1) {
                 matchIds.push(id);
             }
         });

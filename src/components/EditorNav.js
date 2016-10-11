@@ -37,7 +37,7 @@ export default class EditorNav extends React.PureComponent {
     }
 
     toggleCatHanlder(event) {
-        if (event.target === this._catHandler) {
+        if (event.target === this._catIcon) {
             this.setState({ catHandlerShow: !this.state.catHandlerShow });
         }
     }
@@ -61,7 +61,7 @@ export default class EditorNav extends React.PureComponent {
     }
 
     toggleTagHanlder(event) {
-        if (event.target === this._tagHandler) {
+        if (event.target === this._tagIcon) {
             this.setState({ tagHandlerShow: !this.state.tagHandlerShow });
         }
     }
@@ -115,24 +115,25 @@ export default class EditorNav extends React.PureComponent {
         let catItems = Object.keys(categories).map(cat => (
                 <li key={cat}>
                     <span>{cat} ({categories[cat].length})</span>
-                    <span className="delete" onClick={e => this.handleDelCat(e, cat)}></span>
+                    <span className="icon-delete" onClick={e => this.handleDelCat(e, cat)}></span>
                 </li>
             )
         );
         let tagItems = Object.keys(tags).map(tag => (
                 <li key={tag}>
                     <span>{tag} ({tags[tag].length})</span>
-                    <span className="delete" onClick={e => this.handleDelTag(e, tag)}></span>
+                    <span className="icon-delete" onClick={e => this.handleDelTag(e, tag)}></span>
                 </li>
             )
         );
         return (
             <nav className="nav">
                 <button
-                  className={this.props.asideShow ? 'aside-hidden' : 'aside-show'}
+                  className="aside-toggle"
                   title="切换边栏"
                   onClick={() => this.props.toggleAside()}
                 >
+                    <i className={this.props.asideShow ? 'icon-left' : 'icon-right'}></i>
                 </button>
                 <input
                   className="input-title"
@@ -156,11 +157,14 @@ export default class EditorNav extends React.PureComponent {
                 <button className="add-post" title="添加日记"
                   onClick={() => this.handleAddPost()}
                 >
+                    <i className="icon-addPost"></i>
                 </button>
                 <button className="add-tag" title="管理标签"
-                  ref={ button => this._tagHandler = button }
                   onClick={e => this.toggleTagHanlder(e)}
                 >
+                    <i className="icon-addTag"
+                      ref={ i => this._tagIcon = i }
+                    ></i>
                     <div className="triangle"
                       style={{ display: this.state.tagHandlerShow ? 'block' : 'none' }}
                     ></div>
@@ -174,10 +178,12 @@ export default class EditorNav extends React.PureComponent {
                         <ul>{tagItems}</ul>
                     </div>
                 </button>
-                <button className="add-category" title="管理分类"
-                  ref={ button => this._catHandler = button }
+                <button className="add-cat" title="管理分类"
                   onClick={e => this.toggleCatHanlder(e)}
                 >
+                    <i className="icon-addCat"
+                      ref={ i => this._catIcon = i }
+                    ></i>
                     <div className="triangle"
                       style={{ display: this.state.catHandlerShow ? 'block' : 'none' }}
                     ></div>
@@ -194,30 +200,37 @@ export default class EditorNav extends React.PureComponent {
                 <button className="show-preview" title="只显示预览区"
                   onClick={() => changeScreen(1)}
                 >
+                    <i className="icon-preview"></i>
                 </button>
                 <button className="show-editor" title="只显示编辑区"
                   onClick={() => changeScreen(0)}
                 >
+                    <i className="icon-editor"></i>
                 </button>
                 <button className="show-double" title="双屏显示"
                   onClick={() => changeScreen(2)}
                 >
+                    <i className="icon-double"></i>
                 </button>
                 <button className="redo" title="恢复"
                   onClick={() => this.props.handleRedo()}
                 >
+                    <i className="icon-redo"></i>
                 </button>
                 <button className="undo" title="撤销"
                   onClick={() => this.props.handleUndo()}
                 >
+                    <i className="icon-undo"></i>
                 </button>
                 <button className="download" title="下载日记"
                   onClick={() => this.handleDown()}
                 >
+                    <i className="icon-download"></i>
                 </button>
                 <button className="del" title="删除日记"
                   onClick={() => this.handleDelPost()}
                 >
+                    <i className="icon-del"></i>
                 </button>
             </nav>
         );

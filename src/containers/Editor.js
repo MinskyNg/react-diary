@@ -10,13 +10,13 @@ class Editor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.post = this.props.posts[this.props.params.id];
-        this.state = { screenShow: 2, undoStack: [], redoStack: [] };
+        this.state = { screenShow: 2, undoStack: [this.post.body], redoStack: [] };
         this.handleDrop = this.handleDrop.bind(this);
     }
 
     componentDidMount() {
         if (this.post !== undefined) {
-            this.timer = setTimeout(() => this.setStack(), 2500);
+            this.timer = setTimeout(() => this.setStack(), 2000);
             document.addEventListener('drop', this.handleDrop);
         }
     }
@@ -24,7 +24,7 @@ class Editor extends React.PureComponent {
     componentWillReceiveProps(nextProps) {
         this.post = nextProps.posts[nextProps.params.id];
         if (this.props.params.id !== nextProps.params.id) {
-            this.state = { screenShow: 2, undoStack: [], redoStack: [] };
+            this.state = { screenShow: 2, undoStack: [this.post.body], redoStack: [] };
         }
     }
 
@@ -44,7 +44,7 @@ class Editor extends React.PureComponent {
             undoStack.push(this.post.body);
             this.setState({ undoStack });
         }
-        this.timer = setTimeout(() => this.setStack(), 2500);
+        this.timer = setTimeout(() => this.setStack(), 2000);
     }
 
     handleUndo() {

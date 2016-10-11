@@ -87,22 +87,23 @@ export default class EditorMain extends React.PureComponent {
             >
                 <textarea
                   className="editor"
-                  style={ editorStyle }
-                  ref={ textarea => this._editor = textarea }
-                  onChange={ () => this.props.updateBody(this._editor.value) }
-                  value={ this.props.body }
+                  style={editorStyle}
+                  ref={textarea => this._editor = textarea}
+                  onChange={() => this.props.updateBody(this._editor.value)}
+                  value={this.props.body}
                 >
                 </textarea>
                 <div
                   className="preview"
-                  style={ previewStyle }
-                  ref={ div => this._preview = div }
+                  style={previewStyle}
+                  ref={div => this._preview = div}
                   dangerouslySetInnerHTML={{ __html: markup }}
                 >
                 </div>
                 <EditorBar
-                  editor={ this._editor }
-                  updateBody={ (body) => this.props.updateBody(body) }
+                  screenShow={screenShow}
+                  editor={this._editor}
+                  updateBody={(body) => this.props.updateBody(body)}
                 />
             </div>
         );

@@ -2,63 +2,23 @@
     position: absolute;
     bottom: 30px;
     left: 30px;
-    width: 360px;
+    width: 335px;
     height: 34px;
     padding: 2px 5px;
     border-radius: 5px;
-    background-color: rgba(5,5,5,0.5)
-}
+    background-color: rgba(5,5,5,0.5);
 
-.toolbar button {
-    width: 30px;
-    height: 28px;
-    margin: 1px 1px;
-    border: 0;
-    border-radius: 4px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.toolbar button:hover {
-    background-color: #555;
-}
-
-.add-heading {
-    background: url(./img/heading.png) no-repeat center;
-}
-
-.add-strong {
-    background: url(./img/strong.png) no-repeat center;
-}
-
-.add-italic {
-    background: url(./img/italic.png) no-repeat center;
-}
-
-.add-code {
-    background: url(./img/code.png) no-repeat center;
-}
-
-.add-link {
-    background: url(./img/link.png) no-repeat center;
-}
-
-.add-img {
-    background: url(./img/img.png) no-repeat center;
-}
-
-.add-ul {
-    background: url(./img/ul.png) no-repeat center;
-}
-
-.add-ol {
-    background: url(./img/ol.png) no-repeat center;
-}
-
-.add-quote {
-    background: url(./img/quote.png) no-repeat center;
-}
-
-.add-line {
-    background: url(./img/line.png) no-repeat center;
+    button {
+        width: 30px;
+        height: 28px;
+        margin: 1px 1px;
+        padding: 0;
+        border: 0;
+        border-radius: 4px;
+        background-color: transparent;
+        cursor: pointer;
+        &:hover {
+            background-color: #555;
+        }
+    }
 }
