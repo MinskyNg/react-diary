@@ -115,14 +115,14 @@ export default class EditorNav extends React.PureComponent {
         let catItems = Object.keys(categories).map(cat => (
                 <li key={cat}>
                     <span>{cat} ({categories[cat].length})</span>
-                    <span className="icon-delete" onClick={e => this.handleDelCat(e, cat)}></span>
+                    <span title="删除分类" className="icon-delete" onClick={e => this.handleDelCat(e, cat)}></span>
                 </li>
             )
         );
         let tagItems = Object.keys(tags).map(tag => (
                 <li key={tag}>
                     <span>{tag} ({tags[tag].length})</span>
-                    <span className="icon-delete" onClick={e => this.handleDelTag(e, tag)}></span>
+                    <span title="删除标签" className="icon-delete" onClick={e => this.handleDelTag(e, tag)}></span>
                 </li>
             )
         );
@@ -134,6 +134,11 @@ export default class EditorNav extends React.PureComponent {
                   onClick={() => this.props.toggleAside()}
                 >
                     <i className={this.props.asideShow ? 'icon-left' : 'icon-right'}></i>
+                </button>
+                <button className="full-screen" title="全屏模式"
+                  onClick={() => this.props.toggleScreen()}
+                >
+                    <i className="icon-fullScreen"></i>
                 </button>
                 <input
                   className="input-title"
@@ -154,11 +159,6 @@ export default class EditorNav extends React.PureComponent {
                 >
                     {tagOptions}
                 </select>
-                <button className="add-post" title="添加日记"
-                  onClick={() => this.handleAddPost()}
-                >
-                    <i className="icon-addPost"></i>
-                </button>
                 <button className="add-tag" title="管理标签"
                   onClick={e => this.toggleTagHanlder(e)}
                 >
@@ -197,6 +197,22 @@ export default class EditorNav extends React.PureComponent {
                         <ul>{catItems}</ul>
                     </div>
                 </button>
+                <button className="add-post" title="添加日记"
+                  onClick={() => this.handleAddPost()}
+                >
+                    <i className="icon-addPost"></i>
+                </button>
+                <button className="del" title="删除日记"
+                  onClick={() => this.handleDelPost()}
+                >
+                    <i className="icon-del"></i>
+                </button>
+                <button className="download" title="下载日记"
+                  onClick={() => this.handleDown()}
+                >
+                    <i className="icon-download"></i>
+                </button>
+                <i className="split"></i>
                 <button className="show-preview" title="只显示预览区"
                   onClick={() => changeScreen(1)}
                 >
@@ -212,6 +228,7 @@ export default class EditorNav extends React.PureComponent {
                 >
                     <i className="icon-double"></i>
                 </button>
+                <i className="split"></i>
                 <button className="redo" title="恢复"
                   onClick={() => this.props.handleRedo()}
                 >
@@ -221,16 +238,6 @@ export default class EditorNav extends React.PureComponent {
                   onClick={() => this.props.handleUndo()}
                 >
                     <i className="icon-undo"></i>
-                </button>
-                <button className="download" title="下载日记"
-                  onClick={() => this.handleDown()}
-                >
-                    <i className="icon-download"></i>
-                </button>
-                <button className="del" title="删除日记"
-                  onClick={() => this.handleDelPost()}
-                >
-                    <i className="icon-del"></i>
                 </button>
             </nav>
         );

@@ -10,3 +10,4 @@ export const UPDATE_CAT = 'UPDATE_CAT';
 export const UPDATE_TAG = 'UPDATE_TAG';
 export const CHANGE_NAV_NAME = 'CHANGE_NAV_NAME';
 export const TOGGLE_ASIDE = 'TOGGLE_ASIDE';
+export const TOGGLE_SCREEN = 'TOGGLE_SCREEN';

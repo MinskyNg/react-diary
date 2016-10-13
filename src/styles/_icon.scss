@@ -14,7 +14,7 @@
 
 .icon-search {
     float: left;
-    @include icon(0px -55px, 32px, 32px);
+    @include icon(-55px 0px, 32px, 32px);
 }
 
 .icon-deleteArticle {
@@ -24,7 +24,7 @@
 .icon-date {
     float: left;
     margin-right: 8px;
-    @include icon(-55px 0px, 32px, 32px);
+    @include icon(0px -55px, 32px, 32px);
 }
 
 .icon-left {
@@ -44,11 +44,16 @@
 
 .icon-addPost {
     margin: 1px 0 0 1px;
-    @include icon(-56px -87px, 28px, 28px);
+    @include icon(0px -87px, 28px, 28px);
 }
 
 .icon-addTag {
     @include icon(-32px -55px, 31px, 31px);
+}
+
+.icon-fullScreen {
+    margin: 2px 0 0 3px;
+    @include icon(-63px -55px, 24px, 24px);
 }
 
 .icon-delete {
@@ -57,7 +62,7 @@
     border-radius: 50%;
     @include icon(-141px -21px, 16px, 16px);
     &:hover {
-        background-color: #999;
+        background-color: #E56969;
     }
 }
 
@@ -86,7 +91,7 @@
 }
 
 .icon-download {
-    @include icon(0px -87px, 28px, 28px);
+    @include icon(-56px -87px, 28px, 28px);
 }
 
 .icon-del {
@@ -96,17 +101,17 @@
 
 .icon-heading {
     margin-left: 3px;
-    @include icon(-46px -115px, 23px, 23px);
+    @include icon(-92px -115px, 23px, 23px);
 }
 
 .icon-strong {
     margin-left: 3px;
-    @include icon(-115px -115px, 23px, 23px);
+    @include icon(-141px 0px, 23px, 23px);
 }
 
 .icon-italic {
     margin-left: 3px;
-    @include icon(-23px -115px, 23px, 23px);
+    @include icon(-46px -115px, 23px, 23px);
 }
 
 .icon-code {
@@ -116,12 +121,12 @@
 
 .icon-link {
     margin-left: 3px;
-    @include icon(-92px -115px, 23px, 23px);
+    @include icon(0px -115px, 23px, 23px);
 }
 
 .icon-img {
     margin-left: 3px;
-    @include icon(-63px -55px, 23px, 23px);
+    @include icon(-115px -115px, 23px, 23px);
 }
 
 .icon-ul {
@@ -131,15 +136,15 @@
 
 .icon-ol {
     margin-left: 3px;
-    @include icon(0px -115px, 23px, 23px);
+    @include icon(-23px -115px, 23px, 23px);
 }
 
 .icon-quote {
     margin-left: 3px;
-    @include icon(-141px 0px, 23px, 21px);
+    @include icon(-141px -23px, 23px, 21px);
 }
 
 .icon-line {
     margin-left: 3px;
-    @include icon(-141px -37px, 23px, 4px);
+    @include icon(-141px -60px, 23px, 4px);
 }

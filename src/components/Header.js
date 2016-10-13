@@ -14,7 +14,7 @@ export default class Header extends React.PureComponent {
 
     render() {
         return (
-            <header className="header">
+            <header className="header" style={{ display: this.props.fullScreen ? 'none' : 'block' }}>
                 <i className="icon-react"></i>
                 <h1>React Diary</h1>
                 <div>

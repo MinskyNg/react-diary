@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addCat, delCat, addTag, delTag, addPost, toggleAside } from '../actions';
+import { addCat, delCat, addTag, delTag, addPost, toggleAside, toggleScreen } from '../actions';
 import Nav from '../components/Nav';
 
 
@@ -23,6 +23,7 @@ class Home extends React.PureComponent {
                       router.replace(`/editor/${postIds[0] + 1}`);
                   }}
                   toggleAside={() => dispatch(toggleAside())}
+                  toggleScreen={() => dispatch(toggleScreen())}
                 />
                 {this.props.children}
             </div>

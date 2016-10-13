@@ -1,82 +1,12 @@
-.article {
-    width: 850px;
-    padding: 30px 30px 20px;
-    margin: 30px auto 50px;
-    border: 1px solid rgba(0,0,0,.09);
-    border-radius: 4px;
-    font-size: 1.6rem;
-    background-color: #FFF;
-    box-shadow: 0 3px 6px rgba(0,0,0,.04);
-}
-
-.postItem {
-    transition: all 0.3s linear;
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 6px 3px rgba(0,0,0,.1);
-        .article-delete {
-            opacity: 1;
-        }
-    }
-    .article-title {
-        cursor: pointer;
-        &:hover {
-            opacity: 0.6;
-        }
-    }
-}
-
-
-.article-title {
-    margin: 0 auto;
-    font-size: 3rem;
-    text-align: center;
-    &:after {
-        content: "";
-        display: block;
-        height: 2px;
-        width: 80px;
-        margin: 0 auto;
-        margin-top: 16px;
-        background: black;
-    }
-}
-
-.article-delete {
-    opacity: 0;
+.preview {
     float: right;
-    width: 24px;
-    height: 24px;
-    margin: 5px 10px 0 0;
-    border: 0;
-    border-radius: 50%;
-    background-color: transparent;
-    outline: 0;
-    cursor: pointer;
-    transition: all 0.4s linear;
-    &:hover {
-        background-color: #E56969;
-    }
-}
-
-.article-date {
-    clear: both;
-    display: block;
-    height: 32px;
-    margin-top: 40px;
-    color: rgba(0, 0, 0, .8);
-    font-size: 1.8rem;
-    font-weight: bold;
-    line-height: 32px;
-}
-
-.article-section {
-    min-height: 200px;
-    margin: 30px 0 40px;
+    height: 100%;
+    padding: 5px 15px;
     font-family: simsun, sans-serif;
-    font-size: 1.6rem;
-    overflow: hidden;
+    font-size: 1.5rem;
+    overflow: auto;
 
+    // 预览区文本样式
     a {
         text-decoration: none;
         color: #0645ad;
@@ -282,48 +212,3 @@
         box-sizing: border-box
     }
 }
-
-.article-bar {
-    height: 35px;
-
-    a {
-        float: left;
-        height: 30px;
-        padding: 0 12px;
-        margin: 3px 16px 2px 0;
-        border: 1px solid #566A82;
-        border-radius: 5px;
-        color: #566A82;
-        font-size: 1.5rem;
-        line-height: 30px;
-        text-decoration: none;
-        background-color: #FFF;
-        cursor: pointer;
-        transition: all 0.3s linear;
-        &:hover {
-            color: #FFF;
-            background-color: #566A82;
-        }
-    }
-
-    button {
-        float: right;
-        width: 100px;
-        height: 35px;
-        margin: 0 10px;
-        border: 1px #02B875 solid;
-        border-radius: 5px;
-        color: #02B875;
-        font-size: 1.5rem;
-        font-weight: bold;
-        background-color: #FFF;
-        outline: 0;
-        cursor: pointer;
-        transition: all 0.3s linear;
-        &:hover {
-            color: #FFF;
-            background-color: #02B875;
-        }
-    }
-}
-

@@ -1,5 +1,6 @@
 import { ADD_CAT, DEL_CAT, ADD_TAG, DEL_TAG, ADD_POST, DEL_POST, UPDATE_TITLE, UPDATE_BODY,
- UPDATE_CAT, UPDATE_TAG, CHANGE_NAV_NAME, TOGGLE_ASIDE } from '../constants/actionTypes';
+  UPDATE_CAT, UPDATE_TAG, CHANGE_NAV_NAME, TOGGLE_ASIDE, TOGGLE_SCREEN }
+  from '../constants/actionTypes';
 
 
 function makeActionCreator(type, ...argNames) {
@@ -24,3 +25,4 @@ export const updateCat = makeActionCreator(UPDATE_CAT, 'id', 'cat');
 export const updateTag = makeActionCreator(UPDATE_TAG, 'id', 'tag');
 export const changeNavName = makeActionCreator(CHANGE_NAV_NAME, 'navName');
 export const toggleAside = makeActionCreator(TOGGLE_ASIDE);
+export const toggleScreen = makeActionCreator(TOGGLE_SCREEN);

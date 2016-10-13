@@ -1,28 +1,15 @@
 @import "editorBar";
+@import "preview";
 
 
 .editor-wrapper {
     position: relative;
+    border-left: 1px #EDEDED solid;
 }
 
-.editor {
+.CodeMirror {
     float: left;
-    height: 100%;
-    padding: 15px;
-    padding-left: 25px;
-    border: 0;
     border-right: 1px #EDEDED solid;
-    font-size: 1.6rem;
-    line-height: 1.5em;
-    background-color: #f5f5f5;
-    resize: none;
+    font-size: 1.8rem;
 }
 
-
-.preview {
-    float: right;
-    height: 100%;
-    padding: 5px 15px;
-    font-size: 1.6rem;
-    overflow: auto;
-}

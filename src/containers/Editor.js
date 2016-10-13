@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addCat, delCat, addTag, delTag, addPost, delPost, toggleAside,
+import { addCat, delCat, addTag, delTag, addPost, delPost, toggleAside, toggleScreen,
   updateTitle, updateBody, updateCat, updateTag } from '../actions';
 import EditorNav from '../components/EditorNav';
 import EditorMain from '../components/EditorMain';
@@ -10,7 +10,7 @@ class Editor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.post = this.props.posts[this.props.params.id];
-        this.state = { screenShow: 2, undoStack: [this.post.body], redoStack: [] };
+        this.state = { screenShow: 2, do: false, undoStack: [this.post.body], redoStack: [] };
         this.handleDrop = this.handleDrop.bind(this);
     }
 
@@ -53,7 +53,7 @@ class Editor extends React.PureComponent {
         if (undoStack.length > 1) {
             const body = undoStack[undoStack.length - 2];
             redoStack.push(undoStack.pop());
-            this.setState({ undoStack, redoStack });
+            this.setState({ do: true, undoStack, redoStack });
             this.props.dispatch(updateBody(this.post.id, body));
         }
     }
@@ -64,7 +64,7 @@ class Editor extends React.PureComponent {
         if (redoStack.length > 0) {
             const body = redoStack.pop();
             undoStack.push(body);
-            this.setState({ undoStack, redoStack });
+            this.setState({ do: true, undoStack, redoStack });
             this.props.dispatch(updateBody(this.post.id, body));
         }
     }
@@ -81,7 +81,7 @@ class Editor extends React.PureComponent {
     }
 
     render() {
-        const { postIds, categories, tags, posts, asideShow, dispatch, router } = this.props;
+        const { postIds, categories, tags, posts, asideShow, fullScreen, dispatch, router } = this.props;
         const postId = +this.props.params.id;
         const post = posts[postId];
         if (post === undefined) {
@@ -111,6 +111,7 @@ class Editor extends React.PureComponent {
                       router.replace('/');
                   }}
                   toggleAside={() => dispatch(toggleAside())}
+                  toggleScreen={() => dispatch(toggleScreen())}
                   updateTitle={title => dispatch(updateTitle(postId, title))}
                   updateCat={cat => dispatch(updateCat(postId, cat))}
                   updateTag={tag => dispatch(updateTag(postId, tag))}
@@ -119,8 +120,11 @@ class Editor extends React.PureComponent {
                   changeScreen={show => this.setState({ screenShow: show })}
                 />
                 <EditorMain
+                  do={this.state.do}
                   body={post.body}
+                  fullScreen={fullScreen}
                   screenShow={this.state.screenShow}
+                  cancelDo={() => this.setState({ do: false })}
                   updateBody={body => {
                       this.setState({ redoStack: [] });
                       dispatch(updateBody(postId, body));
@@ -144,7 +148,8 @@ Editor.propTypes = {
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
     })).isRequired,
-    asideShow: PropTypes.bool.isRequired
+    asideShow: PropTypes.bool.isRequired,
+    fullScreen: PropTypes.bool.isRequired
 };
 
 
@@ -154,7 +159,8 @@ function selector(state) {
         categories: state.getIn(['diarys', 'categories']).toJS(),
         tags: state.getIn(['diarys', 'tags']).toJS(),
         posts: state.getIn(['diarys', 'posts']).toJS(),
-        asideShow: state.get('asideShow')
+        asideShow: state.get('asideShow'),
+        fullScreen: state.get('fullScreen')
     };
 }
 

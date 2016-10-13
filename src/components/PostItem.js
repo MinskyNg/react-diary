@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router';
 import marked from 'marked';
+import hljs from 'highlight.js';
 import trimHtml from 'trim-html';
 
 
 export default class PostItem extends React.PureComponent {
+    componentDidMount() {
+        // 配置markdown解析器和highlight.js
+        marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
+    }
+
     handleDelPost() {
         if (confirm('确定要删除此日记吗?')) {
             this.props.delPost(this.props.id);
@@ -16,8 +22,10 @@ export default class PostItem extends React.PureComponent {
         let tagItems = this.props.tag.map(tag => (<Link key={tag} to={`/tag/${tag}`}>{tag}</Link>));
         const markup = marked(this.props.body.toString(), { sanitize: true });
         return (
-            <article className="article">
-                <h3 className="article-title">{this.props.title}</h3>
+            <article className="article postItem">
+                <h3 className="article-title"
+                  onClick={() => router.push(`/post/${id}`)}
+                >{this.props.title}</h3>
                 <button className="article-delete icon-deleteArticle" title="删除日记"
                   onClick={() => this.handleDelPost()}
                 >

@@ -7,7 +7,9 @@ import Aside from '../components/Aside';
 class App extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = { height: document.body.scrollHeight - 60 };
+        this.state = {
+            height: this.props.fullScreen ? document.body.scrollHeight : document.body.scrollHeight - 60
+        };
         this.updateHeight = this.updateHeight.bind(this);
     }
 
@@ -15,19 +17,30 @@ class App extends React.PureComponent {
         window.addEventListener('resize', this.updateHeight);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.fullScreen !== nextProps.fullScreen) {
+            this.setState({
+                height: nextProps.fullScreen ? document.body.scrollHeight : document.body.scrollHeight - 60
+            });
+        }
+    }
+
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateHeight);
     }
 
     updateHeight() {
-        this.setState({ height: document.body.scrollHeight - 60 });
+        this.setState({
+            height: this.props.fullScreen ? document.body.scrollHeight : document.body.scrollHeight - 60
+        });
     }
 
     render() {
-        const { postIds, categories, asideShow, router } = this.props;
+        const { postIds, categories, asideShow, fullScreen, router } = this.props;
         return (
             <div style={{ height: '100%' }}>
                 <Header
+                  fullScreen={fullScreen}
                   router={router}
                 />
                 <div style={{ height: `${this.state.height}px` }}>
@@ -47,7 +60,8 @@ class App extends React.PureComponent {
 App.propTypes = {
     postIds: PropTypes.array.isRequired,
     categories: PropTypes.object.isRequired,
-    asideShow: PropTypes.bool.isRequired
+    asideShow: PropTypes.bool.isRequired,
+    fullScreen: PropTypes.bool.isRequired
 };
 
 
@@ -55,7 +69,8 @@ function selector(state) {
     return {
         postIds: state.getIn(['diarys', 'postIds']).toJS(),
         categories: state.getIn(['diarys', 'categories']).toJS(),
-        asideShow: state.get('asideShow')
+        asideShow: state.get('asideShow'),
+        fullScreen: state.get('fullScreen')
     };
 }
 

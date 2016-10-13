@@ -12,7 +12,8 @@ const diarys = JSON.parse(localStorage.getItem('diarys')) || mockDiary;
 const initialState = fromJS({
     diarys,
     navName: '全部日记',
-    asideShow: true
+    asideShow: true,
+    fullScreen: false
 });
 
 

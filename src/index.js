@@ -6,6 +6,7 @@ import store from './store';
 import routes from './routes';
 import DevTools from './containers/DevTools';
 require('normalize.css/normalize.css');
+require('highlight.js/styles/github.css');
 require('./styles/App.scss');
 
 

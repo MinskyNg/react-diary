@@ -73,14 +73,14 @@ export default class Nav extends React.PureComponent {
         let catItems = Object.keys(categories).map(cat => (
                 <li key={cat}>
                     <span>{cat} ({categories[cat].length})</span>
-                    <span className="icon-delete" onClick={e => this.handleDelCat(e, cat)}></span>
+                    <span title="删除分类" className="icon-delete" onClick={e => this.handleDelCat(e, cat)}></span>
                 </li>
             )
         );
         let tagItems = Object.keys(tags).map(tag => (
                 <li key={tag}>
                     <span>{tag} ({tags[tag].length})</span>
-                    <span className="icon-delete" onClick={e => this.handleDelTag(e, tag)}></span>
+                    <span title="删除标签" className="icon-delete" onClick={e => this.handleDelTag(e, tag)}></span>
                 </li>
             )
         );
@@ -93,12 +93,12 @@ export default class Nav extends React.PureComponent {
                 >
                     <i className={this.props.asideShow ? 'icon-left' : 'icon-right'}></i>
                 </button>
-                <h2>{this.props.navName}</h2>
-                <button className="add-post" title="添加日记"
-                  onClick={() => this.handleAddPost()}
+                <button className="full-screen" title="全屏模式"
+                  onClick={() => this.props.toggleScreen()}
                 >
-                    <i className="icon-addPost"></i>
+                    <i className="icon-fullScreen"></i>
                 </button>
+                <h2>{this.props.navName}</h2>
                 <button className="add-tag" title="管理标签"
                   onClick={e => this.toggleTagHanlder(e)}
                 >
@@ -136,6 +136,11 @@ export default class Nav extends React.PureComponent {
                         <h3>所有分类</h3>
                         <ul>{catItems}</ul>
                     </div>
+                </button>
+                <button className="add-post" title="添加日记"
+                  onClick={() => this.handleAddPost()}
+                >
+                    <i className="icon-addPost"></i>
                 </button>
             </nav>
         );

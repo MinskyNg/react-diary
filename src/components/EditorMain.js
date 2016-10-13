@@ -1,42 +1,110 @@
 import React from 'react';
 import marked from 'marked';
+import hljs from 'highlight.js';
+import CodeMirror from 'codemirror';
 import EditorBar from './EditorBar';
+require('codemirror/mode/gfm/gfm.js');
+require('codemirror/lib/codemirror.css');
+require('codemirror/theme/3024-day.css');
 
 
 export default class EditorMain extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = { height: document.body.scrollHeight - 116 };
+        this.state = {
+            height: this.props.fullScreen ? document.body.scrollHeight - 56 : document.body.scrollHeight - 116
+        };
         this.updateHeight = this.updateHeight.bind(this);
+        this.cmChanged = this.cmChanged.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
-        this.handleTab = this.handleTab.bind(this);
+        // 配置markdown解析器和highlight.js
+        marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
     }
 
     componentDidMount() {
-        this._editor.addEventListener('scroll', this.handleScroll);
+        this.editor = CodeMirror.fromTextArea(this._textarea, {
+            theme: '3024-day',
+            mode: 'markdown',
+            lineWrapping: true,
+            lineNumbers: true
+        });
+        this.editorScroller = this.editor.getScrollerElement();
+        this.editor.setSize('50%', '100%');
+        this.editor.on('change', this.cmChanged);
+        this.editorScroller.addEventListener('scroll', this.handleScroll);
         this._preview.addEventListener('scroll', this.handleScroll);
-        this._editor.addEventListener('keydown', this.handleTab);
         window.addEventListener('resize', this.updateHeight);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.do) {
+            this.editor.setValue(nextProps.body);
+            nextProps.cancelDo();
+        }
+
+        if (this.props.body !== '' && nextProps.body === '') {
+            this.editor.setValue('');
+        }
+
+        if (this.props.screenShow !== nextProps.screenShow) {
+            if (nextProps.screenShow === 2) {
+                this.editor.setSize('50%', '100%');
+                if (this.props.screenShow !== 2) {
+                    this.editorScroller.addEventListener('scroll', this.handleScroll);
+                    this._preview.addEventListener('scroll', this.handleScroll);
+                }
+            } else if (nextProps.screenShow === 0) {
+                this.editor.setSize('100%', '100%');
+                if (this.props.screenShow === 2) {
+                    this.editorScroller.addEventListener('scroll', this.handleScroll);
+                    this._preview.addEventListener('scroll', this.handleScroll);
+                }
+            } else {
+                this.editor.setSize('0%', '0%');
+                if (this.props.screenShow === 2) {
+                    this.editorScroller.removeEventListener('scroll', this.handleScroll);
+                    this._preview.removeEventListener('scroll', this.handleScroll);
+                }
+            }
+        }
+
+        if (this.props.fullScreen !== nextProps.fullScreen) {
+            this.setState({
+                height: nextProps.fullScreen ? document.body.scrollHeight - 56 : document.body.scrollHeight - 116
+            });
+        }
+    }
+
     componentWillUnmount() {
-        this._editor.removeEventListener('scroll', this.handleScroll);
+        this.editor.off('change', this.cmChanged);
+        this.editorScroller.removeEventListener('scroll', this.handleScroll);
         this._preview.removeEventListener('scroll', this.handleScroll);
-        this._editor.removeEventListener('keydown', this.handleTab);
         window.removeEventListener('resize', this.updateHeight);
     }
 
     updateHeight() {
-        this.setState({ height: document.body.scrollHeight - 116 });
+        this.setState({
+            height: this.props.fullScreen ? document.body.scrollHeight - 56 : document.body.scrollHeight - 116
+        });
     }
 
-    handleScroll(event) {
+    getEditor() {
+        return this.editor;
+    }
+
+    cmChanged(doc, change) {
+        if (change.origin !== 'setValue') {
+            this.props.updateBody(doc.getValue());
+        }
+    }
+
+    handleScroll() {
         const target = event.target;
         let other;
-        if (target === this._editor) {
+        if (target === this.editorScroller) {
             other = this._preview;
         } else {
-            other = this._editor;
+            other = this.editorScroller;
         }
         // 移除另一个区域的滚动事件 防止循环滚动
         other.removeEventListener('scroll', this.handleScroll);
@@ -46,20 +114,7 @@ export default class EditorMain extends React.PureComponent {
         // 恢复另一个区域的滚动事件
         setTimeout(() => {
             other.addEventListener('scroll', this.handleScroll);
-        }, 200);
-    }
-
-    // 阻止tab键切换文本框
-    handleTab(event) {
-        const keyCode = event.keyCode || event.which;
-        // tab键码
-        if (keyCode === 9) {
-            const start = this._editor.selectionStart;
-            const end = this._editor.selectionEnd;
-            this._editor.value = `${this._editor.value.substring(0, start)}\t${this._editor.value.substring(end)}`;
-            this._editor.selectionStart = this._editor.selectionEnd = start + 1;
-            event.preventDefault();
-        }
+        }, 300);
     }
 
     render() {
@@ -67,30 +122,23 @@ export default class EditorMain extends React.PureComponent {
         const screenShow = this.props.screenShow;
         let width;
         if (screenShow === 2) {
-            width = 48;
+            width = 50;
         } else if (screenShow === 0) {
-            width = 100;
-        } else {
             width = 0;
+        } else {
+            width = 100;
         }
-        const editorStyle = {
-            display: screenShow !== 1 ? 'block' : 'none',
-            width: `${width}%`
-        };
         const previewStyle = {
             display: screenShow !== 0 ? 'block' : 'none',
-            width: `${100 - width}%`
+            width: `${width}%`
         };
         return (
             <div className="editor-wrapper"
               style={{ height: `${this.state.height}px` }}
             >
                 <textarea
-                  className="editor"
-                  style={editorStyle}
-                  ref={textarea => this._editor = textarea}
-                  onChange={() => this.props.updateBody(this._editor.value)}
-                  value={this.props.body}
+                  ref={textarea => this._textarea = textarea}
+                  defaultValue={this.props.body}
                 >
                 </textarea>
                 <div
@@ -102,7 +150,7 @@ export default class EditorMain extends React.PureComponent {
                 </div>
                 <EditorBar
                   screenShow={screenShow}
-                  editor={this._editor}
+                  getEditor={() => this.getEditor()}
                   updateBody={(body) => this.props.updateBody(body)}
                 />
             </div>

@@ -1,13 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { delPost, changeNavName } from '../actions';
 import marked from 'marked';
+import hljs from 'highlight.js';
+import { delPost, changeNavName } from '../actions';
 
 
 class Post extends React.PureComponent {
     componentDidMount() {
         this.props.dispatch(changeNavName(this.props.posts[this.props.params.id].category));
+        // 配置markdown解析器和highlight.js
+        marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
     }
 
     componentWillReceiveProps(nextProps) {

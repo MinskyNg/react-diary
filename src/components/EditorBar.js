@@ -20,133 +20,69 @@ export default class EditorBar extends React.PureComponent {
 
     insertText(type) {
         const text = this.map[type];
-        const editor = this.props.editor;
-        // IE
-        if (document.selection) {
-            const sel = document.selection.createRange();
-            // 没有选中文本直接插入文字
-            if (sel.text === '') {
-                sel.text = text;
-            // 有选中文本则为文本添加标签
-            } else {
-                switch (type) {
-                    case 'heading':
-                        sel.text = `## ${sel.text}`;
-                        break;
-                    case 'strong':
-                        sel.text = `**${sel.text}**`;
-                        break;
-                    case 'italic':
-                        sel.text = `*${sel.text}*`;
-                        break;
-                    case 'code':
-                        sel.text = `\t ${sel.text}`;
-                        break;
-                    case 'img':
-                        sel.text = `![图片说明](${sel.text})`;
-                        break;
-                    case 'url':
-                        sel.text = `[链接说明](${sel.text})`;
-                        break;
-                    case 'ul':
-                        sel.text = `* ${sel.text}`;
-                        break;
-                    case 'ol':
-                        sel.text = `1. ${sel.text}`;
-                        break;
-                    case 'quote':
-                        sel.text = `> ${sel.text}`;
-                        break;
-                    default:
-                        sel.text = '-------';
-                }
+        const editor = this.props.getEditor();
+        const start = editor.getCursor(true);
+        const end = editor.getCursor(false);
+        if (start.line === end.line && start.ch === end.ch) {
+            editor.replaceSelection(text);
+            const cursor = editor.getCursor(false);
+            switch (type) {
+                case 'heading':
+                case 'code':
+                case 'quote':
+                    editor.setSelection({ line: cursor.line, ch: cursor.ch - 5 }, cursor);
+                    break;
+                case 'strong':
+                    editor.setSelection({ line: cursor.line, ch: cursor.ch - 7 }, { line: cursor.line, ch: cursor.ch - 2 });
+                    break;
+                case 'italic':
+                    editor.setSelection({ line: cursor.line, ch: cursor.ch - 6 }, { line: cursor.line, ch: cursor.ch - 1 });
+                    break;
+                case 'img':
+                case 'url':
+                    editor.setSelection({ line: cursor.line, ch: cursor.ch - 5 }, { line: cursor.line, ch: cursor.ch - 1 });
+                    break;
+                case 'ul':
+                case 'ol':
+                    editor.setSelection({ line: cursor.line, ch: cursor.ch - 6 }, cursor);
+                    break;
+                default:
             }
-        // 非IE
-        } else if (typeof editor.selectionStart === 'number' && typeof editor.selectionEnd === 'number') {
-            // 获取文本起始点和结束点
-            const startPos = editor.selectionStart;
-            const endPos = editor.selectionEnd;
-            // 记录光标位置
-            let cursorPos = startPos;
-            // 编辑区文本
-            const tmpText = editor.value;
-            // 没有选中区域时
-            if (startPos === endPos) {
-                // 直接插入文本
-                editor.value = tmpText.substring(0, startPos) + text + tmpText.substring(endPos, tmpText.length);
-                // 移动光标
-                cursorPos += text.length;
-                // 改变选中区域
-                switch (type) {
-                    case 'heading':
-                    case 'code':
-                    case 'quote':
-                        editor.selectionStart = cursorPos - 5;
-                        editor.selectionEnd = cursorPos;
-                        break;
-                    case 'strong':
-                        editor.selectionStart = cursorPos - 7;
-                        editor.selectionEnd = cursorPos - 2;
-                        break;
-                    case 'italic':
-                        editor.selectionStart = cursorPos - 6;
-                        editor.selectionEnd = cursorPos - 1;
-                        break;
-                    case 'img':
-                    case 'url':
-                        editor.selectionStart = cursorPos - 5;
-                        editor.selectionEnd = cursorPos - 1;
-                        break;
-                    case 'ul':
-                    case 'ol':
-                        editor.selectionStart = cursorPos - 6;
-                        editor.selectionEnd = cursorPos;
-                        break;
-                    default:
-                        editor.selectionStart = editor.selectionEnd = cursorPos;
-                }
-                // 存在选中区域
-            } else {
-                let replaceText;
-                switch (type) {
-                    case 'heading':
-                        replaceText = `## ${tmpText.substring(startPos, endPos)}`;
-                        break;
-                    case 'strong':
-                        replaceText = `**${tmpText.substring(startPos, endPos)}**`;
-                        break;
-                    case 'italic':
-                        replaceText = `*${tmpText.substring(startPos, endPos)}*`;
-                        break;
-                    case 'code':
-                        replaceText = `\t ${tmpText.substring(startPos, endPos)}`;
-                        break;
-                    case 'img':
-                        replaceText = `![图片说明](${tmpText.substring(startPos, endPos)})`;
-                        break;
-                    case 'url':
-                        replaceText = `[链接说明](${tmpText.substring(startPos, endPos)})`;
-                        break;
-                    case 'ul':
-                        replaceText = `* ${tmpText.substring(startPos, endPos)}`;
-                        break;
-                    case 'ol':
-                        replaceText = `1. ${tmpText.substring(startPos, endPos)}`;
-                        break;
-                    case '>quote':
-                        replaceText = `> ${tmpText.substring(startPos, endPos)}`;
-                        break;
-                    default:
-                        replaceText = '-------';
-                }
-                editor.value = tmpText.substring(0, startPos) + replaceText + tmpText.substring(endPos, tmpText.length);
-            }
-            // 找不到光标
         } else {
-            editor.value += text;
+            switch (type) {
+                case 'heading':
+                    editor.replaceSelection(`## ${editor.getSelection()}`);
+                    break;
+                case 'strong':
+                    editor.replaceSelection(`**${editor.getSelection()}**`);
+                    break;
+                case 'italic':
+                    editor.replaceSelection(`*${editor.getSelection()}*`);
+                    break;
+                case 'code':
+                    editor.replaceSelection(`\t ${editor.getSelection()}`);
+                    break;
+                case 'img':
+                    editor.replaceSelection(`![图片说明](${editor.getSelection()})`);
+                    break;
+                case 'url':
+                    editor.replaceSelection(`[链接说明](${editor.getSelection()})`);
+                    break;
+                case 'ul':
+                    editor.replaceSelection(`* ${editor.getSelection()}`);
+                    break;
+                case 'ol':
+                    editor.replaceSelection(`1. ${editor.getSelection()}`);
+                    break;
+                case 'quote':
+                    editor.replaceSelection(`> ${editor.getSelection()}`);
+                    break;
+                default:
+                    editor.replaceSelection('-------');
+            }
         }
         editor.focus();
-        this.props.updateBody(editor.value);
+        this.props.updateBody(editor.getValue());
     }
 
     render() {

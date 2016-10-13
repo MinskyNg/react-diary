@@ -2,16 +2,16 @@
     float: left;
     width: 175px;
     height: 100%;
-    border-right: 1px #BDBDBD solid;
-    background-color: #F5F5F5;
+    background-color: #FAFAFA;
     overflow: auto;
 
     a {
         display: block;
         height: 56px;
         border-bottom: 1px #EDEDED solid;
-        color: #000;
-        background-color: #FFF;
+        color: rgba(0,0,0,.8);
+        cursor: pointer;
+        transition: all 0.3s linear;
         &:hover {
             color: #FFF;
             background-color: #CCC;
@@ -19,7 +19,8 @@
     }
 
     .active {
-        background-color: #CCC;
+        cursor: default;
+        background-color: #DDD;
     }
 }
 

@@ -20,6 +20,8 @@
   "homepage": "https://github.com/MinskyNg/react-diary#readme",
   "dependencies": {
     "babel-runtime": "6.x",
+    "codemirror": "^5.19.0",
+    "highlight.js": "^9.7.0",
     "immutable": "^3.8.1",
     "marked": "^0.3.6",
     "normalize.css": "^4.2.0",
