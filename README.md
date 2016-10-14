@@ -7,7 +7,7 @@
 npm install & npm start
 
 ## Features
- 
+
 ### 日记管理:
 
 * 利用LocalStorage本地存储
@@ -25,12 +25,13 @@ npm install & npm start
 * 左右分屏同步滚动，左边编写，右边预览，支持切换显示模式
 
 ## Tech Stack
-react
-redux
-react-router
-immutable
-marked
-codemirror
+
+* react
+* redux
+* react-router
+* immutable
+* marked
+* codemirror
 
 
 

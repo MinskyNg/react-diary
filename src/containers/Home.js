@@ -1,3 +1,8 @@
+/*
+首页组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { delPost, changeNavName } from '../actions';
@@ -9,11 +14,13 @@ class Home extends React.PureComponent {
         this.props.dispatch(changeNavName('全部日记'));
     }
 
+
     render() {
-        const { postIds, posts, dispatch, router } = this.props;
+        const { postIds, posts, asideShow, dispatch, router } = this.props;
         let ArchiveItems = [];
         let i = 0;
         const len = postIds.length;
+        // 日记按年份输出
         while (i < len) {
             let prevPost = posts[postIds[i]];
             let nextPost = posts[postIds[++i]];
@@ -28,11 +35,13 @@ class Home extends React.PureComponent {
                   key={prevPost.year}
                   year={prevPost.year}
                   articles={articles}
+                  asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
                   router={router}
                 />
             );
         }
+
         return (
             <div>
                 {ArchiveItems}
@@ -52,7 +61,8 @@ Home.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    })).isRequired
+    })).isRequired,
+    asideShow: PropTypes.bool.isRequired
 };
 
 
@@ -60,6 +70,7 @@ function selector(state) {
     return {
         postIds: state.getIn(['diarys', 'postIds']).toJS(),
         posts: state.getIn(['diarys', 'posts']).toJS(),
+        asideShow: state.get('asideShow')
     };
 }
 

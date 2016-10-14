@@ -1,3 +1,8 @@
+/*
+日记详情组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -8,27 +13,44 @@ import { delPost, changeNavName } from '../actions';
 
 class Post extends React.PureComponent {
     componentDidMount() {
-        this.props.dispatch(changeNavName(this.props.posts[this.props.params.id].category));
+        if (this.props.posts[this.props.params.id] !== undefined) {
+            this.props.dispatch(changeNavName(this.props.posts[this.props.params.id].category));
+        }
         // 配置markdown解析器和highlight.js
         marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
     }
 
+
     componentWillReceiveProps(nextProps) {
-        if (this.props.params.id !== nextProps.params.id) {
+        if (this.props.params.id !== nextProps.params.id && this.props.posts[this.props.params.id] !== undefined) {
             nextProps.dispatch(changeNavName(nextProps.posts[nextProps.params.id].category));
         }
     }
 
+
     render() {
-        const { posts, dispatch, router } = this.props;
+        const { posts, asideShow, dispatch, router } = this.props;
         const post = posts[this.props.params.id];
+
         if (post === undefined) {
-            return <div></div>;
+            return (
+                <div className="notfound">
+                    <h2>404</h2>
+                    <p>Post not found</p>
+                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                </div>
+            );
         }
+
+        // 生成标签项
         let tagItems = post.tag.map(tag => (<Link key={tag} to={`/tag/${tag}`}>{tag}</Link>));
+        // 解析markdown文本为html
         const markup = marked(post.body.toString(), { sanitize: true });
+
         return (
-            <article className="article">
+            <article className="article"
+              style={{ margin: asideShow ? '25px 120px 50px 260px' : '25px 190px 50px 190px' }}
+            >
                 <h3 className="article-title">{post.title}</h3>
                 <div className="article-date">
                     <i className="icon-date"></i>
@@ -72,14 +94,16 @@ Post.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    })).isRequired
+    })).isRequired,
+    asideShow: PropTypes.bool.isRequired
 };
 
 
 function selector(state) {
     return {
         postIds: state.getIn(['diarys', 'postIds']).toJS(),
-        posts: state.getIn(['diarys', 'posts']).toJS()
+        posts: state.getIn(['diarys', 'posts']).toJS(),
+        asideShow: state.get('asideShow')
     };
 }
 

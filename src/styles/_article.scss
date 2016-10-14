@@ -1,14 +1,21 @@
+// 文章区
+
+
 .article {
-    width: 850px;
+    width: auto;
+    min-width: 550px;
     padding: 30px 30px 20px;
-    margin: 30px auto 50px;
+    margin: 25px 120px 50px 260px;
     border: 1px solid rgba(0,0,0,.09);
     border-radius: 4px;
     font-size: 1.6rem;
     background-color: #FFF;
     box-shadow: 0 3px 6px rgba(0,0,0,.04);
+    transition: margin 0.3s ease;
 }
 
+
+// 日记概览
 .postItem {
     transition: all 0.3s linear;
     &:hover {
@@ -21,12 +28,12 @@
     .article-title {
         cursor: pointer;
         &:hover {
-            opacity: 0.6;
+            opacity: .6;
         }
     }
 }
 
-
+// 标题
 .article-title {
     margin: 0 auto;
     font-size: 3rem;
@@ -42,6 +49,7 @@
     }
 }
 
+// 删除图标
 .article-delete {
     opacity: 0;
     float: right;
@@ -59,6 +67,7 @@
     }
 }
 
+// 日记日期
 .article-date {
     clear: both;
     display: block;
@@ -70,6 +79,7 @@
     line-height: 32px;
 }
 
+// 日记文本
 .article-section {
     min-height: 200px;
     margin: 30px 0 40px;
@@ -283,9 +293,11 @@
     }
 }
 
+// 日记功能区
 .article-bar {
     height: 35px;
 
+    // 日记标签
     a {
         float: left;
         height: 30px;
@@ -306,6 +318,7 @@
         }
     }
 
+    // 日记按钮
     button {
         float: right;
         width: 100px;

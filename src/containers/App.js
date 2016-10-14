@@ -1,7 +1,11 @@
+/*
+主体组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import Aside from '../components/Aside';
 
 
 class App extends React.PureComponent {
@@ -13,11 +17,14 @@ class App extends React.PureComponent {
         this.updateHeight = this.updateHeight.bind(this);
     }
 
+
     componentDidMount() {
         window.addEventListener('resize', this.updateHeight);
     }
 
+
     componentWillReceiveProps(nextProps) {
+        // 切换全屏模式时，修改高度计算方式
         if (this.props.fullScreen !== nextProps.fullScreen) {
             this.setState({
                 height: nextProps.fullScreen ? document.body.scrollHeight : document.body.scrollHeight - 60
@@ -25,18 +32,22 @@ class App extends React.PureComponent {
         }
     }
 
+
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateHeight);
     }
 
+
+    // 调整高度
     updateHeight() {
         this.setState({
             height: this.props.fullScreen ? document.body.scrollHeight : document.body.scrollHeight - 60
         });
     }
 
+
     render() {
-        const { postIds, categories, asideShow, fullScreen, router } = this.props;
+        const { fullScreen, router } = this.props;
         return (
             <div style={{ height: '100%' }}>
                 <Header
@@ -44,11 +55,6 @@ class App extends React.PureComponent {
                   router={router}
                 />
                 <div style={{ height: `${this.state.height}px` }}>
-                    <Aside
-                      postLen={postIds.length}
-                      categories={categories}
-                      asideShow={asideShow}
-                    />
                     {this.props.children}
                 </div>
             </div>
@@ -58,18 +64,12 @@ class App extends React.PureComponent {
 
 
 App.propTypes = {
-    postIds: PropTypes.array.isRequired,
-    categories: PropTypes.object.isRequired,
-    asideShow: PropTypes.bool.isRequired,
     fullScreen: PropTypes.bool.isRequired
 };
 
 
 function selector(state) {
     return {
-        postIds: state.getIn(['diarys', 'postIds']).toJS(),
-        categories: state.getIn(['diarys', 'categories']).toJS(),
-        asideShow: state.get('asideShow'),
         fullScreen: state.get('fullScreen')
     };
 }

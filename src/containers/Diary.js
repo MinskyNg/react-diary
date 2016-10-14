@@ -1,12 +1,19 @@
+/*
+日记管理组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addCat, delCat, addTag, delTag, addPost, toggleAside, toggleScreen } from '../actions';
 import Nav from '../components/Nav';
+import Aside from '../components/Aside';
 
 
 class Home extends React.PureComponent {
     render() {
         const { postIds, categories, tags, navName, asideShow, dispatch, router } = this.props;
+
         return (
             <div className="content">
                 <Nav
@@ -24,6 +31,11 @@ class Home extends React.PureComponent {
                   }}
                   toggleAside={() => dispatch(toggleAside())}
                   toggleScreen={() => dispatch(toggleScreen())}
+                />
+                <Aside
+                  postLen={postIds.length}
+                  categories={categories}
+                  asideShow={asideShow}
                 />
                 {this.props.children}
             </div>

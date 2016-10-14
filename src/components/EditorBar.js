@@ -1,3 +1,8 @@
+/*
+编辑器工具栏
+*/
+
+
 import React from 'react';
 
 
@@ -18,6 +23,7 @@ export default class EditorBar extends React.PureComponent {
         };
     }
 
+    // 根据标记类型改变选区
     insertText(type) {
         const text = this.map[type];
         const editor = this.props.getEditor();
@@ -84,6 +90,7 @@ export default class EditorBar extends React.PureComponent {
         editor.focus();
         this.props.updateBody(editor.getValue());
     }
+
 
     render() {
         return (

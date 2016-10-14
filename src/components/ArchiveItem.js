@@ -1,19 +1,27 @@
+/*
+相同年份日记归档
+*/
+
+
 import React from 'react';
 import PostItem from './PostItem';
 
 
 export default class ArchiveItem extends React.PureComponent {
     render() {
-        const { articles, delPost, router } = this.props;
+        const { articles, delPost, asideShow, router } = this.props;
+
         let postItems = articles.map(post => (
                 <PostItem
                   key={post.id}
                   {...post}
+                  asideShow={asideShow}
                   delPost={delPost}
                   router={router}
                 />
             )
         );
+
         return (
             <div>
                 <div className="year">{`${this.props.year}年`}</div>

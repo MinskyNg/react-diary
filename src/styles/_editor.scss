@@ -1,6 +1,12 @@
 @import "editorBar";
 @import "preview";
 
+.editor {
+    min-width: 985px;
+    height: 100%;
+    background-color: #FAFAFA;
+    overflow: hidden;
+}
 
 .editor-wrapper {
     position: relative;
@@ -9,6 +15,7 @@
 
 .CodeMirror {
     float: left;
+    padding-bottom: 8px;
     border-right: 1px #EDEDED solid;
     font-size: 1.8rem;
 }

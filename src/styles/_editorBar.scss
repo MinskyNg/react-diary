@@ -1,24 +1,30 @@
+// 编辑区工具栏
+
 .toolbar {
     position: absolute;
-    bottom: 30px;
-    left: 30px;
+    bottom: -20px;
+    left: 15px;
     width: 335px;
-    height: 34px;
+    height: 36px;
     padding: 2px 5px;
     border-radius: 5px;
-    background-color: rgba(30,30,30,0.6);
+    background-color: rgba(30, 30, 30, .6);
     z-index: 999;
+    transition: bottom 0.2s linear;
+    &:hover {
+        bottom: 2px;
+    }
 
     button {
         width: 30px;
         height: 28px;
-        margin: 1px 1px;
+        margin: 2px 1px;
         padding: 0;
         border: 0;
         border-radius: 4px;
         background-color: transparent;
         cursor: pointer;
-        transition: all 0.2s linear;
+        transition: background-color 0.2s linear;
         &:hover {
             background-color: #555;
         }

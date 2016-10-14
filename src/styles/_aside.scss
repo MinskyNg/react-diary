@@ -1,29 +1,47 @@
-.category-list {
-    float: left;
-    width: 175px;
-    height: 100%;
-    background-color: #FAFAFA;
-    overflow: auto;
+// 侧边栏样式
 
+
+.category-list {
+    position: fixed;
+    top: 200px;
+    left: 25px;
+    width: 175px;
+    max-height: 500px;
+    border-radius: 3px;
+    background-color: #FFF;
+    box-shadow: 0 3px 6px rgba(0, 0, 0,.04);
+    overflow: auto;
+    transition: transform 0.4s ease;
+    // 分类链接
     a {
         display: block;
         height: 56px;
         border-bottom: 1px #EDEDED solid;
-        color: rgba(0,0,0,.8);
+        color: rgba(0, 0, 0,.8);
         cursor: pointer;
         transition: all 0.3s linear;
         &:hover {
             color: #FFF;
             background-color: #CCC;
         }
+        &:last-child {
+            border-bottom: 0;
+        }
     }
-
+    // 处于当前分类样式
     .active {
         cursor: default;
         background-color: #DDD;
     }
 }
 
+// 隐藏
+.category-hidden {
+    transform: translateX(-222px);
+    transition: transform 0.4s ease;
+}
+
+// 分类名
 .category-name {
     float: left;
     width: 80%;
@@ -38,6 +56,7 @@
     overflow: hidden;
 }
 
+// 分类文章数
 .category-count {
     display: block;
     float: right;

@@ -1,29 +1,21 @@
-.triangle {
-    position: absolute;
-    top: 21px;
-    right: 8px;
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent #F8F8F8 transparent;
-    z-index: 100;
-}
+// 分类/标签管理面板
+
 
 .panel {
     position: absolute;
-    top: 40px;
-    right: -10px;
+    top: 20px;
+    right: -6px;
     width: 200px;
     height: 400px;
     padding: 12px 0;
     border-radius: 10px;
     text-align: center;
     background-color: #FCFCFC;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
     z-index: 99;
     overflow: auto;
     cursor: default;
+    transition: all 0.3s linear;
 
     input {
         width: 160px;

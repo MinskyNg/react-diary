@@ -1,5 +1,34 @@
+// 404页面
+
 .notfound {
-    margin-top: 50px;
-    font-size: 5rem;
+    margin-top: 100px;
     text-align: center;
+    h2 {
+        font-size: 10rem;
+        margin-bottom: 1rem;
+    }
+    p {
+        font-size: 4rem;
+        margin-top: 0;
+    }
+    button {
+        display: block;
+        width: 144px;
+        height: 46px;
+        margin: 0 auto;
+        border: 2px solid #000;
+        border-radius: 20px;
+        color: #000;
+        font-size: 15px;
+        text-align: center;
+        line-height: 42px;
+        background: transparent;
+        outline: 0;
+        cursor: pointer;
+        transition: all 0.5s linear;
+        &:hover {
+            color: #FFF;
+            background: #000;
+        }
+    }
 }

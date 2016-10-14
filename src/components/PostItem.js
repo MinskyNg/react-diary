@@ -1,3 +1,8 @@
+/*
+日记摘要组件
+*/
+
+
 import React from 'react';
 import { Link } from 'react-router';
 import marked from 'marked';
@@ -11,23 +16,27 @@ export default class PostItem extends React.PureComponent {
         marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
     }
 
-    handleDelPost() {
-        if (confirm('确定要删除此日记吗?')) {
-            this.props.delPost(this.props.id);
-        }
-    }
 
     render() {
         const { id, router } = this.props;
+        // 生成标签项
         let tagItems = this.props.tag.map(tag => (<Link key={tag} to={`/tag/${tag}`}>{tag}</Link>));
+        // 解析markdown文本为html
         const markup = marked(this.props.body.toString(), { sanitize: true });
+
         return (
-            <article className="article postItem">
+            <article className="article postItem"
+              style={{ margin: this.props.asideShow ? '25px 120px 50px 260px' : '25px 190px 50px 190px' }}
+            >
                 <h3 className="article-title"
                   onClick={() => router.push(`/post/${id}`)}
                 >{this.props.title}</h3>
                 <button className="article-delete icon-deleteArticle" title="删除日记"
-                  onClick={() => this.handleDelPost()}
+                  onClick={() => {
+                      if (confirm('确定要删除此日记吗?')) {
+                          this.props.delPost(this.props.id);
+                      }
+                  }}
                 >
                 </button>
                 <div className="article-date">
@@ -35,7 +44,7 @@ export default class PostItem extends React.PureComponent {
                     {this.props.date}
                 </div>
                 <section className="article-section"
-                  dangerouslySetInnerHTML={{ __html: trimHtml(markup, { limit: 200 }).html }}
+                  dangerouslySetInnerHTML={{ __html: trimHtml(markup, { limit: 300 }).html }}
                 >
                 </section>
                 <div className="article-bar">

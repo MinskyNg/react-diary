@@ -1,3 +1,8 @@
+/*
+搜索页面组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { delPost, changeNavName } from '../actions';
@@ -9,24 +14,29 @@ class Search extends React.PureComponent {
         this.props.dispatch(changeNavName(`${this.props.params.keyword}的搜索结果`));
     }
 
+
     componentWillReceiveProps(nextProps) {
         if (this.props.params.keyword !== nextProps.params.keyword) {
             nextProps.dispatch(changeNavName(`${nextProps.params.keyword}的搜索结果`));
         }
     }
 
+
     render() {
         const keyword = this.props.params.keyword;
-        const { postIds, posts, dispatch, router } = this.props;
+        const { postIds, posts, asideShow, dispatch, router } = this.props;
         let ArchiveItems = [];
         const matchIds = [];
+
         postIds.forEach(id => {
             if (posts[id].title.indexOf(keyword) !== -1 || posts[id].body.indexOf(keyword) !== -1) {
                 matchIds.push(id);
             }
         });
+
         let i = 0;
         const len = matchIds.length;
+        // 匹配日记按年份输出
         while (i < len) {
             let prevPost = posts[matchIds[i]];
             let nextPost = posts[matchIds[++i]];
@@ -41,11 +51,13 @@ class Search extends React.PureComponent {
                   key={prevPost.year}
                   year={prevPost.year}
                   articles={articles}
+                  asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
                   router={router}
                 />
             );
         }
+
         return (
             <div>
                 {ArchiveItems}
@@ -65,14 +77,16 @@ Search.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    })).isRequired
+    })).isRequired,
+    asideShow: PropTypes.bool.isRequired
 };
 
 
 function selector(state) {
     return {
         postIds: state.getIn(['diarys', 'postIds']).toJS(),
-        posts: state.getIn(['diarys', 'posts']).toJS()
+        posts: state.getIn(['diarys', 'posts']).toJS(),
+        asideShow: state.get('asideShow')
     };
 }
 

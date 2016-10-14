@@ -1,3 +1,8 @@
+/*
+编辑区导航栏
+*/
+
+
 import React from 'react';
 
 
@@ -7,11 +12,13 @@ export default class EditorNav extends React.PureComponent {
         this.state = { tagHandlerShow: false, catHandlerShow: false };
     }
 
+    // 标题改变
     handleTitleChange(event) {
         const title = event.target.value.replace(/(^\s*)|(\s*$)/g, '');
         this.props.updateTitle(title || '');
     }
 
+    // 下拉多选改变
     handleMultiSelect(event) {
         const options = event.target.options;
         const tag = [];
@@ -23,6 +30,7 @@ export default class EditorNav extends React.PureComponent {
         this.props.updateTag(tag);
     }
 
+    // 添加日记
     handleAddPost() {
         let date = new Date();
         const year = date.getFullYear();
@@ -30,18 +38,21 @@ export default class EditorNav extends React.PureComponent {
         this.props.addPost(this.props.category, year, date);
     }
 
+    // 删除日记
     handleDelPost() {
         if (confirm('确定要删除此日记吗?')) {
             this.props.delPost();
         }
     }
 
+    // 切换显示分类管理面板
     toggleCatHanlder(event) {
         if (event.target === this._catIcon) {
             this.setState({ catHandlerShow: !this.state.catHandlerShow });
         }
     }
 
+    // 添加分类
     handleAddCat(event) {
         if (event.keyCode === 13) {
             const cat = event.target.value.replace(/(^\s*)|(\s*$)/g, '');
@@ -54,18 +65,21 @@ export default class EditorNav extends React.PureComponent {
         event.stopPropagation();
     }
 
+    // 删除分类
     handleDelCat(event, cat) {
         if (confirm('确定要删除此分类吗?')) {
             this.props.delCat(cat);
         }
     }
 
+    // 切换显示标签管理面板
     toggleTagHanlder(event) {
         if (event.target === this._tagIcon) {
             this.setState({ tagHandlerShow: !this.state.tagHandlerShow });
         }
     }
 
+    // 添加标签
     handleAddTag(event) {
         if (event.keyCode === 13) {
             const tag = event.target.value.replace(/(^\s*)|(\s*$)/g, '');
@@ -78,12 +92,14 @@ export default class EditorNav extends React.PureComponent {
         event.stopPropagation();
     }
 
+    // 删除标签
     handleDelTag(event, tag) {
         if (confirm('确定要删除此标签吗?')) {
             this.props.delTag(tag);
         }
     }
 
+    // 下载日记
     handleDown() {
         const name = `${this.props.title}.md`;
         const blob = new Blob([this.props.body], {
@@ -108,10 +124,15 @@ export default class EditorNav extends React.PureComponent {
         }
     }
 
+
     render() {
         const { categories, tags, changeScreen } = this.props;
+
+        // 生成分类/标签Select选项
         let catOptions = Object.keys(categories).map(cat => <option key={cat} value={cat}>{cat}</option>);
         let tagOptions = Object.keys(tags).map(tag => <option key={tag} value={tag}>{tag}</option>);
+
+        // 生成分类/标签项
         let catItems = Object.keys(categories).map(cat => (
                 <li key={cat}>
                     <span>{cat} ({categories[cat].length})</span>
@@ -126,15 +147,20 @@ export default class EditorNav extends React.PureComponent {
                 </li>
             )
         );
+
+        const panelShowStyle = {
+            top: '45px',
+            visibility: 'visible',
+            opacity: 1
+        };
+        const panelHiddenStyle = {
+            top: '15px',
+            visibility: 'hidden',
+            opacity: 0
+        };
+
         return (
             <nav className="nav">
-                <button
-                  className="aside-toggle"
-                  title="切换边栏"
-                  onClick={() => this.props.toggleAside()}
-                >
-                    <i className={this.props.asideShow ? 'icon-left' : 'icon-right'}></i>
-                </button>
                 <button className="full-screen" title="全屏模式"
                   onClick={() => this.props.toggleScreen()}
                 >
@@ -165,11 +191,8 @@ export default class EditorNav extends React.PureComponent {
                     <i className="icon-addTag"
                       ref={ i => this._tagIcon = i }
                     ></i>
-                    <div className="triangle"
-                      style={{ display: this.state.tagHandlerShow ? 'block' : 'none' }}
-                    ></div>
                     <div className="panel"
-                      style={{ display: this.state.tagHandlerShow ? 'block' : 'none' }}
+                      style={this.state.tagHandlerShow ? panelShowStyle : panelHiddenStyle}
                     >
                         <input type="text" placeholder="回车添加标签"
                           onKeyUp={e => this.handleAddTag(e)}
@@ -184,11 +207,8 @@ export default class EditorNav extends React.PureComponent {
                     <i className="icon-addCat"
                       ref={ i => this._catIcon = i }
                     ></i>
-                    <div className="triangle"
-                      style={{ display: this.state.catHandlerShow ? 'block' : 'none' }}
-                    ></div>
                     <div className="panel"
-                      style={{ display: this.state.catHandlerShow ? 'block' : 'none' }}
+                      style={this.state.catHandlerShow ? panelShowStyle : panelHiddenStyle}
                     >
                         <input type="text" placeholder="回车添加分类"
                           onKeyUp={e => this.handleAddCat(e)}

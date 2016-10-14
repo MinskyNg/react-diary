@@ -1,3 +1,8 @@
+/*
+编辑器组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addCat, delCat, addTag, delTag, addPost, delPost, toggleAside, toggleScreen,
@@ -10,9 +15,18 @@ class Editor extends React.PureComponent {
     constructor(props) {
         super(props);
         this.post = this.props.posts[this.props.params.id];
-        this.state = { screenShow: 2, do: false, undoStack: [this.post.body], redoStack: [] };
+        if (this.post !== undefined) {
+            // 屏幕显示切换，撤销恢复标志，撤销恢复记录栈
+            this.state = {
+                screenShow: 2,
+                do: false,
+                undoStack: [this.post.body],
+                redoStack: []
+            };
+        }
         this.handleDrop = this.handleDrop.bind(this);
     }
+
 
     componentDidMount() {
         if (this.post !== undefined) {
@@ -21,12 +35,14 @@ class Editor extends React.PureComponent {
         }
     }
 
+
     componentWillReceiveProps(nextProps) {
         this.post = nextProps.posts[nextProps.params.id];
         if (this.props.params.id !== nextProps.params.id) {
             this.state = { screenShow: 2, undoStack: [this.post.body], redoStack: [] };
         }
     }
+
 
     componentWillUnmount() {
         if (this.post !== undefined) {
@@ -35,6 +51,8 @@ class Editor extends React.PureComponent {
         }
     }
 
+
+    // 设置撤销栈
     setStack() {
         const undoStack = [...this.state.undoStack];
         if (undoStack[undoStack.length - 1] !== this.post.body) {
@@ -47,6 +65,8 @@ class Editor extends React.PureComponent {
         this.timer = setTimeout(() => this.setStack(), 2000);
     }
 
+
+    // 处理撤销操作
     handleUndo() {
         const undoStack = [...this.state.undoStack];
         const redoStack = [...this.state.redoStack];
@@ -58,6 +78,8 @@ class Editor extends React.PureComponent {
         }
     }
 
+
+    // 处理恢复操作
     handleRedo() {
         const undoStack = [...this.state.undoStack];
         const redoStack = [...this.state.redoStack];
@@ -69,26 +91,36 @@ class Editor extends React.PureComponent {
         }
     }
 
+
+    // 处理文件拖拽上传操作
     handleDrop() {
-        // 文件读取API
         const reader = new FileReader();
-        reader.onload = evt => {
+        reader.onload = e => {
             this.setState({ redoStack: [] });
-            this.props.dispatch(updateBody(evt.target.result));
+            this.props.dispatch(updateBody(e.target.result));
         };
         reader.readAsText(event.dataTransfer.files[0]);
         event.preventDefault();
     }
 
+
     render() {
-        const { postIds, categories, tags, posts, asideShow, fullScreen, dispatch, router } = this.props;
+        const { postIds, categories, tags, posts, fullScreen, dispatch, router } = this.props;
         const postId = +this.props.params.id;
         const post = posts[postId];
+
         if (post === undefined) {
-            return <div></div>;
+            return (
+                <div className="notfound">
+                    <h2>404</h2>
+                    <p>Post not found</p>
+                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                </div>
+            );
         }
+
         return (
-            <div className="content">
+            <div className="editor">
                 <EditorNav
                   title={post.title}
                   category={post.category}
@@ -96,7 +128,6 @@ class Editor extends React.PureComponent {
                   body={post.body}
                   categories={categories}
                   tags={tags}
-                  asideShow={asideShow}
                   addCat={cat => dispatch(addCat(cat))}
                   delCat={cat => dispatch(delCat(cat))}
                   addTag={tag => dispatch(addTag(tag))}
@@ -148,7 +179,6 @@ Editor.propTypes = {
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
     })).isRequired,
-    asideShow: PropTypes.bool.isRequired,
     fullScreen: PropTypes.bool.isRequired
 };
 
@@ -159,7 +189,6 @@ function selector(state) {
         categories: state.getIn(['diarys', 'categories']).toJS(),
         tags: state.getIn(['diarys', 'tags']).toJS(),
         posts: state.getIn(['diarys', 'posts']).toJS(),
-        asideShow: state.get('asideShow'),
         fullScreen: state.get('fullScreen')
     };
 }

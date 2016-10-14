@@ -1,3 +1,6 @@
+// 导航栏
+
+
 @import "panel";
 
 .nav {
@@ -7,7 +10,7 @@
     border-bottom: 1px #EDEDED solid;
     text-align: center;
     background-color: #FFF;
-
+    // 下拉选框
     select {
         float: left;
         width: 100px;
@@ -17,7 +20,7 @@
         font-size: 1.6rem;
         background-color: #F5F5F5;
     }
-
+    // 导航栏功能键
     button {
         width: 30px;
         height: 30px;
@@ -32,7 +35,7 @@
             background-color: #AAA;
         }
     }
-
+    // 导航栏标题
     h2 {
         display: inline-block;
         font-size: 2.5rem;
@@ -52,6 +55,7 @@
     float: right;
 }
 
+// 功能键分割符
 .split {
     float: right;
     height: 28px;
@@ -60,6 +64,7 @@
     background: #AAA;
 }
 
+// 日记标题输入区
 .input-title {
     float: left;
     width: 160px;

@@ -1,3 +1,8 @@
+/*
+标签页面组件
+*/
+
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { delPost, changeNavName } from '../actions';
@@ -9,29 +14,40 @@ class Tag extends React.PureComponent {
         this.props.dispatch(changeNavName(this.props.params.tagName));
     }
 
+
     componentWillReceiveProps(nextProps) {
         if (this.props.params.tagName !== nextProps.params.tagName) {
             nextProps.dispatch(changeNavName(nextProps.params.tagName));
         }
     }
 
+
     render() {
         const tagName = this.props.params.tagName;
-        const { tags, posts, dispatch, router } = this.props;
-        const postIds = tags[tagName];
-        if (postIds === undefined) {
-            return <div></div>;
+        const { tags, posts, asideShow, dispatch, router } = this.props;
+        const tagIds = tags[tagName];
+
+        if (tagIds === undefined) {
+            return (
+                <div className="notfound">
+                    <h2>404</h2>
+                    <p>Tag not found</p>
+                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                </div>
+            );
         }
+
         let ArchiveItems = [];
         let i = 0;
-        const len = postIds.length;
+        const len = tagIds.length;
+        // 匹配日记按年份输出
         while (i < len) {
-            let prevPost = posts[postIds[i]];
-            let nextPost = posts[postIds[++i]];
+            let prevPost = posts[tagIds[i]];
+            let nextPost = posts[tagIds[++i]];
             let articles = [prevPost];
             while (nextPost && prevPost.year === nextPost.year) {
                 prevPost = nextPost;
-                nextPost = posts[postIds[++i]];
+                nextPost = posts[tagIds[++i]];
                 articles.push(prevPost);
             }
             ArchiveItems.push(
@@ -39,11 +55,13 @@ class Tag extends React.PureComponent {
                   key={prevPost.year}
                   year={prevPost.year}
                   articles={articles}
+                  asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
                   router={router}
                 />
             );
         }
+
         return (
             <div>
                 {ArchiveItems}
@@ -63,14 +81,16 @@ Tag.propTypes = {
         date: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         tag: PropTypes.array.isRequired
-    })).isRequired
+    })).isRequired,
+    asideShow: PropTypes.bool.isRequired
 };
 
 
 function selector(state) {
     return {
         tags: state.getIn(['diarys', 'tags']).toJS(),
-        posts: state.getIn(['diarys', 'posts']).toJS()
+        posts: state.getIn(['diarys', 'posts']).toJS(),
+        asideShow: state.get('asideShow')
     };
 }
 

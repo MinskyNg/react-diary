@@ -19,7 +19,7 @@ export default (
             <Route path="category/:catName" component={withRouter(Category)} />
             <Route path="tag/:tagName" component={withRouter(Tag)} />
             <Route path="post/:id" component={withRouter(Post)} />
-            <Route path="404" component={Notfound} />
+            <Route path="404" component={withRouter(Notfound)} />
         </Route>
         <Route path="editor/:id" component={withRouter(Editor)} />
         <Redirect from="*" to="/404" />

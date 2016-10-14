@@ -1,10 +1,13 @@
+// 页面头部
+
+
 .header {
     width: 100%;
     height: 60px;
     padding-left: 10px;
     border-bottom: 1px #B9B9B9 solid;
     background-color: #FFF;
-
+    // 项目标题
     h1 {
         float: left;
         height: 60px;
@@ -15,7 +18,7 @@
         word-spacing: 10px;
         line-height: 60px;
     }
-
+    // 搜索框外围
     div {
         float: right;
         width: 240px;
@@ -25,7 +28,7 @@
         border-radius: 15px;
         background-color: #FFF;
     }
-
+    // 搜索框输入
     input {
         float: right;
         width: 200px;

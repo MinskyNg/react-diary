@@ -1,3 +1,8 @@
+/*
+编辑器主体
+*/
+
+
 import React from 'react';
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -5,7 +10,7 @@ import CodeMirror from 'codemirror';
 import EditorBar from './EditorBar';
 require('codemirror/mode/gfm/gfm.js');
 require('codemirror/lib/codemirror.css');
-require('codemirror/theme/3024-day.css');
+require('codemirror/theme/base16-light.css');
 
 
 export default class EditorMain extends React.PureComponent {
@@ -21,31 +26,38 @@ export default class EditorMain extends React.PureComponent {
         marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
     }
 
+
     componentDidMount() {
+        // 配置CodeMirror插件
         this.editor = CodeMirror.fromTextArea(this._textarea, {
-            theme: '3024-day',
+            theme: 'base16-light',
             mode: 'markdown',
             lineWrapping: true,
             lineNumbers: true
         });
-        this.editorScroller = this.editor.getScrollerElement();
         this.editor.setSize('50%', '100%');
         this.editor.on('change', this.cmChanged);
+        // CodeMirror滚动条
+        this.editorScroller = this.editor.getScrollerElement();
         this.editorScroller.addEventListener('scroll', this.handleScroll);
         this._preview.addEventListener('scroll', this.handleScroll);
         window.addEventListener('resize', this.updateHeight);
     }
 
+
     componentWillReceiveProps(nextProps) {
+        // 接收撤销恢复标志
         if (nextProps.do) {
             this.editor.setValue(nextProps.body);
             nextProps.cancelDo();
         }
 
+        // 新建文章
         if (this.props.body !== '' && nextProps.body === '') {
             this.editor.setValue('');
         }
 
+        // 切换编辑区显示
         if (this.props.screenShow !== nextProps.screenShow) {
             if (nextProps.screenShow === 2) {
                 this.editor.setSize('50%', '100%');
@@ -68,12 +80,14 @@ export default class EditorMain extends React.PureComponent {
             }
         }
 
+        // 切换全屏模式时，修改高度计算方式
         if (this.props.fullScreen !== nextProps.fullScreen) {
             this.setState({
                 height: nextProps.fullScreen ? document.body.scrollHeight - 56 : document.body.scrollHeight - 116
             });
         }
     }
+
 
     componentWillUnmount() {
         this.editor.off('change', this.cmChanged);
@@ -82,22 +96,27 @@ export default class EditorMain extends React.PureComponent {
         window.removeEventListener('resize', this.updateHeight);
     }
 
+
+    // 动态调整编辑区高度
     updateHeight() {
         this.setState({
             height: this.props.fullScreen ? document.body.scrollHeight - 56 : document.body.scrollHeight - 116
         });
     }
 
+    // 子组件获取编辑器
     getEditor() {
         return this.editor;
     }
 
+    // 编辑区改变时，修改日记内容
     cmChanged(doc, change) {
         if (change.origin !== 'setValue') {
             this.props.updateBody(doc.getValue());
         }
     }
 
+    // 处理同步滚动
     handleScroll() {
         const target = event.target;
         let other;
@@ -117,6 +136,7 @@ export default class EditorMain extends React.PureComponent {
         }, 300);
     }
 
+
     render() {
         const markup = marked(this.props.body.toString(), { sanitize: true });
         const screenShow = this.props.screenShow;
@@ -132,6 +152,7 @@ export default class EditorMain extends React.PureComponent {
             display: screenShow !== 0 ? 'block' : 'none',
             width: `${width}%`
         };
+
         return (
             <div className="editor-wrapper"
               style={{ height: `${this.state.height}px` }}
