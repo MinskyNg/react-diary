@@ -15,7 +15,7 @@ class Home extends React.PureComponent {
         const { postIds, categories, tags, navName, asideShow, dispatch, router } = this.props;
 
         return (
-            <div className="content">
+            <div className="diary-warpper">
                 <Nav
                   navName={navName}
                   categories={categories}
@@ -32,12 +32,12 @@ class Home extends React.PureComponent {
                   toggleAside={() => dispatch(toggleAside())}
                   toggleScreen={() => dispatch(toggleScreen())}
                 />
+                {this.props.children}
                 <Aside
                   postLen={postIds.length}
                   categories={categories}
                   asideShow={asideShow}
                 />
-                {this.props.children}
             </div>
         );
     }

@@ -10,6 +10,14 @@
     border-bottom: 1px #EDEDED solid;
     text-align: center;
     background-color: #FFF;
+    &:after{
+        content: " ";
+        display: block;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+        clear: both;
+    }
     // 下拉选框
     select {
         float: left;
@@ -37,9 +45,10 @@
     }
     // 导航栏标题
     h2 {
-        display: inline-block;
+        display: inline;
         font-size: 2.5rem;
-        margin: 14px 0 0;
+        line-height: 58px;
+        text-align: center;
     }
 }
 

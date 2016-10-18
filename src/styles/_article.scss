@@ -3,15 +3,21 @@
 
 .article {
     width: auto;
-    min-width: 550px;
     padding: 30px 30px 20px;
-    margin: 25px 120px 50px 260px;
     border: 1px solid rgba(0,0,0,.09);
     border-radius: 4px;
     font-size: 1.6rem;
     background-color: #FFF;
     box-shadow: 0 3px 6px rgba(0,0,0,.04);
     transition: margin 0.3s ease;
+}
+
+.article-asideShow {
+    margin: 25px 120px 50px 260px;
+}
+
+.article-asideHidden {
+    margin: 25px 190px 50px;
 }
 
 
@@ -64,6 +70,7 @@
     transition: all 0.4s linear;
     &:hover {
         background-color: #E56969;
+        transform: scale(1.08);
     }
 }
 
@@ -295,8 +302,14 @@
 
 // 日记功能区
 .article-bar {
-    height: 35px;
-
+    &:after{
+        content: " ";
+        display: block;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+        clear: both;
+    }
     // 日记标签
     a {
         float: left;
@@ -315,6 +328,7 @@
         &:hover {
             color: #FFF;
             background-color: #566A82;
+            transform: scale(1.08);
         }
     }
 
@@ -336,7 +350,32 @@
         &:hover {
             color: #FFF;
             background-color: #02B875;
+            transform: scale(1.08);
         }
+    }
+}
+
+.article-tags {
+    float: left;
+    &:after{
+        content: " ";
+        display: block;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+        clear: both;
+    }
+}
+
+.article-button {
+    float: right;
+    &:after{
+        content: " ";
+        display: block;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+        clear: both;
     }
 }
 

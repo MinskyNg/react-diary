@@ -120,7 +120,7 @@ class Editor extends React.PureComponent {
         }
 
         return (
-            <div className="editor">
+            <div className="editor-warpper">
                 <EditorNav
                   title={post.title}
                   category={post.category}

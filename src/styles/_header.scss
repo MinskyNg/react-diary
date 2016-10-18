@@ -7,11 +7,17 @@
     padding-left: 10px;
     border-bottom: 1px #B9B9B9 solid;
     background-color: #FFF;
+    &:after{
+        content: " ";
+        display: block;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+        clear: both;
+    }
     // 项目标题
     h1 {
-        float: left;
-        height: 60px;
-        margin: 0;
+        display: inline;
         font-size: 3rem;
         font-family: cursive;
         letter-spacing: 4px;

@@ -154,7 +154,7 @@ export default class EditorMain extends React.PureComponent {
         };
 
         return (
-            <div className="editor-wrapper"
+            <div className="editor-main"
               style={{ height: `${this.state.height}px` }}
             >
                 <textarea

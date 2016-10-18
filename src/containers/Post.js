@@ -48,8 +48,8 @@ class Post extends React.PureComponent {
         const markup = marked(post.body.toString(), { sanitize: true });
 
         return (
-            <article className="article"
-              style={{ margin: asideShow ? '25px 120px 50px 260px' : '25px 190px 50px 190px' }}
+            <article
+              className={`article ${this.props.asideShow ? 'article-asideShow' : 'article-asideHidden'}`}
             >
                 <h3 className="article-title">{post.title}</h3>
                 <div className="article-date">
@@ -61,22 +61,26 @@ class Post extends React.PureComponent {
                 >
                 </section>
                 <div className="article-bar">
-                    {tagItems}
-                    <button
-                      onClick={() => {
-                          if (confirm('确定要删除此日记吗?')) {
-                              dispatch(delPost(post.id));
-                              router.replace('/');
-                          }
-                      }}
-                    >
-                        删除日记
-                    </button>
-                    <button
-                      onClick={() => router.push(`/editor/${post.id}`)}
-                    >
-                        编辑日记
-                    </button>
+                    <div className="article-tags">
+                      {tagItems}
+                    </div>
+                    <div className="article-button">
+                        <button
+                          onClick={() => {
+                              if (confirm('确定要删除此日记吗?')) {
+                                  dispatch(delPost(post.id));
+                                  router.replace('/');
+                              }
+                          }}
+                        >
+                            删除日记
+                        </button>
+                        <button
+                          onClick={() => router.push(`/editor/${post.id}`)}
+                        >
+                            编辑日记
+                        </button>
+                    </div>
                 </div>
             </article>
         );

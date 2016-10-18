@@ -25,8 +25,8 @@ export default class PostItem extends React.PureComponent {
         const markup = marked(this.props.body.toString(), { sanitize: true });
 
         return (
-            <article className="article postItem"
-              style={{ margin: this.props.asideShow ? '25px 120px 50px 260px' : '25px 190px 50px 190px' }}
+            <article
+              className={`article postItem ${this.props.asideShow ? 'article-asideShow' : 'article-asideHidden'}`}
             >
                 <h3 className="article-title"
                   onClick={() => router.push(`/post/${id}`)}
@@ -48,17 +48,21 @@ export default class PostItem extends React.PureComponent {
                 >
                 </section>
                 <div className="article-bar">
-                    {tagItems}
-                    <button
-                      onClick={() => router.push(`/post/${id}`)}
-                    >
-                        查看全文
-                    </button>
-                    <button
-                      onClick={() => router.push(`/editor/${id}`)}
-                    >
-                        编辑日记
-                    </button>
+                    <div className="article-tags">
+                      {tagItems}
+                    </div>
+                    <div className="article-button">
+                      <button
+                        onClick={() => router.push(`/post/${id}`)}
+                      >
+                          查看全文
+                      </button>
+                      <button
+                        onClick={() => router.push(`/editor/${id}`)}
+                      >
+                          编辑日记
+                      </button>
+                    </div>
                 </div>
             </article>
         );

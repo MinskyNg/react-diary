@@ -1,1 +1,106 @@
-_response.scss
+@media screen and (max-width: 1024px) {
+    .category-list {
+        left: 20px;
+        width: 165px;
+    }
+
+    .year {
+        padding-right: 45px;
+    }
+
+    .article-asideShow {
+        margin: 25px 60px 50px 210px;
+    }
+
+    .article-asideHidden {
+        margin: 25px 100px 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        div {
+            width: 190px;
+            margin-right: 15px;
+            border-radius: 13px;
+        }
+
+        input {
+            width: 150px;
+            border-radius: 13px;
+        }
+    }
+
+    .aside-toggle {
+        display: none;
+    }
+
+    .category-list {
+        position: static;
+        width: 90%;
+        margin: 50px auto;
+    }
+
+    .article {
+        width: 90%;
+    }
+
+    .article-asideShow {
+        margin: 25px auto 50px;
+    }
+
+    .article-asideHidden {
+        margin: 25px auto 50px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .header {
+        h1 {
+            display: none;
+        }
+    }
+
+    .nav {
+        h2 {
+            font-size: 2rem;
+        }
+    }
+
+    .article-bar button {
+        float: left;
+    }
+
+    .article-bar button:last-child {
+        float: right;
+    }
+
+    .article-tags, .article-button {
+        float: none;
+    }
+
+    .article-button {
+        margin-top: 15px;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+    .category-list {
+        position: static;
+        width: 96%;
+        margin: 40px auto;
+    }
+
+    .article {
+        width: 96%;
+    }
+
+    .article-asideShow {
+        margin: 20px auto 40px;
+    }
+
+    .article-asideHidden {
+        margin: 20px auto 40px;
+    }
+}

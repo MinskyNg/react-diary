@@ -1,14 +1,14 @@
 @import "editorBar";
 @import "preview";
 
-.editor {
+.editor-warpper {
     min-width: 985px;
     height: 100%;
     background-color: #FAFAFA;
     overflow: hidden;
 }
 
-.editor-wrapper {
+.editor-main {
     position: relative;
     border-left: 1px #EDEDED solid;
 }
