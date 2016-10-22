@@ -12,20 +12,29 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0,.04);
     overflow: auto;
     transition: transform 0.4s ease;
+    // 分类列表
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        display: block;
+        border-bottom: 1px #EDEDED solid;
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
     // 分类链接
     a {
         display: block;
         height: 56px;
-        border-bottom: 1px #EDEDED solid;
         color: rgba(0, 0, 0,.8);
         cursor: pointer;
         transition: all 0.3s linear;
         &:hover {
             color: #FFF;
             background-color: #CCC;
-        }
-        &:last-child {
-            border-bottom: 0;
         }
     }
     // 处于当前分类样式

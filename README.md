@@ -24,14 +24,16 @@ npm install & npm start
 * 支持文件拖拽上传和导出到本地为.md后缀
 * 左右分屏同步滚动，左边编写，右边预览，支持切换显示模式
 
+
 ## Tech Stack
 
-* react
-* redux
-* react-router
-* immutable
-* marked
-* codemirror
+* React
+* Redux
+* React-Router
+* Server-Side Rendering
+* Immutable.js
+* Marked
+* CodeMirror
 
 
 

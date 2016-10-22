@@ -1,3 +1,8 @@
+/**
+* 前端路由
+**/
+
+
 import React from 'react';
 import { Route, IndexRoute, Redirect, withRouter } from 'react-router';
 import App from './containers/App';

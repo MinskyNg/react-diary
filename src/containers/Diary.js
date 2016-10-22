@@ -1,6 +1,6 @@
-/*
-日记管理组件
-*/
+/**
+* 日记管理
+**/
 
 
 import React, { PropTypes } from 'react';

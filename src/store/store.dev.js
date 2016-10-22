@@ -1,3 +1,8 @@
+/**
+* redux store dev
+**/
+
+
 import { applyMiddleware, createStore, compose } from 'redux';
 import createLogger from 'redux-logger';
 import { fromJS } from 'immutable';

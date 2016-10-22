@@ -1,6 +1,6 @@
-/*
-相同年份日记归档
-*/
+/**
+* 日记归档
+**/
 
 
 import React from 'react';

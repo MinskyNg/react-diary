@@ -1,6 +1,6 @@
-/*
-404组件
-*/
+/**
+* 404页面
+**/
 
 
 import React from 'react';

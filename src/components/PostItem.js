@@ -1,6 +1,6 @@
-/*
-日记摘要组件
-*/
+/**
+* 日记摘要
+**/
 
 
 import React from 'react';

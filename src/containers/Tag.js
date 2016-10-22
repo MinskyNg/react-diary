@@ -1,6 +1,6 @@
-/*
-标签页面组件
-*/
+/**
+* 标签页面
+**/
 
 
 import React, { PropTypes } from 'react';

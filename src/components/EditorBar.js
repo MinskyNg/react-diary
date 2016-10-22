@@ -1,6 +1,6 @@
-/*
-编辑器工具栏
-*/
+/**
+* 编辑器工具栏
+**/
 
 
 import React from 'react';

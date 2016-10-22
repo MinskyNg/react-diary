@@ -1,6 +1,6 @@
-/*
-搜索页面组件
-*/
+/**
+* 搜索页面
+**/
 
 
 import React, { PropTypes } from 'react';

@@ -1,6 +1,6 @@
-/*
-编辑区导航栏
-*/
+/**
+* 编辑器导航栏
+**/
 
 
 import React from 'react';

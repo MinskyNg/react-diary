@@ -3,7 +3,9 @@ import { ADD_CAT, DEL_CAT, ADD_TAG, DEL_TAG, ADD_POST, DEL_POST, UPDATE_TITLE, U
   from '../constants/actionTypes';
 
 
-// actionCreator生成辅助函数
+/**
+* actionCreator生成辅助函数
+**/
 function makeActionCreator(type, ...argNames) {
     return (...args) => {
         const action = { type };

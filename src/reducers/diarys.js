@@ -3,7 +3,9 @@ import { ADD_CAT, DEL_CAT, ADD_TAG, DEL_TAG, ADD_POST, DEL_POST, UPDATE_TITLE, U
 import { fromJS, List } from 'immutable';
 
 
-// reducer生成辅助函数
+/**
+* reducer生成辅助函数
+**/
 function createReducer(initialState, handlers) {
     return function reducer(state = initialState, action) {
         if (handlers.hasOwnProperty(action.type)) {
@@ -17,8 +19,9 @@ function createReducer(initialState, handlers) {
 
 const handlers = {};
 
-
-// 添加分类
+/**
+* 添加分类
+**/
 handlers[ADD_CAT] = (state, action) => {
     if (action.cat === '全部日记' || action.cat === '搜索结果') {
         return state;
@@ -28,7 +31,9 @@ handlers[ADD_CAT] = (state, action) => {
 };
 
 
-// 删除分类
+/**
+* 删除分类
+**/
 handlers[DEL_CAT] = (state, action) => {
     if (action.cat === '未分类') {
         return state;
@@ -50,13 +55,17 @@ handlers[DEL_CAT] = (state, action) => {
 };
 
 
-// 添加标签
+/**
+* 添加标签
+**/
 handlers[ADD_TAG] = (state, action) => {
     const tag = action.tag;
     return state.hasIn(['tags', tag]) ? state : state.setIn(['tags', tag], List([]));
 };
 
-// 删除标签
+/**
+* 删除标签
+**/
 handlers[DEL_TAG] = (state, action) => {
     const tag = action.tag;
     const tagList = state.getIn(['tags', tag]);
@@ -68,7 +77,9 @@ handlers[DEL_TAG] = (state, action) => {
 };
 
 
-// 添加日记
+/**
+* 添加日记
+**/
 handlers[ADD_POST] = (state, action) => {
     const { id, year, date, cat } = action;
     if (state.hasIn(['categories', cat])) {
@@ -82,7 +93,9 @@ handlers[ADD_POST] = (state, action) => {
 };
 
 
-// 删除日记
+/**
+* 删除日记
+**/
 handlers[DEL_POST] = (state, action) => {
     const id = action.id;
     const post = state.getIn(['posts', id.toString()]).toJS();
@@ -95,19 +108,25 @@ handlers[DEL_POST] = (state, action) => {
 };
 
 
-// 修改标题
+/**
+* 修改标题
+**/
 handlers[UPDATE_TITLE] = (state, action) => {
     return state.setIn(['posts', action.id.toString(), 'title'], action.title);
 };
 
 
-// 修改内容
+/**
+* 修改内容
+**/
 handlers[UPDATE_BODY] = (state, action) => {
     return state.setIn(['posts', action.id.toString(), 'body'], action.body);
 };
 
 
-// 修改分类
+/**
+* 修改分类
+**/
 handlers[UPDATE_CAT] = (state, action) => {
     const { id, cat } = action;
     const preCat = state.getIn(['posts', id.toString(), 'category']);
@@ -123,7 +142,9 @@ handlers[UPDATE_CAT] = (state, action) => {
 };
 
 
-// 修改标签
+/**
+* 修改标签
+**/
 handlers[UPDATE_TAG] = (state, action) => {
     if (action.tag.length > 5) {
         return state;

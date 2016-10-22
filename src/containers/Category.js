@@ -1,6 +1,6 @@
-/*
-分类页面组件
-*/
+/**
+* 分类页面
+**/
 
 
 import React, { PropTypes } from 'react';

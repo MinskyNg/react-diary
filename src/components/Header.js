@@ -1,6 +1,6 @@
-/*
-页面头部
-*/
+/**
+*页面顶部
+**/
 
 
 import React from 'react';
@@ -28,7 +28,7 @@ export default class Header extends React.PureComponent {
                 <h1>React Diary</h1>
                 <div>
                     <i className="icon-search"></i>
-                    <input type="text" onKeyUp={e => this.handleSearch(e)} />
+                    <input type="text" placeholder="Seach here" onKeyUp={e => this.handleSearch(e)} />
                 </div>
             </header>
         );

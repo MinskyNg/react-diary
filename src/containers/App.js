@@ -1,6 +1,6 @@
-/*
-主体组件
-*/
+/**
+* 主体组件
+**/
 
 
 import React, { PropTypes } from 'react';

@@ -1,6 +1,6 @@
-/*
-侧边栏组件
-*/
+/**
+* 侧边栏
+**/
 
 
 import React from 'react';
@@ -12,20 +12,26 @@ export default class Aside extends React.PureComponent {
         const { postLen, categories, asideShow } = this.props;
         // 生成分类列表
         let categoryItems = Object.keys(categories).map(category => (
-                <Link key={category} to={`/category/${category}`} activeClassName="active">
-                    <h4 className="category-name">{category}</h4>
-                    <span className="category-count">{categories[category].length}</span>
-                </Link>
+                <li key={category}>
+                    <Link to={`/category/${category}`} activeClassName="active">
+                        <h4 className="category-name">{category}</h4>
+                        <span className="category-count">{categories[category].length}</span>
+                    </Link>
+                </li>
             )
         );
 
         return (
             <aside className={`category-list${asideShow ? '' : ' category-hidden'}`}>
-                <IndexLink to="/" activeClassName="active">
-                    <h4 className="category-name">全部日记</h4>
-                    <span className="category-count">{postLen}</span>
-                </IndexLink>
-                {categoryItems}
+                <ul>
+                    <li>
+                        <IndexLink to="/" activeClassName="active">
+                            <h4 className="category-name">全部日记</h4>
+                            <span className="category-count">{postLen}</span>
+                        </IndexLink>
+                    </li>
+                    {categoryItems}
+                </ul>
             </aside>
         );
     }

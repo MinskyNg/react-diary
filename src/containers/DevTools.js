@@ -1,6 +1,6 @@
-/*
-Redux调试工具
-*/
+/**
+* Redux调试工具
+**/
 
 
 import React from 'react';

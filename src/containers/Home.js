@@ -1,6 +1,6 @@
-/*
-首页组件
-*/
+/**
+* 首页
+**/
 
 
 import React, { PropTypes } from 'react';

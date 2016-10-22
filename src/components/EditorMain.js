@@ -1,6 +1,6 @@
-/*
-编辑器主体
-*/
+/**
+* 编辑器主体
+**/
 
 
 import React from 'react';

@@ -1,6 +1,6 @@
-/*
-编辑器组件
-*/
+/**
+* 编辑器
+**/
 
 
 import React, { PropTypes } from 'react';

@@ -1,6 +1,6 @@
-/*
-导航栏
-*/
+/**
+* 导航栏
+**/
 
 
 import React from 'react';
