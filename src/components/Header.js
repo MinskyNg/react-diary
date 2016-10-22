@@ -4,6 +4,7 @@
 
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 
 export default class Header extends React.PureComponent {
@@ -13,7 +14,7 @@ export default class Header extends React.PureComponent {
             const keyword = event.target.value.replace(/(^\s*)|(\s*$)/g, '');
             if (keyword !== null && keyword !== '') {
                 event.target.value = '';
-                this.props.router.push(`/search/${keyword}`);
+                browserHistory.push(`/search/${keyword}`);
             }
         }
     }
@@ -23,7 +24,7 @@ export default class Header extends React.PureComponent {
         return (
             <header className="header" style={{ display: this.props.fullScreen ? 'none' : 'block' }}>
                 <i className="icon-react" title="回到首页"
-                  onClick={() => this.props.router.push('/')}
+                  onClick={() => browserHistory.push('/')}
                 ></i>
                 <h1>React Diary</h1>
                 <div>

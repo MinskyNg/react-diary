@@ -4,7 +4,7 @@
 
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import trimHtml from 'trim-html';
@@ -18,7 +18,7 @@ export default class PostItem extends React.PureComponent {
 
 
     render() {
-        const { id, router } = this.props;
+        const id = this.props.id;
         // 生成标签项
         let tagItems = this.props.tag.map(tag => (<Link key={tag} to={`/tag/${tag}`}>{tag}</Link>));
         // 解析markdown文本为html
@@ -29,7 +29,7 @@ export default class PostItem extends React.PureComponent {
               className={`article postItem ${this.props.asideShow ? 'article-asideShow' : 'article-asideHidden'}`}
             >
                 <h3 className="article-title"
-                  onClick={() => router.push(`/post/${id}`)}
+                  onClick={() => browserHistory.push(`/post/${id}`)}
                 >{this.props.title}</h3>
                 <button className="article-delete icon-deleteArticle" title="删除日记"
                   onClick={() => {
@@ -53,12 +53,12 @@ export default class PostItem extends React.PureComponent {
                     </div>
                     <div className="article-button">
                       <button
-                        onClick={() => router.push(`/post/${id}`)}
+                        onClick={() => browserHistory.push(`/post/${id}`)}
                       >
                           查看全文
                       </button>
                       <button
-                        onClick={() => router.push(`/editor/${id}`)}
+                        onClick={() => browserHistory.push(`/editor/${id}`)}
                       >
                           编辑日记
                       </button>

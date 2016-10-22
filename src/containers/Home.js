@@ -16,7 +16,7 @@ class Home extends React.PureComponent {
 
 
     render() {
-        const { postIds, posts, asideShow, dispatch, router } = this.props;
+        const { postIds, posts, asideShow, dispatch } = this.props;
         let ArchiveItems = [];
         let i = 0;
         const len = postIds.length;
@@ -37,7 +37,6 @@ class Home extends React.PureComponent {
                   articles={articles}
                   asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
-                  router={router}
                 />
             );
         }

@@ -16,6 +16,7 @@ function makeActionCreator(type, ...argNames) {
     };
 }
 
+
 export const addCat = makeActionCreator(ADD_CAT, 'cat');  // 添加分类
 export const delCat = makeActionCreator(DEL_CAT, 'cat');  // 删除分类
 export const addTag = makeActionCreator(ADD_TAG, 'tag');  // 添加标签

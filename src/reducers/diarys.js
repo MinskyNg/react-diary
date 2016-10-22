@@ -17,6 +17,7 @@ function createReducer(initialState, handlers) {
     };
 }
 
+
 const handlers = {};
 
 /**

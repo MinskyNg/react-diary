@@ -4,6 +4,7 @@
 
 
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { delPost, changeNavName } from '../actions';
 import ArchiveItem from '../components/ArchiveItem';
@@ -25,7 +26,7 @@ class Category extends React.PureComponent {
 
     render() {
         const catName = this.props.params.catName;
-        const { categories, posts, asideShow, dispatch, router } = this.props;
+        const { categories, posts, asideShow, dispatch } = this.props;
         const catIds = categories[catName];
 
         if (catIds === undefined) {
@@ -33,7 +34,7 @@ class Category extends React.PureComponent {
                 <div className="notfound">
                     <h2>404</h2>
                     <p>Category not found</p>
-                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                    <button onClick={() => browserHistory.replace('/')}>Back To Home</button>
                 </div>
             );
         }
@@ -58,7 +59,6 @@ class Category extends React.PureComponent {
                   articles={articles}
                   asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
-                  router={router}
                 />
             );
         }

@@ -4,6 +4,7 @@
 
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { changeNavName } from '../actions';
 
@@ -19,7 +20,7 @@ class Home extends React.PureComponent {
             <div className="notfound">
                 <h2>404</h2>
                 <p>Page not found</p>
-                <button onClick={() => this.props.router.replace('/')}>Back To Home</button>
+                <button onClick={() => browserHistory.replace('/')}>Back To Home</button>
             </div>
         );
     }

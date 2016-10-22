@@ -5,7 +5,7 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import { delPost, changeNavName } from '../actions';
@@ -29,7 +29,7 @@ class Post extends React.PureComponent {
 
 
     render() {
-        const { posts, asideShow, dispatch, router } = this.props;
+        const { posts, asideShow, dispatch } = this.props;
         const post = posts[this.props.params.id];
 
         if (post === undefined) {
@@ -37,7 +37,7 @@ class Post extends React.PureComponent {
                 <div className="notfound">
                     <h2>404</h2>
                     <p>Post not found</p>
-                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                    <button onClick={() => browserHistory.replace('/')}>Back To Home</button>
                 </div>
             );
         }
@@ -69,14 +69,14 @@ class Post extends React.PureComponent {
                           onClick={() => {
                               if (confirm('确定要删除此日记吗?')) {
                                   dispatch(delPost(post.id));
-                                  router.replace('/');
+                                  browserHistory.replace('/');
                               }
                           }}
                         >
                             删除日记
                         </button>
                         <button
-                          onClick={() => router.push(`/editor/${post.id}`)}
+                          onClick={() => browserHistory.push(`/editor/${post.id}`)}
                         >
                             编辑日记
                         </button>

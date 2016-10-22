@@ -47,12 +47,10 @@ class App extends React.PureComponent {
 
 
     render() {
-        const { fullScreen, router } = this.props;
         return (
             <div style={{ height: '100%' }}>
                 <Header
-                  fullScreen={fullScreen}
-                  router={router}
+                  fullScreen={this.props.fullScreen}
                 />
                 <div style={{ height: `${this.state.height}px` }}>
                     {this.props.children}

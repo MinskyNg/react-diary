@@ -4,6 +4,7 @@
 
 
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { addCat, delCat, addTag, delTag, addPost, toggleAside, toggleScreen } from '../actions';
 import Nav from '../components/Nav';
@@ -12,7 +13,7 @@ import Aside from '../components/Aside';
 
 class Home extends React.PureComponent {
     render() {
-        const { postIds, categories, tags, navName, asideShow, dispatch, router } = this.props;
+        const { postIds, categories, tags, navName, asideShow, dispatch } = this.props;
 
         return (
             <div className="diary-warpper">
@@ -26,8 +27,8 @@ class Home extends React.PureComponent {
                   addTag={tag => dispatch(addTag(tag))}
                   delTag={tag => dispatch(delTag(tag))}
                   addPost={(cat, year, date) => {
-                      dispatch(addPost(postIds[0] + 1, cat, year, date));
-                      router.replace(`/editor/${postIds[0] + 1}`);
+                      dispatch(addPost((postIds[0] + 1) || 0, cat, year, date));
+                      browserHistory.replace(`/editor/${(postIds[0] + 1) || 0}`);
                   }}
                   toggleAside={() => dispatch(toggleAside())}
                   toggleScreen={() => dispatch(toggleScreen())}

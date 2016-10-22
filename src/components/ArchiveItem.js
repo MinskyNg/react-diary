@@ -9,7 +9,7 @@ import PostItem from './PostItem';
 
 export default class ArchiveItem extends React.PureComponent {
     render() {
-        const { articles, delPost, asideShow, router } = this.props;
+        const { articles, delPost, asideShow } = this.props;
 
         let postItems = articles.map(post => (
                 <PostItem
@@ -17,7 +17,6 @@ export default class ArchiveItem extends React.PureComponent {
                   {...post}
                   asideShow={asideShow}
                   delPost={delPost}
-                  router={router}
                 />
             )
         );

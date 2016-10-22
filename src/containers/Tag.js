@@ -4,6 +4,7 @@
 
 
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { delPost, changeNavName } from '../actions';
 import ArchiveItem from '../components/ArchiveItem';
@@ -24,7 +25,7 @@ class Tag extends React.PureComponent {
 
     render() {
         const tagName = this.props.params.tagName;
-        const { tags, posts, asideShow, dispatch, router } = this.props;
+        const { tags, posts, asideShow, dispatch } = this.props;
         const tagIds = tags[tagName];
 
         if (tagIds === undefined) {
@@ -32,7 +33,7 @@ class Tag extends React.PureComponent {
                 <div className="notfound">
                     <h2>404</h2>
                     <p>Tag not found</p>
-                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                    <button onClick={() => browserHistory.replace('/')}>Back To Home</button>
                 </div>
             );
         }
@@ -57,7 +58,6 @@ class Tag extends React.PureComponent {
                   articles={articles}
                   asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
-                  router={router}
                 />
             );
         }

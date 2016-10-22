@@ -4,6 +4,7 @@
 
 
 import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { addCat, delCat, addTag, delTag, addPost, delPost, toggleAside, toggleScreen,
   updateTitle, updateBody, updateCat, updateTag } from '../actions';
@@ -105,7 +106,7 @@ class Editor extends React.PureComponent {
 
 
     render() {
-        const { postIds, categories, tags, posts, fullScreen, dispatch, router } = this.props;
+        const { postIds, categories, tags, posts, fullScreen, dispatch } = this.props;
         const postId = +this.props.params.id;
         const post = posts[postId];
 
@@ -114,7 +115,7 @@ class Editor extends React.PureComponent {
                 <div className="notfound">
                     <h2>404</h2>
                     <p>Post not found</p>
-                    <button onClick={() => router.replace('/')}>Back To Home</button>
+                    <button onClick={() => browserHistory.replace('/')}>Back To Home</button>
                 </div>
             );
         }
@@ -134,12 +135,12 @@ class Editor extends React.PureComponent {
                   delTag={tag => dispatch(delTag(tag))}
                   addPost={(cat, year, date) => {
                       this.setState({ undoStack: [], redoStack: [] });
-                      dispatch(addPost(postIds[0] + 1, cat, year, date));
-                      router.replace(`/editor/${postIds[0] + 1}`);
+                      dispatch(addPost((postIds[0] + 1) || 0, cat, year, date));
+                      browserHistory.replace(`/editor/${(postIds[0] + 1) || 0}`);
                   }}
                   delPost={() => {
                       dispatch(delPost(postId));
-                      router.replace('/');
+                      browserHistory.replace('/');
                   }}
                   toggleAside={() => dispatch(toggleAside())}
                   toggleScreen={() => dispatch(toggleScreen())}

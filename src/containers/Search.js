@@ -24,7 +24,7 @@ class Search extends React.PureComponent {
 
     render() {
         const keyword = this.props.params.keyword;
-        const { postIds, posts, asideShow, dispatch, router } = this.props;
+        const { postIds, posts, asideShow, dispatch } = this.props;
         let ArchiveItems = [];
         const matchIds = [];
 
@@ -53,7 +53,6 @@ class Search extends React.PureComponent {
                   articles={articles}
                   asideShow={asideShow}
                   delPost={id => dispatch(delPost(id))}
-                  router={router}
                 />
             );
         }

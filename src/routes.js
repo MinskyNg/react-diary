@@ -4,7 +4,7 @@
 
 
 import React from 'react';
-import { Route, IndexRoute, Redirect, withRouter } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
 import App from './containers/App';
 import Diary from './containers/Diary';
 import Home from './containers/Home';
@@ -17,16 +17,16 @@ import Notfound from './containers/Notfound';
 
 
 export default (
-    <Route path="/" component={withRouter(App)}>
-        <Route component={withRouter(Diary)}>
-            <IndexRoute component={withRouter(Home)} />
-            <Route path="search/:keyword" component={withRouter(Search)} />
-            <Route path="category/:catName" component={withRouter(Category)} />
-            <Route path="tag/:tagName" component={withRouter(Tag)} />
-            <Route path="post/:id" component={withRouter(Post)} />
-            <Route path="404" component={withRouter(Notfound)} />
+    <Route path="/" component={App}>
+        <Route component={Diary}>
+            <IndexRoute component={Home} />
+            <Route path="search/:keyword" component={Search} />
+            <Route path="category/:catName" component={Category} />
+            <Route path="tag/:tagName" component={Tag} />
+            <Route path="post/:id" component={Post} />
+            <Route path="404" component={Notfound} />
         </Route>
-        <Route path="editor/:id" component={withRouter(Editor)} />
+        <Route path="editor/:id" component={Editor} />
         <Redirect from="*" to="/404" />
     </Route>
 );
