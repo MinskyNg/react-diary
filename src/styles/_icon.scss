@@ -3,6 +3,7 @@
 
 @mixin icon($position, $width, $height) {
     display: block;
+    background-color: transparent;
     background-image: url(./img/sprite.png);
     background-position: $position;
     width: $width;

@@ -34,7 +34,9 @@ export default class EditorNav extends React.PureComponent {
     handleAddPost() {
         let date = new Date();
         const year = date.getFullYear();
-        date = `${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+        const hour = date.getHours();
+        const min = date.getMinutes();
+        date = `${date.getMonth() + 1}-${date.getDate()} ${hour < 10 ? (`0${hour}`) : hour}:${min < 10 ? (`0${min}`) : min}`;
         this.props.addPost(this.props.category, year, date);
     }
 
