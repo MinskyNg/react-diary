@@ -36,7 +36,6 @@ module.exports = {
             }
         })
     ],
-    devtool: 'cheap-source-map',
     entry: {
         index: [
             path.resolve(__dirname, 'src/index.js')

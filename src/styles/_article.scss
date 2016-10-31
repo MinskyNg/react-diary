@@ -34,7 +34,7 @@
     .article-title {
         cursor: pointer;
         &:hover {
-            opacity: .6;
+            opacity: .7;
         }
     }
 }
@@ -90,6 +90,7 @@
 .article-section {
     min-height: 200px;
     margin: 30px 0 40px;
+    color: #666A70;
     font-family: simsun, sans-serif;
     font-size: 1.6rem;
     overflow: hidden;
@@ -120,7 +121,7 @@
         margin-bottom: 16px;
         font-weight: bold;
         line-height: 1.4;
-        color: #111;
+        color: #444;
     }
 
     h1 {

@@ -4,7 +4,7 @@
 
 ## How to start
 
-npm install & npm start
+npm install & npm run dev
 
 ## Features
 
@@ -30,7 +30,6 @@ npm install & npm start
 * React
 * Redux
 * React-Router
-* Server-Side Rendering
 * Immutable.js
 * Marked
 * CodeMirror
