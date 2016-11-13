@@ -104,10 +104,6 @@ export default class EditorMain extends React.PureComponent {
         });
     }
 
-    // 子组件获取编辑器
-    getEditor() {
-        return this.editor;
-    }
 
     // 编辑区改变时，修改日记内容
     cmChanged(doc, change) {
@@ -171,7 +167,7 @@ export default class EditorMain extends React.PureComponent {
                 </div>
                 <EditorBar
                   screenShow={screenShow}
-                  getEditor={() => this.getEditor()}
+                  getEditor={() => this.editor}
                   updateBody={(body) => this.props.updateBody(body)}
                 />
             </div>

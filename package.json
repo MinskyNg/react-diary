@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --devtool eval  --progress --colors --hot --content-base dist",
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "test": "karma start",
-    "lint": "NODE_ENV=production eslint 'src'"
+    "lint": "NODE_ENV=production eslint 'src'",
+    "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,7 @@
     "chai": "^3.5.0",
     "chai-immutable": "^1.6.0",
     "clean-webpack-plugin": "^0.1.10",
+    "coveralls": "^2.11.15",
     "css-loader": "~0.23.0",
     "enzyme": "^2.5.1",
     "eslint": "2.x",
@@ -72,7 +74,7 @@
     "mocha": "^3.1.2",
     "node-sass": "^3.8.0",
     "open-browser-webpack-plugin": "0.0.2",
-    "phantomjs-prebuilt": "^2.1.13",
+    "phantomjs": "^2.1.7",
     "postcss-loader": "^0.13.0",
     "precss": "^1.4.0",
     "react-addons-test-utils": "^15.3.2",

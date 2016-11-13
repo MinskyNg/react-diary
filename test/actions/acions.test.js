@@ -3,7 +3,7 @@ import * as actions from '../../src/actions';
 
 
 describe('actions', () => {
-    it('should add a post', () => {
+    it('should create an action to add a post', () => {
         const id = 1;
         const cat = '分类1';
         const year = '2016';

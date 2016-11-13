@@ -42,6 +42,12 @@ module.exports = function(config) {
             },
             resolve: {
                 extensions: ['', '.js', '.jsx'],
+            },
+            externals: {
+                cheerio: 'window',
+                'react/addons': true,
+                'react/lib/ExecutionEnvironment': true,
+                'react/lib/ReactContext': true
             }
         },
 
@@ -60,8 +66,11 @@ module.exports = function(config) {
         reporters: ['mocha', 'coverage'],
 
         coverageReporter: {
-            type: 'html',
-            dir: 'coverage/'
+            dir: 'coverage/',
+            reporters: [
+                { type: 'html' },
+                { type: 'lcov', subdir: 'lcov' }
+            ]
         },
 
         port: 9876,

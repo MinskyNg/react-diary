@@ -1,3 +1,6 @@
+[![Build](https://img.shields.io/travis/MinskyNg/react-diary/master.svg)](https://travis-ci.org/MinskyNg/react-diary)
+[![Coverage Status](https://img.shields.io/coveralls/MinskyNg/react-diary/master.svg)](https://coveralls.io/github/MinskyNg/react-diary)
+
 # 基于React的日记应用
 
 [react-diary](http://minsky.me/diary)
@@ -8,7 +11,7 @@ npm install & npm run dev
 
 ## Features
 
-### 日记管理:
+### 日记:
 
 * 利用LocalStorage本地存储
 * 可为日记添加分类和标签

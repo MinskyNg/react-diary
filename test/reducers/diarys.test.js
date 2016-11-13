@@ -1,8 +1,8 @@
-import * as types from '../../src/constants/actionTypes';
-import diarys from '../../src/reducers/diarys';
 import { fromJS, List } from 'immutable';
 import chaiImmutable from 'chai-immutable';
 chai.use(chaiImmutable);
+import * as types from '../../src/constants/actionTypes';
+import diarys from '../../src/reducers/diarys';
 
 
 describe('diarys reducer', () => {
