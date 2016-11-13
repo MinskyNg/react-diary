@@ -11,11 +11,4 @@ cache:
 after_script:
     - npm run coveralls
 os:
-  - linux
   - osx
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable

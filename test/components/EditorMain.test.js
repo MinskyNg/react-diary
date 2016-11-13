@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import EditorMain from '../../src/components/EditorMain';
 
 
-describe.only('<EditorMain />', () => {
+describe('<EditorMain />', () => {
     let spyes;
     let props;
     let wrapper;

@@ -9,7 +9,8 @@ module.exports = function(config) {
         frameworks: ['mocha', 'chai', 'sinon'],
 
         files: [
-            './test/test.webpack.js',
+            'node_modules/babel-polyfill/dist/polyfill.js',
+            './test/test.webpack.js'
         ],
 
         plugins: [
@@ -17,8 +18,8 @@ module.exports = function(config) {
             'karma-mocha-reporter',
             'karma-chai',
             'karma-sinon',
-            // 'karma-phantomjs-launcher',
-            'karma-chrome-launcher',
+            'karma-phantomjs-launcher',
+            // 'karma-chrome-launcher',
             'karma-coverage',
             'karma-webpack',
             'karma-sourcemap-loader'
@@ -81,8 +82,8 @@ module.exports = function(config) {
 
         autoWatch: true,
 
-        // browsers: ['PhantomJS'],
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS'],
+        // browsers: ['Chrome'],
 
         singleRun: false,
 

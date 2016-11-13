@@ -1,5 +1,5 @@
-[![Build](https://img.shields.io/travis/MinskyNg/react-diary/master.svg)](https://travis-ci.org/MinskyNg/react-diary)
-[![Coverage Status](https://img.shields.io/coveralls/MinskyNg/react-diary/master.svg)](https://coveralls.io/github/MinskyNg/react-diary)
+[![Build](https://travis-ci.org/MinskyNg/react-diary.svg?branch=master)](https://travis-ci.org/MinskyNg/react-diary?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/MinskyNg/react-diary/badge.svg?branch=master)](https://coveralls.io/github/MinskyNg/react-diary?branch=master)
 
 # 基于React的日记应用
 
