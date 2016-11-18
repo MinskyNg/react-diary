@@ -4,8 +4,11 @@ import { fromJS, List } from 'immutable';
 
 
 /**
-* reducer生成辅助函数
-**/
+ * reducer生成辅助函数
+ * @param {object} initialState 默认state
+ * @param {function} handlers 处理函数对象
+ * @return {object} state
+ */
 function createReducer(initialState, handlers) {
     return function reducer(state = initialState, action) {
         if (handlers.hasOwnProperty(action.type)) {

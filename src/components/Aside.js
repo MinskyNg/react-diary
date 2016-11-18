@@ -1,6 +1,10 @@
 /**
-* 侧边栏
-**/
+ * 侧边栏
+ * @class Aside
+ * @prop {number} postLen 文章总数
+ * @prop {object} categories 分类列表
+ * @prop {boolean} asideShow 是否显示侧栏
+ */
 
 
 import React from 'react';

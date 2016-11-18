@@ -1,6 +1,10 @@
 /**
-* 分类页面
-**/
+ * 分类页面
+ * @class Category
+ * @prop {object} categories 分类列表
+ * @prop {object} posts 文章列表
+ * @prop {boolean} asideShow 是否显示侧边栏
+ */
 
 
 import React, { PropTypes } from 'react';

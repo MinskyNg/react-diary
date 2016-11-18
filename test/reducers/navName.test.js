@@ -1,4 +1,4 @@
-import  { CHANGE_NAV_NAME } from '../../src/constants/actionTypes';
+import { CHANGE_NAV_NAME } from '../../src/constants/actionTypes';
 import navName from '../../src/reducers/navName';
 
 

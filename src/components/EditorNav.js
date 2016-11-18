@@ -1,6 +1,27 @@
 /**
-* 编辑器导航栏
-**/
+ * 编辑器导航栏
+ * @class EditorNav
+ * @prop {string} title 文章标题
+ * @prop {string} category 文章类别
+ * @prop {array} tag 文章标签
+ * @prop {string} body 文章内容
+ * @prop {object} categories 分类列表
+ * @prop {array} tags 标签列表
+ * @prop {function} addCat 添加分类
+ * @prop {function} delCat 删除分类
+ * @prop {function} addTag 添加标签
+ * @prop {function} delTag 删除标签
+ * @prop {function} addPost 新建文章
+ * @prop {function} delPost 删除文章
+ * @prop {function} toggleAside 切换边栏
+ * @prop {function} toggleScreen 切换全屏
+ * @prop {function} updateTitle 更新标题
+ * @prop {function} updateCat 更新类别
+ * @prop {function} updateTag 更新标签
+ * @prop {function} handleUndo 撤销
+ * @prop {function} handleRedo 重做
+ * @prop {function} changeScreen 改变显示模式
+ */
 
 
 import React from 'react';

@@ -1,6 +1,14 @@
 /**
-* 日记摘要
-**/
+ * 日记摘要
+ * @class PostItem
+ * @prop {string} id 文章id
+ * @prop {string} title 文章标题
+ * @prop {string} body 文章内容
+ * @prop {string} category 文章分类
+ * @prop {array} tag 文标签
+ * @prop {boolean} asideShow 是否显示侧边栏
+ * @prop {function} delPost 删除文章
+ */
 
 
 import React from 'react';

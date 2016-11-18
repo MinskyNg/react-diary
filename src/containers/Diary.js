@@ -1,6 +1,12 @@
 /**
-* 日记管理
-**/
+ * 日记管理
+ * @class Diary
+ * @prop {array} postIds 文章id列表
+ * @prop {object} categories 分类列表
+ * @prop {array} tags 标签列表
+ * @prop {stirng} navName 导航栏标题
+ * @prop {boolean} asideShow 是否显示侧边栏
+ */
 
 
 import React, { PropTypes } from 'react';
@@ -11,7 +17,7 @@ import Nav from '../components/Nav';
 import Aside from '../components/Aside';
 
 
-class Home extends React.PureComponent {
+class Diary extends React.PureComponent {
     render() {
         const { postIds, categories, tags, navName, asideShow, dispatch } = this.props;
 
@@ -45,7 +51,7 @@ class Home extends React.PureComponent {
 }
 
 
-Home.propTypes = {
+Diary.propTypes = {
     postIds: PropTypes.array.isRequired,
     categories: PropTypes.object.isRequired,
     tags: PropTypes.object.isRequired,
@@ -64,4 +70,4 @@ function selector(state) {
     };
 }
 
-export default connect(selector)(Home);
+export default connect(selector)(Diary);

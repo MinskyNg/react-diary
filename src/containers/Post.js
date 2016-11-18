@@ -1,6 +1,10 @@
 /**
-* 日记页面
-**/
+ * 日记页面
+ * @class Post
+ * @prop {array} postIds 文章id列表
+ * @prop {object} posts 文章列表
+ * @prop {boolean} asideShow 是否显示侧边栏
+ */
 
 
 import React, { PropTypes } from 'react';

@@ -1,6 +1,16 @@
 /**
-* 编辑器
-**/
+ * 编辑器
+ * @class Editor
+ * @state {number} screenShow 显示模式
+ * @state {boolean} do 是否撤销重做
+ * @state {array} undoStack 撤销记录栈
+ * @state {array} redoStack 重做记录栈
+ * @prop {string} postIds 文章id列表
+ * @prop {object} categories 分类列表
+ * @prop {array} tags 标签列表
+ * @prop {object} posts 文章列表
+ * @prop {boolean} fullScreen 是否全屏
+ */
 
 
 import React, { PropTypes } from 'react';
@@ -17,7 +27,6 @@ class Editor extends React.PureComponent {
         super(props);
         this.post = this.props.posts[this.props.params.id];
         if (this.post !== undefined) {
-            // 屏幕显示切换，撤销恢复标志，撤销恢复记录栈
             this.state = {
                 screenShow: 2,
                 do: false,

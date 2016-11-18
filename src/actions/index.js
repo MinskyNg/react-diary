@@ -4,8 +4,11 @@ import { ADD_CAT, DEL_CAT, ADD_TAG, DEL_TAG, ADD_POST, DEL_POST, UPDATE_TITLE, U
 
 
 /**
-* actionCreator生成辅助函数
-**/
+ * actionCreator生成辅助函数
+ * @param {string} type action的类型
+ * @param {string} ...argNames action的参数
+ * @return {object} action
+ */
 function makeActionCreator(type, ...argNames) {
     return (...args) => {
         const action = { type };

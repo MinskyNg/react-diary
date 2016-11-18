@@ -1,6 +1,9 @@
 /**
-* 主体组件
-**/
+ * 主体组件
+ * @class App
+ * @state {number} height 窗口高度
+ * @prop {boolean} fullScreen 是否全屏
+ */
 
 
 import React, { PropTypes } from 'react';

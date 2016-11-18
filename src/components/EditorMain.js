@@ -1,6 +1,13 @@
 /**
-* 编辑器主体
-**/
+ * 编辑器主体
+ * @class EditorMain
+ * @prop {boolean} do 是否撤销重做
+ * @prop {string} body 文章内容
+ * @prop {boolean} fullScreen 是否全屏
+ * @prop {number} screenShow 显示模式
+ * @prop {function} cancelDo 设置do为false
+ * @prop {function} updateBody 更新文章内容
+ */
 
 
 import React from 'react';

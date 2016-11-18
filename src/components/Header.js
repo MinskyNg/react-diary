@@ -1,6 +1,8 @@
 /**
-*页面顶部
-**/
+ * 页面顶部
+ * @class Header
+ * @prop {boolean} fullScreen 是否全屏
+ */
 
 
 import React from 'react';

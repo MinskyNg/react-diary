@@ -1,6 +1,7 @@
 /**
-* 404页面
-**/
+ * 404页面
+ * @class NotFound
+ */
 
 
 import React from 'react';
@@ -9,7 +10,7 @@ import { connect } from 'react-redux';
 import { changeNavName } from '../actions';
 
 
-class Home extends React.PureComponent {
+class NotFound extends React.PureComponent {
     componentDidMount() {
         this.props.dispatch(changeNavName('PageNotFound'));
     }
@@ -27,4 +28,4 @@ class Home extends React.PureComponent {
 }
 
 
-export default connect()(Home);
+export default connect()(NotFound);

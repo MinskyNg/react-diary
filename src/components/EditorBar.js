@@ -1,6 +1,10 @@
 /**
-* 编辑器工具栏
-**/
+ * 编辑器工具栏
+ * @class EditorBar
+ * @prop {function} getEditor 获取编辑器元素
+ * @prop {function} updateBody 更新文章内容
+ * @prop {number} screenShow 显示模式
+ */
 
 
 import React from 'react';
