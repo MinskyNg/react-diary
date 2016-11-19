@@ -23,6 +23,7 @@
 
 // 日记概览
 .postItem {
+    animation: itemShow 0.5s ease-out 1;
     transition: all 0.3s linear;
     &:hover {
         transform: translateY(-5px);
@@ -377,6 +378,28 @@
         font-size: 0;
         visibility: hidden;
         clear: both;
+    }
+}
+
+@keyframes itemShow {
+    0% {
+        transform: rotate(2deg);
+    }
+
+    25% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(2deg);
+    }
+
+    75% {
+        transform: rotate(-2deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
     }
 }
 
