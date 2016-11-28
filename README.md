@@ -3,7 +3,7 @@
 
 # 基于React的日记应用
 
-[react-diary](http://minsky.me/diary)
+[在线地址 react-diary](http://minsky.me/diary)
 
 ## How to start
 
@@ -11,13 +11,13 @@ npm install & npm run dev
 
 ## Features
 
-### 日记:
+### 日记管理:
 
 * 利用LocalStorage本地存储
 * 可为日记添加分类和标签
 * 支持按日记内容搜索
 
-### 编辑器:
+### Markdown编辑器:
 
 * 兼容GFM语法
 * 显示行号，提供代码高亮
