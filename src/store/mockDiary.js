@@ -30,28 +30,28 @@ export default {
     posts: {
         1: {
             id: 1,
-            title: '标题1',
+            title: 'Markdown1',
             body,
             year: 2014,
-            date: '6-4 18:41',
+            date: '6月 4日 18:41',
             category: '分类1',
             tag: ['Web', 'Node']
         },
         2: {
             id: 2,
-            title: '标题2',
+            title: 'Markdown2',
             body,
             year: 2015,
-            date: '9-3 21:41',
+            date: '9月 3日 21:41',
             category: '分类2',
             tag: ['Web', 'Python']
         },
         3: {
             id: 3,
-            title: '标题3',
+            title: 'Markdown3',
             body,
             year: 2016,
-            date: '10-2 10:41',
+            date: '10月 2日 10:41',
             category: '分类1',
             tag: ['Python', 'Node']
         }

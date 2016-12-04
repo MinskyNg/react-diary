@@ -49,7 +49,7 @@ export default class PostItem extends React.PureComponent {
                 </button>
                 <div className="article-date">
                     <i className="icon-date"></i>
-                    {this.props.date}
+                    {this.props.date} • {this.props.category}
                 </div>
                 <section className="article-section"
                   dangerouslySetInnerHTML={{ __html: trimHtml(markup, { limit: 300 }).html }}

@@ -24,7 +24,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 .icon-addPost {
   background-image: url(sprite.png);
-  background-position: 0px -87px;
+  background-position: -87px -28px;
   width: 28px;
   height: 28px;
 }
@@ -36,31 +36,31 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 .icon-code {
   background-image: url(sprite.png);
-  background-position: 0px -138px;
+  background-position: 0px -139px;
   width: 24px;
   height: 18px;
 }
 .icon-date {
   background-image: url(sprite.png);
-  background-position: 0px -55px;
+  background-position: -55px 0px;
   width: 32px;
   height: 32px;
 }
 .icon-del {
   background-image: url(sprite.png);
-  background-position: -87px -28px;
+  background-position: -87px -56px;
   width: 28px;
   height: 28px;
 }
 .icon-delete {
   background-image: url(sprite.png);
-  background-position: -141px -44px;
+  background-position: -141px -67px;
   width: 16px;
   height: 16px;
 }
 .icon-deleteArticle {
   background-image: url(sprite.png);
-  background-position: -115px -76px;
+  background-position: 0px -115px;
   width: 24px;
   height: 24px;
 }
@@ -72,7 +72,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 .icon-download {
   background-image: url(sprite.png);
-  background-position: -56px -87px;
+  background-position: 0px -87px;
   width: 28px;
   height: 28px;
 }
@@ -90,55 +90,55 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 .icon-heading {
   background-image: url(sprite.png);
-  background-position: -92px -115px;
+  background-position: -93px -115px;
   width: 23px;
   height: 23px;
 }
 .icon-img {
   background-image: url(sprite.png);
-  background-position: -115px -115px;
+  background-position: -47px -115px;
   width: 23px;
   height: 23px;
 }
 .icon-italic {
   background-image: url(sprite.png);
-  background-position: -46px -115px;
+  background-position: -141px -23px;
   width: 23px;
   height: 23px;
 }
 .icon-left {
   background-image: url(sprite.png);
-  background-position: -115px -26px;
+  background-position: -115px -52px;
   width: 25px;
   height: 25px;
 }
 .icon-line {
   background-image: url(sprite.png);
-  background-position: -141px -60px;
+  background-position: -141px -83px;
   width: 23px;
   height: 4px;
 }
 .icon-link {
   background-image: url(sprite.png);
-  background-position: 0px -115px;
+  background-position: -141px 0px;
   width: 23px;
   height: 23px;
 }
 .icon-ol {
   background-image: url(sprite.png);
-  background-position: -23px -115px;
+  background-position: -24px -115px;
   width: 23px;
   height: 23px;
 }
 .icon-preview {
   background-image: url(sprite.png);
-  background-position: -87px -56px;
+  background-position: -56px -87px;
   width: 28px;
   height: 28px;
 }
 .icon-quote {
   background-image: url(sprite.png);
-  background-position: -141px -23px;
+  background-position: -141px -46px;
   width: 23px;
   height: 21px;
 }
@@ -150,37 +150,43 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 .icon-redo {
   background-image: url(sprite.png);
-  background-position: -115px 0px;
+  background-position: -115px -26px;
   width: 26px;
   height: 26px;
 }
 .icon-right {
   background-image: url(sprite.png);
-  background-position: -115px -51px;
+  background-position: -115px -77px;
   width: 25px;
   height: 25px;
 }
 .icon-search {
   background-image: url(sprite.png);
-  background-position: -55px 0px;
+  background-position: 0px -55px;
   width: 32px;
   height: 32px;
 }
 .icon-strong {
   background-image: url(sprite.png);
-  background-position: -141px 0px;
+  background-position: -70px -115px;
   width: 23px;
   height: 23px;
 }
+.icon-tag {
+  background-image: url(sprite.png);
+  background-position: -84px -87px;
+  width: 27px;
+  height: 27px;
+}
 .icon-ul {
   background-image: url(sprite.png);
-  background-position: -69px -115px;
+  background-position: -116px -115px;
   width: 23px;
   height: 23px;
 }
 .icon-undo {
   background-image: url(sprite.png);
-  background-position: -84px -87px;
+  background-position: -115px 0px;
   width: 26px;
   height: 26px;
 }

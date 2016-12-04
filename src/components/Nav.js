@@ -30,7 +30,7 @@ export default class Nav extends React.PureComponent {
         const year = date.getFullYear();
         const hour = date.getHours();
         const min = date.getMinutes();
-        date = `${date.getMonth() + 1}-${date.getDate()} ${hour < 10 ? (`0${hour}`) : hour}:${min < 10 ? (`0${min}`) : min}`;
+        date = `${date.getMonth() + 1}月 ${date.getDate()}日 ${hour < 10 ? (`0${hour}`) : hour}:${min < 10 ? (`0${min}`) : min}`;
         this.props.addPost(this.props.navName, year, date);
         event.preventDefault();
         event.stopPropagation();
@@ -139,6 +139,7 @@ export default class Nav extends React.PureComponent {
                 >
                     <i className="icon-fullScreen"></i>
                 </button>
+                <i className="icon-tag"></i>
                 <h2>{this.props.navName}</h2>
                 <button className="add-tag" title="管理标签"
                   onClick={e => this.toggleTagHanlder(e)}

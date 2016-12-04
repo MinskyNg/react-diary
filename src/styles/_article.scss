@@ -81,7 +81,7 @@
     display: block;
     height: 32px;
     margin-top: 40px;
-    color: rgba(0, 0, 0, .8);
+    color: #8C969E;
     font-size: 1.8rem;
     font-weight: bold;
     line-height: 32px;
@@ -318,9 +318,9 @@
         height: 30px;
         padding: 0 12px;
         margin: 3px 16px 2px 0;
-        border: 1px solid #566A82;
+        border: 1px solid #24B790;
         border-radius: 5px;
-        color: #566A82;
+        color: #24B790;
         font-size: 1.5rem;
         line-height: 30px;
         text-decoration: none;
@@ -329,7 +329,7 @@
         transition: all 0.3s linear;
         &:hover {
             color: #FFF;
-            background-color: #566A82;
+            background-color: #24B790;
             transform: scale(1.08);
         }
     }
@@ -340,9 +340,9 @@
         width: 100px;
         height: 35px;
         margin: 0 10px;
-        border: 1px #02B875 solid;
+        border: 1px #36AFE0 solid;
         border-radius: 5px;
-        color: #02B875;
+        color: #36AFE0;
         font-size: 1.5rem;
         font-weight: bold;
         background-color: #FFF;
@@ -351,7 +351,7 @@
         transition: all 0.3s linear;
         &:hover {
             color: #FFF;
-            background-color: #02B875;
+            background-color: #36AFE0;
             transform: scale(1.08);
         }
     }

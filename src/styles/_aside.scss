@@ -20,7 +20,7 @@
     }
     li {
         display: block;
-        border-bottom: 1px #EDEDED solid;
+        border-bottom: 1px #F5F8F9 solid;
         &:last-child {
             border-bottom: 0;
         }
@@ -29,18 +29,19 @@
     a {
         display: block;
         height: 56px;
-        color: rgba(0, 0, 0,.8);
+        color: #70CCF0;
         cursor: pointer;
         transition: all 0.3s linear;
         &:hover {
             color: #FFF;
-            background-color: #CCC;
+            background-color: #70CCF0;
         }
     }
     // 处于当前分类样式
     .active {
         cursor: default;
-        background-color: #DDD;
+        color: #FFF;
+        background-color: #70CCF0;
     }
 }
 
