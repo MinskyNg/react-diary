@@ -58,7 +58,7 @@ class Post extends React.PureComponent {
                 <h3 className="article-title">{post.title}</h3>
                 <div className="article-date">
                     <i className="icon-date"></i>
-                    {`${post.year}-${post.date}`}
+                    {post.year}年 {post.date} • {post.category}
                 </div>
                 <section className="article-section"
                   dangerouslySetInnerHTML={{ __html: markup }}

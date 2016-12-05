@@ -13,7 +13,7 @@
  *    tag: 标签
  */
 
-const body = "# Markdown\n\n----\n\nMarkdown is a text formatting syntax inspired on plain text email. In the words of its creator, [John Gruber][]:\n\n> The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.\n\n[John Gruber]: http://daringfireball.net/\n\n\n## Syntax Guide\n\n### Strong and Emphasize\n\n```\n*emphasize*    **strong**\n_emphasize_    __strong__\n```\n\n### list\n\n#### ul\n\n- item1\n\n  item1\n\n- item2\n\n  item2\n\n### ol\n\n1. item1\n\n2. item2\n\n### Links\n\nInline links:\n\n[link text](http://url.com/)\n\n### code\n\n\n```javascript\n$(function(){\n  $('div').html('I am a div.');\n});\n```";
+const body = "# Markdown\n\n----\n\nMarkdown is a text formatting syntax inspired on plain text email. In the words of its creator, [John Gruber][]:\n\n> The idea is that a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up with tags or formatting instructions.\n\n[John Gruber]: http://daringfireball.net/\n\n\n## Syntax Guide\n\n### Strong and Emphasize\n\n```\n*emphasize*    **strong**\n_emphasize_    __strong__\n```\n\n### list\n\n#### ul\n\n- item1\n\n  item1\n\n- item2\n\n  item2\n\n### ol\n\n1. item1\n\n2. item2\n\n### Image\n\n![Image](http://i1.hdslb.com/video/08/086510262d86a381a52a3651174dbd4d.jpg)\n\n### Link\n\nInline link:\n\n[link text](http://url.com/)\n\n### code\n\n\n```javascript\n$(function(){\n  $('div').html('I am a div.');\n});\n```";
 
 export default {
     postIds: [3, 2, 1],
