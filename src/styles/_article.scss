@@ -318,19 +318,18 @@
         height: 30px;
         padding: 0 12px;
         margin: 3px 16px 2px 0;
-        border: 1px solid #24B790;
+        border: 0;
         border-radius: 5px;
-        color: #24B790;
+        color: #FFF;
         font-size: 1.5rem;
         line-height: 30px;
         text-decoration: none;
-        background-color: #FFF;
+        background-color: #2488CB;
         cursor: pointer;
         transition: all 0.3s linear;
         &:hover {
-            color: #FFF;
-            background-color: #24B790;
-            transform: scale(1.08);
+            background-color: #5DADE2;
+            transform: scale(1.05);
         }
     }
 
