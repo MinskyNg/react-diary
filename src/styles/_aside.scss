@@ -29,19 +29,23 @@
     a {
         display: block;
         height: 56px;
-        color: #70CCF0;
+        color: #38B7EA;
         cursor: pointer;
         transition: all 0.3s linear;
         &:hover {
-            color: #FFF;
-            background-color: #70CCF0;
+            color: #999;
         }
+
     }
-    // 处于当前分类样式
+
+    // 当前分类样式
     .active {
         cursor: default;
         color: #FFF;
-        background-color: #70CCF0;
+        background-color: #38B7EA;
+        &:hover {
+            color: #FFF;
+        }
     }
 }
 

@@ -34,7 +34,7 @@ describe('<Aside />', () => {
         IndexLink = IndexLink.at(0);
         expect(IndexLink.prop('to')).to.equal('/');
         expect(IndexLink.prop('activeClassName')).to.exist;
-        expect(IndexLink.find('.category-name').text()).to.equal('• 全部日记');
+        expect(IndexLink.find('.category-name').text()).to.equal('全部日记');
         expect(IndexLink.find('.category-count').text()).to.equal('3');
     });
 
@@ -44,7 +44,7 @@ describe('<Aside />', () => {
         Link = Link.at(1);
         expect(Link.prop('to')).to.equal('/category/分类1');
         expect(Link.prop('activeClassName')).to.exist;
-        expect(Link.find('.category-name').text()).to.equal('• 分类1');
+        expect(Link.find('.category-name').text()).to.equal('分类1');
         expect(Link.find('.category-count').text()).to.equal('2');
     });
 });

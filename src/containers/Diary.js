@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { addCat, delCat, addTag, delTag, addPost, toggleAside, toggleScreen } from '../actions';
 import Nav from '../components/Nav';
 import Aside from '../components/Aside';
+import BackTop from '../components/BackTop';
 
 
 class Diary extends React.PureComponent {
@@ -22,7 +23,7 @@ class Diary extends React.PureComponent {
         const { postIds, categories, tags, navName, asideShow, dispatch } = this.props;
 
         return (
-            <div className="diary-warpper">
+            <div className="diary-wrapper" id="diary">
                 <Nav
                   navName={navName}
                   categories={categories}
@@ -45,6 +46,7 @@ class Diary extends React.PureComponent {
                   categories={categories}
                   asideShow={asideShow}
                 />
+                <BackTop />
             </div>
         );
     }

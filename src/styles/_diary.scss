@@ -1,7 +1,7 @@
 // 内容区
 
 
-.diary-warpper {
+.diary-wrapper {
     height: 100%;
     background-color: #F5F8F9;
     overflow: auto;
@@ -16,4 +16,19 @@
     font-weight: bold;
     text-align: right;
     line-height: 50px;
+}
+
+
+// 回到顶部
+.backtop {
+    opacity: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    background-color: #565A5f;
+    cursor: default;
+    transition: opacity 0.3s linear;
 }

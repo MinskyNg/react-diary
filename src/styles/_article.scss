@@ -34,8 +34,12 @@
     }
     .article-title {
         cursor: pointer;
+        transition: all 0.3s linear;
         &:hover {
-            opacity: .7;
+            color: #38B7EA;
+            &:after {
+                background-color: #38B7EA;
+            }
         }
     }
 }
@@ -90,7 +94,9 @@
 // 日记文本
 .article-section {
     min-height: 200px;
-    margin: 30px 0 40px;
+    padding-bottom: 20px;
+    margin: 30px 0 15px;
+    border-bottom: 1px solid #F5F8F9;
     color: #666A70;
     font-family: simsun, sans-serif;
     font-size: 1.6rem;
@@ -319,17 +325,17 @@
         padding: 0 12px;
         margin: 3px 16px 2px 0;
         border: 0;
-        border-radius: 5px;
-        color: #FFF;
+        border-radius: 12px;
+        color: #999;
         font-size: 1.5rem;
         line-height: 30px;
         text-decoration: none;
-        background-color: #2488CB;
+        background-color: #F5F8F9;
         cursor: pointer;
         transition: all 0.3s linear;
         &:hover {
-            background-color: #5DADE2;
-            transform: scale(1.05);
+            color: #FFF;
+            background-color: #70CCF0;
         }
     }
 

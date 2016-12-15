@@ -18,7 +18,7 @@ export default class Aside extends React.PureComponent {
         let categoryItems = Object.keys(categories).map(category => (
                 <li key={category}>
                     <Link to={`/category/${category}`} activeClassName="active">
-                        <h4 className="category-name">• {category}</h4>
+                        <h4 className="category-name">{category}</h4>
                         <span className="category-count">{categories[category].length}</span>
                     </Link>
                 </li>
@@ -30,7 +30,7 @@ export default class Aside extends React.PureComponent {
                 <ul>
                     <li>
                         <IndexLink to="/" activeClassName="active">
-                            <h4 className="category-name">• 全部日记</h4>
+                            <h4 className="category-name">全部日记</h4>
                             <span className="category-count">{postLen}</span>
                         </IndexLink>
                     </li>
