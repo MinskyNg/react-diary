@@ -1,6 +1,6 @@
 /**
  * 日记管理
- * @class Diary
+ * @function Diary
  * @prop {array} postIds 文章id列表
  * @prop {object} categories 分类列表
  * @prop {array} tags 标签列表
@@ -18,38 +18,34 @@ import Aside from '../components/Aside';
 import BackTop from '../components/BackTop';
 
 
-class Diary extends React.PureComponent {
-    render() {
-        const { postIds, categories, tags, navName, asideShow, dispatch } = this.props;
-
-        return (
-            <div className="diary-wrapper" id="diary">
-                <Nav
-                  navName={navName}
-                  categories={categories}
-                  tags={tags}
-                  asideShow={asideShow}
-                  addCat={cat => dispatch(addCat(cat))}
-                  delCat={cat => dispatch(delCat(cat))}
-                  addTag={tag => dispatch(addTag(tag))}
-                  delTag={tag => dispatch(delTag(tag))}
-                  addPost={(cat, year, date) => {
-                      dispatch(addPost((postIds[0] + 1) || 0, cat, year, date));
-                      browserHistory.replace(`/editor/${(postIds[0] + 1) || 0}`);
-                  }}
-                  toggleAside={() => dispatch(toggleAside())}
-                  toggleScreen={() => dispatch(toggleScreen())}
-                />
-                {this.props.children}
-                <Aside
-                  postLen={postIds.length}
-                  categories={categories}
-                  asideShow={asideShow}
-                />
-                <BackTop />
-            </div>
-        );
-    }
+function Diary({ postIds, categories, tags, navName, asideShow, dispatch, children }) {
+    return (
+        <div className="diary-wrapper" id="diary">
+            <Nav
+              navName={navName}
+              categories={categories}
+              tags={tags}
+              asideShow={asideShow}
+              addCat={cat => dispatch(addCat(cat))}
+              delCat={cat => dispatch(delCat(cat))}
+              addTag={tag => dispatch(addTag(tag))}
+              delTag={tag => dispatch(delTag(tag))}
+              addPost={(cat, year, date) => {
+                  dispatch(addPost((postIds[0] + 1) || 0, cat, year, date));
+                  browserHistory.replace(`/editor/${(postIds[0] + 1) || 0}`);
+              }}
+              toggleAside={() => dispatch(toggleAside())}
+              toggleScreen={() => dispatch(toggleScreen())}
+            />
+            {children}
+            <Aside
+              postLen={postIds.length}
+              categories={categories}
+              asideShow={asideShow}
+            />
+            <BackTop />
+        </div>
+    );
 }
 
 

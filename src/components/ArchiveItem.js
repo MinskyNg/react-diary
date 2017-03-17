@@ -1,6 +1,6 @@
 /**
  * 日记归档
- * @class ArchiveItem
+ * @function ArchiveItem
  * @prop {array} articles 文章列表
  * @prop {function} delPost 删除文章
  * @prop {function} asideShow 查看全文
@@ -12,25 +12,20 @@ import React from 'react';
 import PostItem from './PostItem';
 
 
-export default class ArchiveItem extends React.PureComponent {
-    render() {
-        const { articles, delPost, asideShow } = this.props;
+export default function ArchiveItem({ articles, delPost, asideShow, year }) {
+    const postMap = post => (
+        <PostItem
+          key={post.id}
+          {...post}
+          asideShow={asideShow}
+          delPost={delPost}
+        />
+    );
 
-        let postItems = articles.map(post => (
-                <PostItem
-                  key={post.id}
-                  {...post}
-                  asideShow={asideShow}
-                  delPost={delPost}
-                />
-            )
-        );
-
-        return (
-            <div>
-                <div className="year">{`${this.props.year}年`}</div>
-                {postItems}
-            </div>
-        );
-    }
+    return (
+        <div>
+            <div className="year">{`${year}年`}</div>
+            {articles.map(postMap)}
+        </div>
+    );
 }

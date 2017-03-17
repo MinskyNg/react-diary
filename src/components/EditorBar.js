@@ -1,6 +1,6 @@
 /**
  * 编辑器工具栏
- * @class EditorBar
+ * @function EditorBar
  * @prop {function} getEditor 获取编辑器元素
  * @prop {function} updateBody 更新文章内容
  * @prop {number} screenShow 显示模式
@@ -10,27 +10,25 @@
 import React from 'react';
 
 
-export default class EditorBar extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.map = {
-            heading: '## 请输入标题',
-            strong: '**请输入文字**',
-            italic: '*请输入文字*',
-            code: '\t 请输入代码',
-            img: '![图片说明](图片地址)',
-            url: '[链接说明](链接地址)',
-            ul: '* 请输入列表项',
-            ol: '1. 请输入列表项',
-            quote: '> 请输入引用',
-            line: '-------'
-        };
-    }
+const textMap = {
+    heading: '## 请输入标题',
+    strong: '**请输入文字**',
+    italic: '*请输入文字*',
+    code: '\t 请输入代码',
+    img: '![图片说明](图片地址)',
+    url: '[链接说明](链接地址)',
+    ul: '* 请输入列表项',
+    ol: '1. 请输入列表项',
+    quote: '> 请输入引用',
+    line: '-------'
+};
 
+
+export default function EditorBar({ screenShow, getEditor, updateBody }) {
     // 根据标记类型改变选区
-    insertText(type) {
-        const text = this.map[type];
-        const editor = this.props.getEditor();
+    function insertText(type) {
+        const text = textMap[type];
+        const editor = getEditor();
         const start = editor.getCursor(true);
         const end = editor.getCursor(false);
         if (start.line === end.line && start.ch === end.ch) {
@@ -92,64 +90,62 @@ export default class EditorBar extends React.PureComponent {
             }
         }
         editor.focus();
-        this.props.updateBody(editor.getValue());
+        updateBody(editor.getValue());
     }
 
 
-    render() {
-        return (
-            <div className="toolbar" style={{ display: this.props.screenShow !== 1 ? 'block' : 'none' }}>
-                <button title="添加标题"
-                  onClick={() => this.insertText('heading')}
-                >
-                    <i className="icon-heading"></i>
-                </button>
-                <button title="添加粗体"
-                  onClick={() => this.insertText('strong')}
-                >
-                    <i className="icon-strong"></i>
-                </button>
-                <button title="添加斜体"
-                  onClick={() => this.insertText('italic')}
-                >
-                    <i className="icon-italic"></i>
-                </button>
-                <button title="添加代码"
-                  onClick={() => this.insertText('code')}
-                >
-                    <i className="icon-code"></i>
-                </button>
-                <button title="添加链接"
-                  onClick={() => this.insertText('url')}
-                >
-                    <i className="icon-link"></i>
-                </button>
-                <button title="添加图片"
-                  onClick={() => this.insertText('img')}
-                >
-                    <i className="icon-img"></i>
-                </button>
-                <button title="添加无序列表"
-                  onClick={() => this.insertText('ul')}
-                >
-                    <i className="icon-ul"></i>
-                </button>
-                <button title="添加有序列表"
-                  onClick={() => this.insertText('ol')}
-                >
-                    <i className="icon-ol"></i>
-                </button>
-                <button title="添加块引用"
-                  onClick={() => this.insertText('quote')}
-                >
-                    <i className="icon-quote"></i>
-                </button>
-                <button title="添加分割线"
-                  onClick={() => this.insertText('line')}
-                >
-                    <i className="icon-line"></i>
-                </button>
-            </div>
-        );
-    }
+    return (
+        <div className="toolbar" style={{ display: screenShow !== 1 ? 'block' : 'none' }}>
+            <button title="添加标题"
+              onClick={() => insertText('heading')}
+            >
+                <i className="icon-heading"></i>
+            </button>
+            <button title="添加粗体"
+              onClick={() => insertText('strong')}
+            >
+                <i className="icon-strong"></i>
+            </button>
+            <button title="添加斜体"
+              onClick={() => insertText('italic')}
+            >
+                <i className="icon-italic"></i>
+            </button>
+            <button title="添加代码"
+              onClick={() => insertText('code')}
+            >
+                <i className="icon-code"></i>
+            </button>
+            <button title="添加链接"
+              onClick={() => insertText('url')}
+            >
+                <i className="icon-link"></i>
+            </button>
+            <button title="添加图片"
+              onClick={() => insertText('img')}
+            >
+                <i className="icon-img"></i>
+            </button>
+            <button title="添加无序列表"
+              onClick={() => insertText('ul')}
+            >
+                <i className="icon-ul"></i>
+            </button>
+            <button title="添加有序列表"
+              onClick={() => insertText('ol')}
+            >
+                <i className="icon-ol"></i>
+            </button>
+            <button title="添加块引用"
+              onClick={() => insertText('quote')}
+            >
+                <i className="icon-quote"></i>
+            </button>
+            <button title="添加分割线"
+              onClick={() => insertText('line')}
+            >
+                <i className="icon-line"></i>
+            </button>
+        </div>
+    );
 }

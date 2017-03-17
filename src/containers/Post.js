@@ -11,7 +11,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import marked from 'marked';
-import hljs from 'highlight.js';
 import { delPost, changeNavName } from '../actions';
 
 
@@ -20,8 +19,6 @@ class Post extends React.PureComponent {
         if (this.props.posts[this.props.params.id] !== undefined) {
             this.props.dispatch(changeNavName(this.props.posts[this.props.params.id].category));
         }
-        // 配置markdown解析器和highlight.js
-        marked.setOptions({ highlight: code => hljs.highlightAuto(code).value });
     }
 
 

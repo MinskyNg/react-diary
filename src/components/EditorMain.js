@@ -175,7 +175,7 @@ export default class EditorMain extends React.PureComponent {
                 <EditorBar
                   screenShow={screenShow}
                   getEditor={() => this.editor}
-                  updateBody={(body) => this.props.updateBody(body)}
+                  updateBody={this.props.updateBody}
                 />
             </div>
         );

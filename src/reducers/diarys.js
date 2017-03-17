@@ -67,6 +67,7 @@ handlers[ADD_TAG] = (state, action) => {
     return state.hasIn(['tags', tag]) ? state : state.setIn(['tags', tag], List([]));
 };
 
+
 /**
 * 删除标签
 **/
